@@ -126,3 +126,4 @@ The API verifies checkout signatures and fetches payment details from Razorpay b
 - Checkout validates Indian mobile/PIN formats. Actual OTP verification requires an SMS/email provider and is not simulated.
 
 See `FEATURES-UPDATE.md` for the migration and testing steps.
+# Makhana-Store-
