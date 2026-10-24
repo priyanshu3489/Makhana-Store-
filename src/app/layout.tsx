@@ -37,8 +37,8 @@ export default async function RootLayout({
 
         <div className="offer-marquee" role="region" aria-label="Store offers">
           <div className="offer-marquee-track">
-            <span>✦ FREE SHIPPING on orders ₹499 and above</span><span>✦ Explore our exclusive flavour collection</span><span>✦ Build your own makhana combo</span><span>✦ Secure checkout · Track orders from your account</span>
-            <span aria-hidden="true">✦ FREE SHIPPING on orders ₹499 and above</span><span aria-hidden="true">✦ Explore our exclusive flavour collection</span><span aria-hidden="true">✦ Build your own makhana combo</span><span aria-hidden="true">✦ Secure checkout · Track orders from your account</span>
+            <span>✦ FREE SHIPPING on orders ₹499 and above</span><span>✦ Check checkout for exclusive collection discounts</span><span>✦ Build your own makhana combo</span><span>✦ Secure checkout · Track orders from your account</span>
+            <span aria-hidden="true">✦ FREE SHIPPING on orders ₹499 and above</span><span aria-hidden="true">✦ Check checkout for exclusive collection discounts</span><span aria-hidden="true">✦ Build your own makhana combo</span><span aria-hidden="true">✦ Secure checkout · Track orders from your account</span>
           </div>
         </div>
         {children}
