@@ -1,3 +1,51 @@
-import { notFound } from "next/navigation";import { prisma } from "@/lib/prisma";import {formatMoney} from "@/lib/money";import ProductAdd from "@/components/ProductAdd";
-export const dynamic="force-dynamic";
-export default async function ProductPage({params}:{params:Promise<{slug:string}>}){const {slug}=await params;const p=await prisma.product.findUnique({where:{slug}});if(!p||!p.active)notFound();return <main className="container" style={{paddingTop:40}}><div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(280px,1fr))",gap:34}}><img src={p.imageUrl} alt={p.name} style={{width:"100%",borderRadius:20,background:"#eee8da",aspectRatio:"1/1",objectFit:"cover"}}/><section style={{padding:"12px 0"}}><span className="pill">{p.flavor} · {p.weightGrams} g</span><h1 style={{fontSize:42,margin:"16px 0"}}>{p.name}</h1><p className="muted" style={{lineHeight:1.8}}>{p.description}</p><div style={{fontSize:28,fontWeight:800,margin:"20px 0"}}>{formatMoney(p.pricePaise)} {p.compareAtPaise&&<del className="muted" style={{fontSize:16,marginLeft:8}}>{formatMoney(p.compareAtPaise)}</del>}</div><p className="muted">{p.stock>0?`${p.stock} in stock`:"Currently sold out"}</p><ProductAdd product={{id:p.id,slug:p.slug,name:p.name,pricePaise:p.pricePaise,imageUrl:p.imageUrl,stock:p.stock}}/><hr style={{margin:"26px 0",borderColor:"#e7e4da"}}/><h3>Product information</h3><p className="muted">Please check the packaging for the current ingredients, allergen information, nutrition details, batch information and best-before date.</p></section></div></main>}
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { prisma } from "@/lib/prisma";
+import { formatMoney } from "@/lib/money";
+import ProductAdd from "@/components/ProductAdd";
+
+export const dynamic = "force-dynamic";
+
+export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const product = await prisma.product.findUnique({ where: { slug } });
+
+  if (!product || !product.active) notFound();
+
+  const hasDiscount = Boolean(product.compareAtPaise && product.compareAtPaise > product.pricePaise);
+
+  return (
+    <main className="container product-detail-page">
+      <nav className="product-breadcrumb" aria-label="Breadcrumb">
+        <Link href="/">Home</Link><span aria-hidden="true">/</span><Link href="/#shop">Shop flavours</Link><span aria-hidden="true">/</span><span>{product.name}</span>
+      </nav>
+      <div className="product-detail-grid">
+        <div className="product-detail-visual">
+          <img className="product-detail-image" src={product.imageUrl} alt={product.name} />
+          <span className="product-image-caption">A LITTLE CRUNCH, A LOT OF JOY</span>
+        </div>
+        <section className="product-detail-info">
+          <span className="product-flavour-badge">{product.flavor}</span>
+          <p className="eyebrow product-meta">{product.weightGrams} g pack · Makhana House</p>
+          <h1>{product.name}</h1>
+          <p className="product-detail-description">{product.description}</p>
+          <div className="product-price-line">
+            <strong>{formatMoney(product.pricePaise)}</strong>
+            {hasDiscount && <del>{formatMoney(product.compareAtPaise!)}</del>}
+            {hasDiscount && <span className="product-savings">Special price</span>}
+          </div>
+          <p className={product.stock > 0 ? "product-availability" : "product-availability sold-out"}>
+            <span aria-hidden="true" />{product.stock > 0 ? (product.stock <= 10 ? `Only ${product.stock} packs left` : "In stock · Ready for your snack shelf") : "Currently sold out"}
+          </p>
+          <ProductAdd product={{ id: product.id, slug: product.slug, name: product.name, pricePaise: product.pricePaise, imageUrl: product.imageUrl, stock: product.stock }} />
+          <div className="product-trust-row"><span>✓ Secure checkout</span><span>✓ Order tracking</span><span>✓ Carefully packed</span></div>
+          <div className="product-details-panel">
+            <h2>Good to know</h2>
+            <p>Check the packaging for current ingredients, allergen information, nutrition details, batch information and best-before date.</p>
+          </div>
+        </section>
+      </div>
+      <div className="product-back-link"><Link href="/#shop">← Explore more flavours</Link></div>
+    </main>
+  );
+}
