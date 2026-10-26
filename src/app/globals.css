@@ -596,3 +596,16 @@ body{background:var(--cream);color:var(--ink);-webkit-font-smoothing:antialiased
 .hero-actions .btn.secondary{background:rgba(255,250,236,.94);border-color:#fff0c8;color:#1d4229}
 @media(max-width:850px){.hero{min-height:560px;background-position:60% center;background-image:linear-gradient(90deg,rgba(14,38,18,.84) 0%,rgba(14,38,18,.58) 55%,rgba(14,38,18,.18) 100%),url('/products/home%20page%20banner.png')}.hero-inner{width:min(100% - 32px,720px);min-height:560px;grid-template-columns:1fr;padding-block:46px}.hero-copy{max-width:560px}.hero-art-photo{display:none!important}}
 @media(max-width:520px){.hero{min-height:520px;background-position:58% center;background-image:linear-gradient(90deg,rgba(14,38,18,.82) 0%,rgba(14,38,18,.57) 65%,rgba(14,38,18,.26) 100%),url('/products/home%20page%20banner.png')}.hero-inner{min-height:520px;padding-block:34px}.hero-copy h1{font-size:clamp(42px,11vw,60px);letter-spacing:-1.8px}.hero-copy>p{max-width:350px;font-size:15px}}
+
+/* Homepage navigation sits over the hero banner, not above it */
+body:has(.hero) .site-header{position:absolute;top:0;left:0;right:0;width:100%;background:linear-gradient(180deg,rgba(9,27,13,.76),rgba(9,27,13,.28));border-bottom:1px solid rgba(255,244,211,.22);backdrop-filter:blur(7px);z-index:40}
+body:has(.hero) .site-header .nav{min-height:82px}
+body:has(.hero) .site-header .brand-mark{background:rgba(255,249,231,.14);border:1px solid rgba(255,231,171,.55)}
+body:has(.hero) .site-header .nav-links a{color:#fff9e9;text-shadow:0 1px 8px #0b1d0c88}
+body:has(.hero) .site-header .nav-links a:hover{color:#ffdb91}
+body:has(.hero) .site-header .nav-admin{border-color:#e7d6a2;background:rgba(255,250,230,.12)}
+body:has(.hero) .offer-marquee{position:absolute;z-index:35;top:82px;left:0;right:0;width:100%;background:rgba(17,48,25,.58);color:#fff5dc;border-bottom:1px solid rgba(255,244,211,.17);backdrop-filter:blur(5px)}
+body:has(.hero) .hero{margin-top:0;padding-top:0}
+body:has(.hero) .hero-inner{padding-top:145px}
+@media(max-width:850px){body:has(.hero) .site-header .nav{min-height:74px;padding-block:10px}body:has(.hero) .offer-marquee{top:74px}body:has(.hero) .hero-inner{padding-top:150px}}
+@media(max-width:520px){body:has(.hero) .site-header .nav{min-height:70px}body:has(.hero) .offer-marquee{top:70px}body:has(.hero) .hero-inner{padding-top:145px}}
