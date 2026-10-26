@@ -824,3 +824,185 @@ body:has(.hero) .offer-marquee { position: relative; inset: auto; display: block
   .site-header .nav-utilities,
   body:has(.hero) .site-header .nav-utilities { gap: 12px; }
 }
+
+/* Final route-specific header themes:
+   interior pages use the clean cream reference; homepage keeps its dark banner overlay. */
+body:not(:has(.hero)) .site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  background: rgba(250, 247, 239, .97);
+  border: 0;
+  border-bottom: 1px solid #eee8dc;
+  box-shadow: none;
+  backdrop-filter: blur(12px);
+}
+body:not(:has(.hero)) .site-header .nav {
+  width: min(1500px, calc(100% - 64px));
+  min-height: 68px;
+  height: auto;
+  margin-inline: auto;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+}
+body:not(:has(.hero)) .site-header .brand {
+  display: inline-flex;
+  flex: 0 0 auto;
+  flex-direction: row;
+  align-items: center;
+  gap: 9px;
+  color: #20261e;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 21px;
+  font-weight: 750;
+  line-height: 1;
+  letter-spacing: -.55px;
+  white-space: nowrap;
+  text-decoration: none;
+}
+body:not(:has(.hero)) .site-header .brand:after { content: none; display: none; }
+body:not(:has(.hero)) .site-header .brand-mark {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+body:not(:has(.hero)) .site-header .brand-mark svg { width: 34px; height: 34px; }
+body:not(:has(.hero)) .site-header .nav-links {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: nowrap;
+  font-size: 13px;
+}
+body:not(:has(.hero)) .site-header .nav-primary {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(22px, 3.4vw, 54px);
+  margin-inline: auto;
+}
+body:not(:has(.hero)) .site-header .nav-primary a {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 0;
+  color: #30332c;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  text-shadow: none;
+}
+body:not(:has(.hero)) .site-header .nav-primary a:hover { color: #315d3b; }
+body:not(:has(.hero)) .site-header .nav-primary .nav-home:after { content: none; }
+body:not(:has(.hero)) .site-header .nav-utilities { display: flex; flex: 0 0 auto; align-items: center; gap: 22px; }
+body:not(:has(.hero)) .site-header .nav-utilities .nav-icon-link {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 34px;
+  color: #34382f;
+  text-decoration: none;
+}
+body:not(:has(.hero)) .site-header .nav-utilities .nav-icon-link svg { width: 20px; height: 20px; opacity: 1; }
+body:not(:has(.hero)) .site-header .nav-utilities .nav-icon-link:hover { color: #315d3b; }
+body:not(:has(.hero)) .site-header .nav-basket-dot { background: #d98a25; box-shadow: 0 0 0 2px #faf7ef; }
+
+/* Preserve the homepage's dark transparent navigation over the makhana banner. */
+body:has(.hero) .site-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  height: 92px;
+  min-height: 0;
+  background: linear-gradient(180deg,rgba(13,30,10,.68),rgba(13,30,10,.12));
+  border: 0;
+  box-shadow: none;
+  backdrop-filter: blur(3px);
+}
+body:has(.hero) .site-header .nav {
+  width: min(1500px,calc(100% - 64px));
+  min-height: 92px;
+  height: 92px;
+  margin-inline: auto;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  flex-wrap: nowrap;
+}
+body:has(.hero) .site-header .brand {
+  color: #fffdf5;
+  font-family: Georgia,'Times New Roman',serif;
+  font-size: clamp(20px,2vw,29px);
+  font-weight: 700;
+  letter-spacing: -.7px;
+}
+body:has(.hero) .site-header .brand:after { content: none; display: none; }
+body:has(.hero) .site-header .brand-mark { width: 40px; height: 40px; flex: 0 0 40px; background: transparent; border: 0; box-shadow: none; }
+body:has(.hero) .site-header .brand-mark svg { width: 40px; height: 40px; }
+body:has(.hero) .site-header .nav-links { flex: 1; display: flex; flex-direction: row; align-items: center; justify-content: space-between; gap: clamp(20px,3vw,48px); flex-wrap: nowrap; }
+body:has(.hero) .site-header .nav-primary { display: flex; flex: 1 1 auto; align-items: center; justify-content: center; gap: clamp(24px,3.5vw,58px); margin-inline: auto; }
+body:has(.hero) .site-header .nav-primary a { position: relative; display: inline-flex; align-items: center; padding: 12px 0; color: #fffdf5; font-weight: 550; font-size: 15px; text-shadow: 0 1px 8px #0008; }
+body:has(.hero) .site-header .nav-primary .nav-home:after { content: ""; position: absolute; left: 0; right: 0; bottom: 3px; height: 2px; background: #f1d27d; border-radius: 3px; }
+body:has(.hero) .site-header .nav-utilities { display: flex; align-items: center; gap: clamp(18px,2.4vw,34px); flex: 0 0 auto; }
+body:has(.hero) .site-header .nav-utilities .nav-icon-link { position: relative; display: grid; place-items: center; width: 28px; height: 38px; color: #fffdf5; }
+body:has(.hero) .site-header .nav-utilities .nav-icon-link svg { width: 25px; height: 25px; opacity: .96; }
+body:has(.hero) .site-header .nav-basket-dot { background: #d78a24; box-shadow: 0 0 0 2px #17351d; }
+body:has(.hero) .offer-marquee { display: none; }
+body:has(.hero) .hero-inner { padding-top: 150px; }
+@media(max-width:850px) {
+  body:not(:has(.hero)) .site-header .nav { width: calc(100% - 32px); min-height: 68px; height: auto; padding: 10px 0; flex-wrap: wrap; gap: 12px; }
+  body:not(:has(.hero)) .site-header .nav-links { flex: 1 0 100%; order: 3; justify-content: space-between; gap: 12px; }
+  body:not(:has(.hero)) .site-header .nav-primary { gap: clamp(14px,4vw,30px); }
+  body:not(:has(.hero)) .site-header .nav-primary a { font-size: 12px; }
+  body:not(:has(.hero)) .site-header .nav-utilities { gap: 18px; }
+  body:has(.hero) .site-header { height: auto; min-height: 78px; }
+  body:has(.hero) .site-header .nav { width: calc(100% - 32px); height: auto; min-height: 78px; padding: 12px 0; flex-wrap: wrap; gap: 14px; }
+  body:has(.hero) .site-header .brand { font-size: 21px; }
+  body:has(.hero) .site-header .brand-mark, body:has(.hero) .site-header .brand-mark svg { width: 34px; height: 34px; flex-basis: 34px; }
+  body:has(.hero) .site-header .nav-links { flex: 1 0 100%; order: 3; gap: 12px; }
+  body:has(.hero) .site-header .nav-primary { justify-content: flex-start; gap: clamp(15px,4vw,32px); margin: 0; }
+  body:has(.hero) .site-header .nav-primary a { font-size: 13px; padding: 5px 0; }
+  body:has(.hero) .site-header .nav-utilities { gap: 18px; }
+  body:has(.hero) .hero-inner { padding-top: 170px; }
+}
+@media(max-width:520px) {
+  body:not(:has(.hero)) .site-header .nav { width: calc(100% - 24px); gap: 8px; }
+  body:not(:has(.hero)) .site-header .brand { font-size: 17px; gap: 5px; }
+  body:not(:has(.hero)) .site-header .brand-mark, body:not(:has(.hero)) .site-header .brand-mark svg { width: 29px; height: 29px; flex-basis: 29px; }
+  body:not(:has(.hero)) .site-header .nav-links { gap: 8px; }
+  body:not(:has(.hero)) .site-header .nav-primary { gap: clamp(9px,3vw,16px); }
+  body:not(:has(.hero)) .site-header .nav-primary a { font-size: 11px; }
+  body:not(:has(.hero)) .site-header .nav-utilities { gap: 12px; }
+  body:has(.hero) .site-header .nav { width: calc(100% - 24px); gap: 8px; }
+  body:has(.hero) .site-header .brand { font-size: 18px; gap: 6px; }
+  body:has(.hero) .site-header .brand-mark, body:has(.hero) .site-header .brand-mark svg { width: 29px; height: 29px; flex-basis: 29px; }
+  body:has(.hero) .site-header .nav-links { gap: 8px; }
+  body:has(.hero) .site-header .nav-primary { gap: clamp(10px,3.4vw,18px); }
+  body:has(.hero) .site-header .nav-primary a { font-size: 12px; }
+  body:has(.hero) .site-header .nav-utilities { gap: 12px; }
+  body:has(.hero) .hero-inner { padding-top: 175px; }
+}
