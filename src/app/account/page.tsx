@@ -2,6 +2,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { getCurrentUser } from "@/lib/session";
 import { prisma } from "@/lib/prisma";
+import { PaymentStatus } from "@prisma/client";
 import { formatMoney } from "@/lib/money";
 import AccountPanel from "@/components/AccountPanel";
 import LogoutButton from "@/components/LogoutButton";
@@ -41,7 +42,7 @@ export default async function AccountPage({
 
   const eligibleOrders = {
     userId: user.id,
-    paymentStatus: { in: ["PAID", "COD_PENDING"] },
+    paymentStatus: { in: [PaymentStatus.PAID, PaymentStatus.COD_PENDING] },
   };
 
   const [
