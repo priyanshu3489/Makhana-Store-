@@ -24,12 +24,14 @@ export default async function RootLayout({
           <nav className="container nav">
             <Link href="/" className="brand brand-icon-only" aria-label="Makhana House home" title="Makhana House">
               <span className="brand-mark" aria-hidden="true">
-                <svg viewBox="0 0 48 48" width="34" height="34" fill="none" role="img">
-                  <path d="M24 5c-5 7-13 12-13 22a13 13 0 0 0 26 0C37 17 29 12 24 5Z" fill="#F5D58A"/>
-                  <path d="M24 15c-3 5-7 8-7 13a7 7 0 0 0 14 0c0-5-4-8-7-13Z" fill="#fff8e7"/>
-                  <path d="M24 31v9" stroke="#F5D58A" strokeWidth="2.5" strokeLinecap="round"/>
+                <svg viewBox="0 0 48 48" width="34" height="34" fill="none">
+                  <path d="M24 5C17 11 8 17 8 27a13 13 0 0 0 26 0C34 16 28 10 24 5Z" fill="#315D3B"/>
+                  <path d="M29 7C35 5 42 8 42 15c0 8-9 14-17 16 1-10-1-18 4-24Z" fill="#668B49"/>
+                  <path d="M7 17C1 17 1 25 7 30c4 4 9 5 13 5-3-8-5-15-13-18Z" fill="#8EAA64"/>
+                  <path d="M13 25 21 33 36 15" stroke="#FFFDF5" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </span>
+              <span className="brand-wordmark">Makhana House</span>
             </Link>
             <SiteNavigation isAdmin={isAdmin} />
           </nav>
