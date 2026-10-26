@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 type Tracking = {
   orderNumber: number;
@@ -42,6 +42,11 @@ export default function TrackPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [order, setOrder] = useState<Tracking | null>(null);
+
+  useEffect(() => {
+    const savedOrderNumber = new URLSearchParams(window.location.search).get("orderNumber");
+    if (savedOrderNumber && /^[0-9]+$/.test(savedOrderNumber)) setNumber(savedOrderNumber);
+  }, []);
 
   async function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
