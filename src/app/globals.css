@@ -609,3 +609,45 @@ body:has(.hero) .hero{margin-top:0;padding-top:0}
 body:has(.hero) .hero-inner{padding-top:145px}
 @media(max-width:850px){body:has(.hero) .site-header .nav{min-height:74px;padding-block:10px}body:has(.hero) .offer-marquee{top:74px}body:has(.hero) .hero-inner{padding-top:150px}}
 @media(max-width:520px){body:has(.hero) .site-header .nav{min-height:70px}body:has(.hero) .offer-marquee{top:70px}body:has(.hero) .hero-inner{padding-top:145px}}
+
+/* Header tuned to the supplied Makhana House reference */
+body:has(.hero) .site-header{height:92px;background:linear-gradient(180deg,rgba(13,30,10,.68),rgba(13,30,10,.12));border:0;box-shadow:none;backdrop-filter:blur(3px)}
+body:has(.hero) .site-header .nav{height:92px;min-height:92px;width:min(1500px,calc(100% - 64px));margin-inline:auto;display:flex;flex-direction:row;align-items:center;justify-content:space-between;gap:30px;padding:0}
+body:has(.hero) .site-header .brand{flex:0 0 auto;display:flex;align-items:center;gap:10px;color:#fffdf5;text-decoration:none;font-family:Georgia,'Times New Roman',serif;font-size:clamp(20px,2vw,29px);font-weight:700;letter-spacing:-.7px;white-space:nowrap}
+body:has(.hero) .site-header .brand:after{content:"Makhana House";display:block}
+body:has(.hero) .site-header .brand-mark{width:40px;height:40px;border:0;border-radius:0;background:transparent;box-shadow:none}
+body:has(.hero) .site-header .brand-mark svg{width:40px;height:40px}
+body:has(.hero) .site-header .nav-links{flex:1;display:flex;align-items:center;justify-content:space-between;gap:clamp(20px,3vw,48px);font-size:15px;flex-wrap:nowrap}
+body:has(.hero) .site-header .nav-primary{display:flex;align-items:center;justify-content:center;gap:clamp(24px,3.5vw,58px);margin-inline:auto}
+body:has(.hero) .site-header .nav-primary a{position:relative;display:inline-flex;align-items:center;padding:12px 0;color:#fffdf5;text-decoration:none;text-shadow:0 1px 8px #0008;font-weight:550;font-size:15px}
+body:has(.hero) .site-header .nav-primary a:hover:after,body:has(.hero) .site-header .nav-primary .nav-home:after{content:"";position:absolute;left:0;right:0;bottom:3px;height:2px;background:#f1d27d;border-radius:3px}
+body:has(.hero) .site-header .nav-utilities{display:flex;align-items:center;gap:clamp(18px,2.4vw,34px);flex:0 0 auto}
+body:has(.hero) .site-header .nav-utilities .nav-icon-link{position:relative;display:grid;place-items:center;width:28px;height:38px;color:#fffdf5;text-decoration:none}
+body:has(.hero) .site-header .nav-utilities .nav-icon-link svg{width:25px;height:25px;opacity:.96}
+body:has(.hero) .site-header .nav-utilities .nav-icon-link:hover{color:#f4d27b}
+body:has(.hero) .site-header .nav-basket-dot{position:absolute;top:5px;right:-2px;width:7px;height:7px;background:#d78a24;border-radius:50%;box-shadow:0 0 0 2px #17351d}
+body:has(.hero) .offer-marquee{display:none}
+body:has(.hero) .hero-inner{padding-top:150px}
+@media(max-width:900px){
+ body:has(.hero) .site-header{height:auto;min-height:78px}
+ body:has(.hero) .site-header .nav{height:auto;min-height:78px;width:calc(100% - 32px);gap:14px;padding:12px 0;flex-wrap:wrap}
+ body:has(.hero) .site-header .brand{font-size:21px}
+ body:has(.hero) .site-header .brand-mark,body:has(.hero) .site-header .brand-mark svg{width:34px;height:34px}
+ body:has(.hero) .site-header .nav-links{flex:1 0 100%;order:3;gap:12px}
+ body:has(.hero) .site-header .nav-primary{gap:clamp(15px,4vw,32px);margin:0;flex:1}
+ body:has(.hero) .site-header .nav-primary a{font-size:13px;padding:5px 0}
+ body:has(.hero) .site-header .nav-utilities{gap:18px}
+ body:has(.hero) .site-header .nav-utilities .nav-icon-link svg{width:21px;height:21px}
+ body:has(.hero) .hero-inner{padding-top:170px}
+}
+@media(max-width:520px){
+ body:has(.hero) .site-header .nav{width:calc(100% - 24px);gap:8px}
+ body:has(.hero) .site-header .brand{font-size:18px;gap:6px}
+ body:has(.hero) .site-header .brand-mark,body:has(.hero) .site-header .brand-mark svg{width:29px;height:29px}
+ body:has(.hero) .site-header .nav-links{gap:8px}
+ body:has(.hero) .site-header .nav-primary{gap:clamp(10px,3.4vw,18px)}
+ body:has(.hero) .site-header .nav-primary a{font-size:12px}
+ body:has(.hero) .site-header .nav-utilities{gap:12px}
+ body:has(.hero) .site-header .nav-utilities .nav-icon-link svg{width:19px;height:19px}
+ body:has(.hero) .hero-inner{padding-top:175px}
+}
