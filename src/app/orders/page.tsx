@@ -26,7 +26,7 @@ export default async function OrdersPage() {
         <div className="row" style={{ alignItems: "flex-start" }}><div><strong>Order #{o.customerOrderNumber}</strong><p className="muted">{o.createdAt.toLocaleString("en-IN")} · {o.items.reduce((sum, item) => sum + item.quantity, 0)} item(s)</p></div><span className="pill">{o.status}</span></div>
         <div style={{ margin: "12px 0" }}>{o.items.map(item => <div className="row" key={item.id} style={{ margin: "8px 0" }}><span>{item.productName} × {item.quantity}</span><span>{formatMoney(item.unitPricePaise * item.quantity)}</span></div>)}</div>
         <div className="row" style={{ borderTop: "1px solid #e7e4da", paddingTop: 12 }}><span className="muted">{o.paymentMethod} · {o.paymentStatus}</span><strong>{formatMoney(o.totalPaise)}</strong></div>
-        <div className="row" style={{ justifyContent: "flex-start", flexWrap: "wrap", marginTop: 14 }}><Link className="btn secondary" href={`/orders/${o.id}`}>View details</Link><BuyAgainButton items={o.items.map(item => ({ product: item.product, quantity: item.quantity }))} /></div>
+        <div className="row" style={{ justifyContent: "flex-start", flexWrap: "wrap", marginTop: 14 }}><Link className="btn secondary" href={`/orders/${o.id}`}>View details</Link><Link className="btn secondary" href={`/track?orderNumber=${o.customerOrderNumber}`}>Track order</Link><BuyAgainButton items={o.items.map(item => ({ product: item.product, quantity: item.quantity }))} /></div>
       </article>)}</div>}
   </main>;
 }
