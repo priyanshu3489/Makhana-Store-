@@ -333,9 +333,10 @@ export default async function AccountPage({
                 <strong>{formatMoney(order.totalPaise)}</strong>
               </div>
 
-              <p className="text-link" style={{ marginBottom: 0 }}>
-                View order and reorder options →
-              </p>
+              <div className="row" style={{ justifyContent: "flex-start", flexWrap: "wrap", marginTop: 12 }}>
+                <Link className="btn secondary" href={`/track?orderNumber=${order.customerOrderNumber}`}>Track order →</Link>
+                <Link className="text-link" href={`/orders/${order.id}`}>View details</Link>
+              </div>
             </Link>
           ))}
         </div>
