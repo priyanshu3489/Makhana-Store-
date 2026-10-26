@@ -1006,3 +1006,54 @@ body:has(.hero) .hero-inner { padding-top: 150px; }
   body:has(.hero) .site-header .nav-utilities { gap: 12px; }
   body:has(.hero) .hero-inner { padding-top: 175px; }
 }
+
+/* Order tracking page — polished customer-facing delivery timeline */
+.track-page{max-width:1120px;padding-top:38px;padding-bottom:34px;min-height:65vh}
+.track-intro{max-width:850px;margin:0 auto 26px}
+.track-intro .eyebrow{display:none}
+.track-intro h1{font-family:Georgia,'Times New Roman',serif;font-size:clamp(34px,4.4vw,48px);font-weight:500;letter-spacing:-1.5px;line-height:1.12;margin:8px 0 12px;color:#1f2d20}
+.track-intro>p{font-size:15px;line-height:1.8;color:#64665c;margin:0;max-width:790px}
+.track-form{max-width:850px;margin:0 auto 26px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 20px;align-items:end}
+.track-field{display:grid;gap:9px;margin:0;min-width:0}
+.track-field>span{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:#52594e}
+.track-field>span svg{width:16px;height:16px;fill:none;stroke:#737b6c;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;flex:0 0 auto}
+.track-field input{width:100%;min-width:0;height:49px;padding:0 15px;border:1px solid #e3dfd3;border-radius:12px;background:rgba(255,254,250,.9);color:#25291f;box-shadow:0 3px 9px #302b170b;font-size:14px;outline:none;transition:border-color .18s,box-shadow .18s}
+.track-field input::placeholder{color:#a5a397}
+.track-field input:focus{border-color:#739173;box-shadow:0 0 0 3px #315d3b15}
+.track-submit{grid-column:1/-1;justify-self:center;width:min(100%,430px);height:49px;margin-top:7px;background:linear-gradient(110deg,#245d37,#17452b);border:1px solid #8ba98a;box-shadow:0 3px 0 #d9e4d4,inset 0 1px 0 #ffffff32;font-size:14px;letter-spacing:.1px;gap:10px}
+.track-submit:hover{filter:brightness(1.06);transform:translateY(-1px)}
+.track-error{grid-column:1/-1;margin:0}
+.track-result{max-width:1020px;margin:26px auto 0;padding:24px 26px 20px;background:rgba(255,254,250,.9);border:1px solid #e9e4d7;border-radius:20px;box-shadow:0 10px 30px #423d2408}
+.track-result-head{display:flex;align-items:center;gap:16px;margin-bottom:26px}
+.track-order-thumb{width:70px;height:70px;flex:0 0 70px;display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:wrap;border-radius:50%;border:3px solid #f0e7d4;background:radial-gradient(circle at 40% 35%,#f6d8a0,#a6b17a 65%,#587246);color:#f9f2dc;box-shadow:inset 0 0 0 3px #ffffff50;font-size:22px}
+.track-order-thumb span:nth-child(2){font-size:14px;color:#b34c2f}
+.track-order-summary{min-width:0;flex:1}
+.track-order-title{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.track-order-title h2{font-size:18px;margin:0;color:#292d24;font-weight:750}
+.track-status{display:inline-flex;align-items:center;border-radius:99px;padding:6px 10px;background:#eaf1e5;color:#47744a;font-size:12px;font-weight:700}
+.track-status-cancelled{background:#fbe9e5;color:#a03c2d}
+.track-order-subtitle{font-size:13px;color:#5c8b5b;margin:7px 0 4px}
+.track-order-date{font-size:12px;color:#8b8b7e;margin:0}
+.track-timeline{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));margin:4px 0 28px;padding:0 5px}
+.track-timeline-step{position:relative;display:flex;flex-direction:column;align-items:center;gap:8px;min-width:0;color:#aaa99e;text-align:center;font-size:12px}
+.track-timeline-line{position:absolute;top:14px;left:-50%;width:100%;height:2px;background:#e7e5db}
+.track-timeline-step:first-child .track-timeline-line{display:none}
+.track-timeline-icon{position:relative;z-index:1;width:28px;height:28px;display:grid;place-items:center;border:2px solid #d8d8ce;border-radius:50%;background:#fffefa;color:#aaa99e;font-size:14px;font-weight:800}
+.track-timeline-step.is-done{color:#4b7650}
+.track-timeline-step.is-done .track-timeline-icon{border-color:#477b50;background:#fffefa;color:#32683d;box-shadow:0 0 0 3px #edf2e8}
+.track-timeline-step.is-done .track-timeline-line{background:#477b50}
+.track-timeline-step.is-active .track-timeline-icon{background:#2b663d;color:#fff;border-color:#2b663d;box-shadow:0 0 0 4px #e7efe2}
+.track-timeline-step strong{font-size:12px;font-weight:650;line-height:1.4}
+.track-items{border-top:1px solid #eee9dc;padding-top:18px}
+.track-items-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px}
+.track-items-heading h3{font-family:Georgia,'Times New Roman',serif;font-weight:500;font-size:20px;margin:0}
+.track-items-heading>span{font-size:12px;color:#797b70}
+.track-item{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid #eee9dc;font-size:14px}
+.track-item:last-child{border-bottom:0}
+.track-item strong{white-space:nowrap;color:#355d3d}
+.track-cancelled-note{padding:14px;border-radius:12px;background:#fff1ed;color:#8c3b2f;font-size:14px}
+.track-updated{font-size:11px;color:#8d8c80;text-align:right;margin:10px 0 0}
+.track-help{max-width:850px;margin:25px auto 0;color:#7a7a6e;font-size:12px;line-height:1.7}
+.track-help .text-link{font-weight:700}
+@media(max-width:700px){.track-page{padding-top:28px}.track-intro{margin-bottom:22px}.track-form{gap:13px}.track-result{padding:20px 16px}.track-order-thumb{width:56px;height:56px;flex-basis:56px;font-size:18px}.track-timeline-step strong{font-size:11px}.track-timeline{margin-bottom:23px}}
+@media(max-width:520px){.track-page{width:calc(100% - 24px);padding-top:22px}.track-intro h1{font-size:36px}.track-intro>p{font-size:14px}.track-desktop-break{display:none}.track-form{grid-template-columns:1fr;gap:14px}.track-submit{grid-column:auto;width:100%;margin-top:5px}.track-result{margin-top:22px;padding:17px 12px;border-radius:16px}.track-result-head{gap:11px;margin-bottom:22px}.track-order-title{gap:7px}.track-order-title h2{font-size:16px}.track-status{font-size:10px;padding:5px 8px}.track-timeline{padding:0;margin-inline:-3px;gap:0}.track-timeline-step{font-size:10px;gap:7px}.track-timeline-icon{width:25px;height:25px;font-size:12px}.track-timeline-line{top:12px}.track-timeline-step strong{font-size:10px;overflow-wrap:anywhere}.track-items-heading h3{font-size:18px}.track-item{font-size:13px}}
