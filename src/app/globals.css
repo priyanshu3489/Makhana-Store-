@@ -651,3 +651,176 @@ body:has(.hero) .hero-inner{padding-top:150px}
  body:has(.hero) .site-header .nav-utilities .nav-icon-link svg{width:19px;height:19px}
  body:has(.hero) .hero-inner{padding-top:175px}
 }
+
+/* Site-wide header: match the light Makhana House reference on every route */
+.site-header,
+body:has(.hero) .site-header {
+  position: sticky;
+  inset: auto;
+  top: 0;
+  z-index: 50;
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  background: rgba(250, 247, 239, .97);
+  border: 0;
+  border-bottom: 1px solid #eee8dc;
+  box-shadow: none;
+  backdrop-filter: blur(12px);
+}
+.site-header .nav,
+body:has(.hero) .site-header .nav {
+  width: min(1500px, calc(100% - 64px));
+  min-height: 68px;
+  height: auto;
+  margin-inline: auto;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+}
+.site-header .brand,
+body:has(.hero) .site-header .brand {
+  display: inline-flex;
+  flex: 0 0 auto;
+  flex-direction: row;
+  align-items: center;
+  gap: 9px;
+  color: #20261e;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 21px;
+  font-weight: 750;
+  line-height: 1;
+  letter-spacing: -.55px;
+  white-space: nowrap;
+  text-decoration: none;
+}
+.site-header .brand:after,
+body:has(.hero) .site-header .brand:after { content: none; display: none; }
+.site-header .brand-mark,
+body:has(.hero) .site-header .brand-mark {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.site-header .brand-mark svg,
+body:has(.hero) .site-header .brand-mark svg { width: 34px; height: 34px; }
+.site-header .brand-wordmark { display: inline-block; }
+.site-header .nav-links,
+body:has(.hero) .site-header .nav-links {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: nowrap;
+  font-size: 13px;
+}
+.site-header .nav-primary,
+body:has(.hero) .site-header .nav-primary {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(22px, 3.4vw, 54px);
+  margin-inline: auto;
+}
+.site-header .nav-primary a,
+body:has(.hero) .site-header .nav-primary a {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 0;
+  color: #30332c;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  text-shadow: none;
+  transition: color .18s ease;
+}
+.site-header .nav-primary a:hover,
+body:has(.hero) .site-header .nav-primary a:hover { color: #315d3b; }
+.site-header .nav-primary .nav-home:after,
+body:has(.hero) .site-header .nav-primary .nav-home:after { content: none; }
+.site-header .nav-utilities,
+body:has(.hero) .site-header .nav-utilities {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 22px;
+}
+.site-header .nav-utilities .nav-icon-link,
+body:has(.hero) .site-header .nav-utilities .nav-icon-link {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 34px;
+  color: #34382f;
+  text-decoration: none;
+}
+.site-header .nav-utilities .nav-icon-link svg,
+body:has(.hero) .site-header .nav-utilities .nav-icon-link svg { width: 20px; height: 20px; opacity: 1; }
+.site-header .nav-utilities .nav-icon-link:hover,
+body:has(.hero) .site-header .nav-utilities .nav-icon-link:hover { color: #315d3b; }
+.site-header .nav-basket-dot,
+body:has(.hero) .site-header .nav-basket-dot { background: #d98a25; box-shadow: 0 0 0 2px #faf7ef; }
+body:has(.hero) .hero { margin-top: 0; }
+body:has(.hero) .hero-inner { padding-top: 54px; }
+body:has(.hero) .offer-marquee { position: relative; inset: auto; display: block; background: #214b35; color: #fff6df; border: 0; backdrop-filter: none; }
+@media(max-width: 850px) {
+  .site-header .nav,
+  body:has(.hero) .site-header .nav {
+    width: calc(100% - 32px);
+    min-height: 68px;
+    height: auto;
+    padding: 10px 0;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .site-header .brand,
+  body:has(.hero) .site-header .brand { font-size: 19px; }
+  .site-header .nav-links,
+  body:has(.hero) .site-header .nav-links {
+    flex: 1 0 100%;
+    order: 3;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .site-header .nav-primary,
+  body:has(.hero) .site-header .nav-primary { gap: clamp(14px, 4vw, 30px); }
+  .site-header .nav-primary a,
+  body:has(.hero) .site-header .nav-primary a { font-size: 12px; }
+  .site-header .nav-utilities,
+  body:has(.hero) .site-header .nav-utilities { gap: 18px; }
+}
+@media(max-width: 520px) {
+  .site-header .nav,
+  body:has(.hero) .site-header .nav { width: calc(100% - 24px); gap: 8px; }
+  .site-header .brand,
+  body:has(.hero) .site-header .brand { font-size: 17px; gap: 5px; }
+  .site-header .brand-mark,
+  body:has(.hero) .site-header .brand-mark,
+  .site-header .brand-mark svg,
+  body:has(.hero) .site-header .brand-mark svg { width: 29px; height: 29px; flex-basis: 29px; }
+  .site-header .nav-links,
+  body:has(.hero) .site-header .nav-links { gap: 8px; }
+  .site-header .nav-primary,
+  body:has(.hero) .site-header .nav-primary { gap: clamp(9px, 3vw, 16px); }
+  .site-header .nav-primary a,
+  body:has(.hero) .site-header .nav-primary a { font-size: 11px; }
+  .site-header .nav-utilities,
+  body:has(.hero) .site-header .nav-utilities { gap: 12px; }
+}
