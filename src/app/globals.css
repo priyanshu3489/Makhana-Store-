@@ -583,7 +583,7 @@ body{background:var(--cream);color:var(--ink);-webkit-font-smoothing:antialiased
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.hero-art-photo,.hero-food-photo,.photo-puff,.photo-sparkle,.btn,.product-card,.product-image,.journal-card,.combo-pick,.product-add-button{animation:none!important;transition:none!important}.photo-puff{display:none}}
 
 /* User-provided Makhana burst banner */
-.hero{min-height:clamp(430px,40vw,640px);display:flex;align-items:center;background-color:#17351d;background-image:linear-gradient(90deg,rgba(14,38,18,.91) 0%,rgba(14,38,18,.76) 30%,rgba(14,38,18,.35) 52%,rgba(14,38,18,.02) 78%),url('/makhana-hero-banner.jpg');background-size:cover;background-position:center;background-repeat:no-repeat;overflow:hidden}
+.hero{min-height:clamp(430px,40vw,640px);display:flex;align-items:center;background-color:#17351d;background-image:linear-gradient(90deg,rgba(14,38,18,.91) 0%,rgba(14,38,18,.76) 30%,rgba(14,38,18,.35) 52%,rgba(14,38,18,.02) 78%),url('/makhana-hero-banner.svg');background-size:cover;background-position:center;background-repeat:no-repeat;overflow:hidden}
 .hero-inner{width:min(1320px,calc(100% - 48px));min-height:clamp(430px,40vw,640px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;gap:24px;padding-block:58px}
 .hero-copy{max-width:620px;color:#fff9e9}
 .hero-copy>.pill{background:rgba(255,249,231,.12);border-color:rgba(255,229,167,.55);color:#ffe6a2}
@@ -594,5 +594,5 @@ body{background:var(--cream);color:var(--ink);-webkit-font-smoothing:antialiased
 .hero-art-photo{display:none!important}
 .hero-actions .btn{box-shadow:0 8px 24px #07190b35}
 .hero-actions .btn.secondary{background:rgba(255,250,236,.94);border-color:#fff0c8;color:#1d4229}
-@media(max-width:850px){.hero{min-height:560px;background-position:60% center;background-image:linear-gradient(90deg,rgba(14,38,18,.84) 0%,rgba(14,38,18,.58) 55%,rgba(14,38,18,.18) 100%),url('/makhana-hero-banner.jpg')}.hero-inner{width:min(100% - 32px,720px);min-height:560px;grid-template-columns:1fr;padding-block:46px}.hero-copy{max-width:560px}.hero-art-photo{display:none!important}}
-@media(max-width:520px){.hero{min-height:520px;background-position:58% center;background-image:linear-gradient(90deg,rgba(14,38,18,.82) 0%,rgba(14,38,18,.57) 65%,rgba(14,38,18,.26) 100%),url('/makhana-hero-banner.jpg')}.hero-inner{min-height:520px;padding-block:34px}.hero-copy h1{font-size:clamp(42px,11vw,60px);letter-spacing:-1.8px}.hero-copy>p{max-width:350px;font-size:15px}}
+@media(max-width:850px){.hero{min-height:560px;background-position:60% center;background-image:linear-gradient(90deg,rgba(14,38,18,.84) 0%,rgba(14,38,18,.58) 55%,rgba(14,38,18,.18) 100%),url('/makhana-hero-banner.svg')}.hero-inner{width:min(100% - 32px,720px);min-height:560px;grid-template-columns:1fr;padding-block:46px}.hero-copy{max-width:560px}.hero-art-photo{display:none!important}}
+@media(max-width:520px){.hero{min-height:520px;background-position:58% center;background-image:linear-gradient(90deg,rgba(14,38,18,.82) 0%,rgba(14,38,18,.57) 65%,rgba(14,38,18,.26) 100%),url('/makhana-hero-banner.svg')}.hero-inner{min-height:520px;padding-block:34px}.hero-copy h1{font-size:clamp(42px,11vw,60px);letter-spacing:-1.8px}.hero-copy>p{max-width:350px;font-size:15px}}
