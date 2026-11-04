@@ -22,6 +22,7 @@ const schema = z.object({
   notes: z.string().max(500).optional(),
   couponCode: z.string().trim().max(40).optional(),
   paymentMethod: z.enum(["RAZORPAY", "COD"]),
+  hamper: z.object({slug:z.enum(["most-selling","premium","celebration-gifting","luxury-gifting"]),name:z.string().max(80),count:z.number().int(),pricePaise:z.number().int(),productIds:z.array(z.string().min(1)).min(3).max(12),productNames:z.array(z.string().max(120)).min(3).max(12),giftNote:z.string().max(160).optional()}).optional(),
   items: z
     .array(
       z.object({
@@ -54,6 +55,8 @@ export async function POST(req: Request) {
     }
 
     const d = parsed.data;
+    const hamperPrices:Record<string,{name:string;count:number;pricePaise:number}>={"most-selling":{name:"Most Selling Hamper",count:3,pricePaise:59900},"premium":{name:"Premium Hamper",count:5,pricePaise:89900},"celebration-gifting":{name:"Celebration Gifting",count:8,pricePaise:129900},"luxury-gifting":{name:"Luxury Gifting",count:12,pricePaise:189900}};
+    if(d.hamper){const expected=hamperPrices[d.hamper.slug];if(!expected||d.hamper.count!==expected.count||d.hamper.pricePaise!==expected.pricePaise||d.items.length!==expected.count||d.hamper.productIds.length!==expected.count||new Set(d.hamper.productIds).size!==expected.count||d.items.some(i=>i.quantity!==1||!d.hamper!.productIds.includes(i.productId))||d.hamper.productNames.length!==expected.count){return NextResponse.json({error:"Hamper selection is invalid. Please rebuild your hamper."},{status:400});}}
     const qty = new Map<string, number>();
 
     for (const item of d.items) {
@@ -93,10 +96,7 @@ export async function POST(req: Request) {
       }
     }
 
-    const subtotal = products.reduce(
-      (sum, p) => sum + p.pricePaise * (qty.get(p.id) || 0),
-      0
-    );
+    const subtotal = d.hamper ? hamperPrices[d.hamper.slug].pricePaise : products.reduce((sum,p)=>sum+p.pricePaise*(qty.get(p.id)||0),0);
 
     let discount = 0;
     let couponCode: string | undefined;
@@ -214,7 +214,7 @@ export async function POST(req: Request) {
             city: d.city,
             state: d.state,
             postalCode: d.postalCode,
-            notes: d.notes || null,
+            notes: [d.notes,d.hamper ? `GIFT HAMPER: ${hamperPrices[d.hamper.slug].name} (₹${(hamperPrices[d.hamper.slug].pricePaise/100).toFixed(2)})\\nSelected packs: ${products.map(p=>p.name).join(", ")}${d.hamper.giftNote ? `\\nGift message: ${d.hamper.giftNote}` : ""}` : null].filter(Boolean).join("\\n\\n") || null,
 
             subtotalPaise: subtotal,
             discountPaise: discount,
@@ -228,10 +228,10 @@ export async function POST(req: Request) {
               d.paymentMethod === "COD" ? "COD_PENDING" : "PENDING",
 
             items: {
-              create: products.map((p) => ({
+              create: products.map((p,i) => ({
                 productId: p.id,
-                productName: p.name,
-                unitPricePaise: p.pricePaise,
+                productName: d.hamper ? `${d.hamper.name} — ${p.name}` : p.name,
+                unitPricePaise: d.hamper ? (i===0 ? subtotal : 0) : p.pricePaise,
                 quantity: qty.get(p.id)!,
               })),
             },
