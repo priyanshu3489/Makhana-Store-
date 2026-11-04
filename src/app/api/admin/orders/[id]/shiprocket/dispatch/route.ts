@@ -53,7 +53,7 @@ export async function POST(req: Request, { params }: { params: Promise<{ id: str
 
     if (input.action === "schedule_pickup") {
       if (!order.shippingAwbCode) return NextResponse.json({ error: "Assign an AWB before scheduling pickup." }, { status: 409 });
-      const body: { shipment_id: number; pickup_date?: string[] } = { shipment_id: Number(order.shiprocketShipmentId) };
+      const body: { shipment_id: number[]; pickup_date?: string[] } = { shipment_id: [Number(order.shiprocketShipmentId)] };
       if (input.pickupDate) {
         if (!/^\\d{4}-\\d{2}-\\d{2}$/.test(input.pickupDate)) return NextResponse.json({ error: "Pickup date must use YYYY-MM-DD format." }, { status: 400 });
         body.pickup_date = [input.pickupDate];
