@@ -16,6 +16,7 @@ type P = {
 type C = {
   product: P;
   quantity: number;
+  hamper?: {slug:string;name:string;count:number;pricePaise:number;productNames:string[];giftNote?:string};
 };
 
 export default function Cart() {
@@ -69,11 +70,8 @@ export default function Cart() {
     );
   }
 
-  const subtotal = cart.reduce(
-    (sum, item) =>
-      sum + item.product.pricePaise * item.quantity,
-    0,
-  );
+  const activeHamper = cart.find(item=>item.hamper)?.hamper;
+  const subtotal = activeHamper ? activeHamper.pricePaise : cart.reduce((sum,item)=>sum+item.product.pricePaise*item.quantity,0);
 
   const totalQuantity = cart.reduce(
     (sum, item) => sum + item.quantity,
@@ -245,13 +243,13 @@ export default function Cart() {
                             className="muted"
                             style={{ margin: 0, fontSize: 14 }}
                           >
-                            {formatMoney(item.product.pricePaise)} per pack
+                            {item.hamper ? "Included in fixed-price hamper" : formatMoney(item.product.pricePaise)+" per pack"}
                           </p>
                         </div>
 
                         <strong style={{ whiteSpace: "nowrap" }}>
                           {formatMoney(
-                            item.product.pricePaise * item.quantity,
+                            item.hamper ? item.hamper.pricePaise : item.hamper ? item.hamper.pricePaise : item.product.pricePaise * item.quantity,
                           )}
                         </strong>
                       </div>
@@ -393,7 +391,7 @@ export default function Cart() {
                 }}
               >
                 <span style={{ flex: 1 }}>
-                  {item.product.name} × {item.quantity}
+                  {item.hamper ? item.hamper.name : item.product.name+" × "+item.quantity}
                 </span>
                 <strong style={{ whiteSpace: "nowrap" }}>
                   {formatMoney(
