@@ -293,10 +293,8 @@ export default async function AccountPage({
           justifyContent: "space-between",
         }}
       >
-        <h2 style={{ fontSize: 24, margin: 0 }}>Recent orders</h2>
-        <Link className="text-link" href="/orders">
-          View all →
-        </Link>
+        <h2 style={{ fontSize: 24, margin: 0 }}>All orders</h2>
+        <span className="muted">Complete purchase history</span>
       </div>
 
       {orders.length === 0 ? (
