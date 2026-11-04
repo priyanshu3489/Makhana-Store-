@@ -249,7 +249,7 @@ export default function Cart() {
 
                         <strong style={{ whiteSpace: "nowrap" }}>
                           {formatMoney(
-                            item.hamper ? item.hamper.pricePaise : item.hamper ? item.hamper.pricePaise : item.product.pricePaise * item.quantity,
+                            item.hamper ? (cart.findIndex((entry) => entry.hamper?.slug === item.hamper?.slug) === cart.indexOf(item) ? item.hamper.pricePaise : 0) : item.hamper ? (cart.findIndex((entry) => entry.hamper?.slug === item.hamper?.slug) === cart.indexOf(item) ? item.hamper.pricePaise : 0) : item.product.pricePaise * item.quantity,
                           )}
                         </strong>
                       </div>
