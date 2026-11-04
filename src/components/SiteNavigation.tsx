@@ -19,7 +19,7 @@ export default function SiteNavigation({ isAdmin }: { isAdmin: boolean }) {
     <div className="nav-links">
       <div className="nav-primary">
         <Link href="/" className="nav-home">Home</Link>
-        <Link href="/#shop">Shop</Link>
+        <Link href="/shop">Shop</Link>
         {!isAdmin && <>
           <Link href="/combos">Combos</Link>
           <Link href="/journal">Journal</Link>
@@ -27,7 +27,7 @@ export default function SiteNavigation({ isAdmin }: { isAdmin: boolean }) {
         </>}
       </div>
       <div className="nav-utilities">
-        {!isAdmin && <Link href="/#shop" className="nav-icon-link" aria-label="Search products" title="Search products"><Icon name="search" /></Link>}
+        {!isAdmin && <Link href="/shop" className="nav-icon-link" aria-label="Browse products" title="Browse products"><Icon name="search" /></Link>}
         <Link href={isAdmin ? "/admin" : "/account"} className="nav-icon-link" aria-label={isAdmin ? "Admin dashboard" : "Account"} title={isAdmin ? "Admin dashboard" : "Account"}><Icon name="user" /></Link>
         {!isAdmin && <Link href="/cart" className="nav-icon-link nav-basket-link" aria-label="Shopping basket" title="Shopping basket"><Icon name="basket" /><span className="nav-basket-dot" aria-hidden="true" /></Link>}
       </div>
