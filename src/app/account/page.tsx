@@ -5,6 +5,7 @@ import { prisma } from "@/lib/prisma";
 import { formatMoney } from "@/lib/money";
 import AccountPanel from "@/components/AccountPanel";
 import LogoutButton from "@/components/LogoutButton";
+import AccountAutoRefresh from "@/components/AccountAutoRefresh";
 
 export const dynamic = "force-dynamic";
 
@@ -56,7 +57,6 @@ export default async function AccountPage({
     prisma.order.findMany({
       where: { userId: user.id },
       orderBy: { createdAt: "desc" },
-      take: 3,
       include: { items: true },
     }),
     prisma.order.count({ where: { userId: user.id } }),
@@ -307,39 +307,36 @@ export default async function AccountPage({
           </Link>
         </div>
       ) : (
-        <div className="stack" style={{ marginTop: 14 }}>
-          {orders.map((order) => (
-            <Link
-              className="card"
-              key={order.id}
-              href={`/orders/${order.id}`}
-              style={{ padding: 18 }}
-            >
-              <div className="row">
-                <strong>Order #{order.customerOrderNumber}</strong>
-                <span className="pill">{order.status}</span>
-              </div>
-
-              <p className="muted">
-                {order.createdAt.toLocaleDateString("en-IN")}
-                {" · "}
-                {order.items.length} item(s)
-              </p>
-
-              <div className="row">
-                <span>
-                  {order.paymentMethod} · {order.paymentStatus}
-                </span>
-                <strong>{formatMoney(order.totalPaise)}</strong>
-              </div>
-
-              <div className="row" style={{ justifyContent: "flex-start", flexWrap: "wrap", marginTop: 12 }}>
-                <Link className="btn secondary" href={`/track?orderNumber=${order.customerOrderNumber}`}>Track order →</Link>
-                <Link className="text-link" href={`/orders/${order.id}`}>View details</Link>
-              </div>
-            </Link>
-          ))}
-        </div>
+        <AccountAutoRefresh>
+          <div className="stack account-order-list" style={{ marginTop: 14 }}>
+            {orders.map((order) => {
+              const terminal = ["DELIVERED", "CANCELLED", "PAYMENT_FAILED"].includes(order.status);
+              const statusLabel = order.status.replaceAll("_", " ").toLowerCase().replace(/\\b\\w/g, (letter) => letter.toUpperCase());
+              return (
+                <article className="card account-order-card" key={order.id} style={{ padding: 18 }}>
+                  <div className="row" style={{ alignItems: "center", flexWrap: "wrap" }}>
+                    <strong>Order #{order.customerOrderNumber}</strong>
+                    <span className={`pill account-status account-status-${order.status.toLowerCase().replaceAll("_", "-")}`}>{statusLabel}</span>
+                  </div>
+                  <p className="muted">
+                    {order.createdAt.toLocaleDateString("en-IN")} · {order.items.reduce((sum, item) => sum + item.quantity, 0)} item(s)
+                  </p>
+                  <div className="row" style={{ flexWrap: "wrap" }}>
+                    <span>{order.paymentMethod} · {order.paymentStatus}</span>
+                    <strong>{formatMoney(order.totalPaise)}</strong>
+                  </div>
+                  <div className="row account-order-actions" style={{ justifyContent: "flex-start", flexWrap: "wrap", marginTop: 12 }}>
+                    {!terminal && <Link className="btn" href={`/track?orderNumber=${order.customerOrderNumber}`}>Track order →</Link>}
+                    {order.status === "DELIVERED" && <span className="account-terminal-label">✓ Delivered</span>}
+                    {order.status === "CANCELLED" && <span className="account-terminal-label is-cancelled">Order cancelled</span>}
+                    {order.status === "PAYMENT_FAILED" && <span className="account-terminal-label is-cancelled">Payment failed</span>}
+                    <Link className="text-link" href={`/orders/${order.id}`}>View details</Link>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </AccountAutoRefresh>
       )}
 
       {user.role === "ADMIN" && (
