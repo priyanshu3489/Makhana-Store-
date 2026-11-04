@@ -18,10 +18,10 @@ A starter e-commerce application for a makhana brand: product catalog, product p
 
 ## 2. Install
 ```bash
-cp .env.example .env
+cp .env.example .env.local
 npm install
 ```
-Edit `.env` and set `DATABASE_URL`, `SESSION_SECRET` (at least 32 random characters), Razorpay test credentials, and the store name. Never commit `.env`.
+Edit `.env.local` and set `DATABASE_URL`, `SESSION_SECRET` (at least 32 random characters), Razorpay test credentials, `NEXT_PUBLIC_STORE_NAME`, and `NEXT_PUBLIC_SITE_URL`. Add Shiprocket credentials only after your Shiprocket account is ready. Never commit `.env.local` or any real credentials.
 
 Generate a strong local session secret with:
 ```bash
@@ -135,7 +135,7 @@ The admin Orders tab has a **Create Shiprocket shipment** action for paid Razorp
 
 ### Local setup
 1. Create a Shiprocket account at https://www.shiprocket.in/ and complete the seller/pickup address setup. Add a pickup location in Shiprocket and copy its exact pickup-location name.
-2. Copy `.env.example` to `.env.local` (or merge the variables into your existing ignored `.env`). Never commit real credentials.
+2. Copy `.env.example` to `.env.local` and enter your credentials locally. Never commit real credentials.
 3. Set:
    - `SHIPROCKET_EMAIL`: Shiprocket account email
    - `SHIPROCKET_PASSWORD`: Shiprocket account password
