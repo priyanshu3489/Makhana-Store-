@@ -65,7 +65,20 @@ export async function POST(req: Request) {
       },
     });
   } catch (error) {
-    console.error("order_tracking_error", error);
-    return NextResponse.json({ error: "Order tracking is temporarily unavailable. Please try again." }, { status: 500 });
+    // Keep the customer-facing response generic; log the underlying failure for diagnosis.
+    console.error("[order_tracking_error]", error);
+
+    const message = error instanceof Error ? error.message : String(error);
+    const isDatabaseError =
+      /prisma|database|connection|connect|query engine|prepared statement/i.test(message);
+
+    return NextResponse.json(
+      {
+        error: isDatabaseError
+          ? "We couldn't connect to the order service. Please try again in a moment. If the problem continues, contact store support."
+          : "We couldn't load this order right now. Please try again.",
+      },
+      { status: isDatabaseError ? 503 : 500 },
+    );
   }
 }
