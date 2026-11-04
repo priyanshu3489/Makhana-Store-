@@ -586,7 +586,7 @@ export default function CheckoutForm({ user }: { user: User }) {
 
                   <strong className="checkout-cart-price">
                     {formatMoney(
-                      item.product.pricePaise * item.quantity,
+                      item.hamper ? (cart.findIndex((entry) => entry.hamper?.slug === item.hamper?.slug) === cart.indexOf(item) ? item.hamper.pricePaise : 0) : item.product.pricePaise * item.quantity,
                     )}
                   </strong>
                 </div>
