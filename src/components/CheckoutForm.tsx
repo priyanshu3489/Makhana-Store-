@@ -571,7 +571,7 @@ export default function CheckoutForm({ user }: { user: User }) {
                   <div className="checkout-cart-image-wrap">
                     <img
                       src={item.product.imageUrl}
-                      alt={item.product.name}
+                      alt={item.hamper ? item.hamper.name : item.product.name}
                       className="checkout-cart-image"
                     />
                     <span className="checkout-cart-quantity">
@@ -586,7 +586,7 @@ export default function CheckoutForm({ user }: { user: User }) {
 
                   <strong className="checkout-cart-price">
                     {formatMoney(
-                      item.hamper ? (cart.findIndex((entry) => entry.hamper?.slug === item.hamper?.slug) === cart.indexOf(item) ? item.hamper.pricePaise : 0) : item.product.pricePaise * item.quantity,
+                      item.hamper ? item.hamper.pricePaise : item.product.pricePaise * item.quantity,
                     )}
                   </strong>
                 </div>
