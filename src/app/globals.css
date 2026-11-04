@@ -1057,3 +1057,18 @@ body:has(.hero) .hero-inner { padding-top: 150px; }
 .track-help .text-link{font-weight:700}
 @media(max-width:700px){.track-page{padding-top:28px}.track-intro{margin-bottom:22px}.track-form{gap:13px}.track-result{padding:20px 16px}.track-order-thumb{width:56px;height:56px;flex-basis:56px;font-size:18px}.track-timeline-step strong{font-size:11px}.track-timeline{margin-bottom:23px}}
 @media(max-width:520px){.track-page{width:calc(100% - 24px);padding-top:22px}.track-intro h1{font-size:36px}.track-intro>p{font-size:14px}.track-desktop-break{display:none}.track-form{grid-template-columns:1fr;gap:14px}.track-submit{grid-column:auto;width:100%;margin-top:5px}.track-result{margin-top:22px;padding:17px 12px;border-radius:16px}.track-result-head{gap:11px;margin-bottom:22px}.track-order-title{gap:7px}.track-order-title h2{font-size:16px}.track-status{font-size:10px;padding:5px 8px}.track-timeline{padding:0;margin-inline:-3px;gap:0}.track-timeline-step{font-size:10px;gap:7px}.track-timeline-icon{width:25px;height:25px;font-size:12px}.track-timeline-line{top:12px}.track-timeline-step strong{font-size:10px;overflow-wrap:anywhere}.track-items-heading h3{font-size:18px}.track-item{font-size:13px}}
+
+/* Account order history and delivery state badges */
+.account-order-list{gap:14px}
+.account-order-card{border:1px solid #ebe6da;border-radius:16px;background:#fffefa;box-shadow:0 5px 20px #3a321008;transition:transform .18s,box-shadow .18s}
+.account-order-card:hover{box-shadow:0 9px 26px #3a321012;transform:translateY(-1px)}
+.account-order-card .row{gap:12px}
+.account-status{border-radius:999px;padding:6px 11px;font-size:11px;font-weight:700;letter-spacing:.02em;background:#f2eee2;color:#75643b}
+.account-status-confirmed,.account-status-processing,.account-status-packed{background:#edf3e8;color:#47744b}
+.account-status-shipped,.account-status-out-for-delivery{background:#eaf1f7;color:#416985}
+.account-status-delivered{background:#e7f3e7;color:#28713d}
+.account-status-cancelled,.account-status-payment-failed{background:#faeae6;color:#a44838}
+.account-terminal-label{display:inline-flex;align-items:center;gap:6px;padding:9px 13px;border-radius:999px;background:#e8f3e7;color:#2d7040;font-size:13px;font-weight:700}
+.account-terminal-label.is-cancelled{background:#faeae6;color:#a44838}
+.account-refresh-note{margin:12px 2px 0;color:#8a897e;font-size:11px;text-align:right}
+@media(max-width:520px){.account-order-card{padding:15px!important}.account-order-actions{gap:10px}.account-refresh-note{text-align:left}}
