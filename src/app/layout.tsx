@@ -60,7 +60,7 @@ export default async function RootLayout({
 
             <div>
               <h3>Explore</h3>
-              <Link href="/">Shop all flavours</Link>
+              <Link href="/shop">Shop all flavours</Link>
               <Link href="/combos">Build a combo</Link>
               <Link href="/journal">Journal</Link>
               <Link href="/reviews">Customer reviews</Link>
