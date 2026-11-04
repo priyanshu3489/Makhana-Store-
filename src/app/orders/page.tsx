@@ -23,7 +23,7 @@ export default async function OrdersPage() {
     </div>
     {orders.length === 0 ? <div className="card" style={{ padding: 24, marginTop: 20 }}><h2>No orders yet</h2><p className="muted">Your previous purchases will appear here after your first order.</p><Link className="btn" href="/">Discover our makhana</Link></div> :
       <div className="stack" style={{ marginTop: 22 }}>{orders.map(o => <article className="card" key={o.id} style={{ padding: 20 }}>
-        <div className="row" style={{ alignItems: "flex-start" }}><div><strong>Order #{o.customerOrderNumber}</strong><p className="muted">{o.createdAt.toLocaleString("en-IN")} · {o.items.reduce((sum, item) => sum + item.quantity, 0)} item(s)</p></div><span className="pill">{o.status}</span></div>
+        <div className="row" style={{ alignItems: "center", flexWrap: "wrap" }}><div><strong>Order #{o.customerOrderNumber}</strong><p className="muted">{o.createdAt.toLocaleString("en-IN")} · {o.items.reduce((sum, item) => sum + item.quantity, 0)} item(s)</p></div><div className="row" style={{ alignItems: "center", justifyContent: "flex-end", flexWrap: "wrap", gap: 8 }}><span className="pill">{o.status}</span><Link className="btn" href={`/track?orderNumber=${o.customerOrderNumber}`}>Track order →</Link></div></div>
         <div style={{ margin: "12px 0" }}>{o.items.map(item => <div className="row" key={item.id} style={{ margin: "8px 0" }}><span>{item.productName} × {item.quantity}</span><span>{formatMoney(item.unitPricePaise * item.quantity)}</span></div>)}</div>
         <div className="row" style={{ borderTop: "1px solid #e7e4da", paddingTop: 12 }}><span className="muted">{o.paymentMethod} · {o.paymentStatus}</span><strong>{formatMoney(o.totalPaise)}</strong></div>
         {(o.shippingStatus || o.shippingAwbCode || o.shippingCourierName) && <div style={{ marginTop: 14, padding: 14, border: "1px solid #e7e4da", borderRadius: 10 }}>
@@ -33,7 +33,7 @@ export default async function OrdersPage() {
           {o.shippingTrackingUrl && <a className="text-link" href={o.shippingTrackingUrl} target="_blank" rel="noreferrer">Track with courier ↗</a>}
           {o.shippingStatusUpdatedAt && <p className="muted" style={{ margin: "6px 0 0" }}>Updated {o.shippingStatusUpdatedAt.toLocaleString("en-IN")}</p>}
         </div>}
-        <div className="row" style={{ justifyContent: "flex-start", flexWrap: "wrap", marginTop: 14 }}><Link className="btn secondary" href={`/orders/${o.id}`}>View details</Link><Link className="btn secondary" href={`/track?orderNumber=${o.customerOrderNumber}`}>Track order</Link><BuyAgainButton items={o.items.map(item => ({ product: item.product, quantity: item.quantity }))} /></div>
+        <div className="row" style={{ justifyContent: "flex-start", flexWrap: "wrap", marginTop: 14 }}><Link className="btn secondary" href={`/orders/${o.id}`}>View details</Link><BuyAgainButton items={o.items.map(item => ({ product: item.product, quantity: item.quantity }))} /></div>
       </article>)}</div>}
   </main>;
 }
