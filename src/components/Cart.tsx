@@ -210,7 +210,7 @@ export default function Cart() {
                     >
                       <img
                         src={item.product.imageUrl}
-                        alt={item.product.name}
+                        alt={item.hamper ? item.hamper.name : item.product.name}
                         style={{
                           width: "100%",
                           aspectRatio: "1",
@@ -243,13 +243,13 @@ export default function Cart() {
                             className="muted"
                             style={{ margin: 0, fontSize: 14 }}
                           >
-                            {item.hamper ? "Included in fixed-price hamper" : formatMoney(item.product.pricePaise)+" per pack"}
+                            {item.hamper ? `${item.hamper.count} selected makhana jars · ${item.hamper.productNames.join(", ")}` : formatMoney(item.product.pricePaise)+" per pack"}
                           </p>
                         </div>
 
                         <strong style={{ whiteSpace: "nowrap" }}>
                           {formatMoney(
-                            item.hamper ? (cart.findIndex((entry) => entry.hamper?.slug === item.hamper?.slug) === cart.indexOf(item) ? item.hamper.pricePaise : 0) : item.product.pricePaise * item.quantity,
+                            item.hamper ? (cart.findIndex((entry) => entry.hamper?.slug === item.hamper?.slug) === cart.indexOf(item) ? item.hamper.pricePaise : 0) : item.hamper ? item.hamper.pricePaise : item.product.pricePaise * item.quantity,
                           )}
                         </strong>
                       </div>
