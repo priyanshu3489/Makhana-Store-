@@ -8,6 +8,7 @@ type Tracking = {
   paymentStatus: string;
   createdAt: string;
   updatedAt: string;
+  shipping: { status: string | null; updatedAt: string | null; awb: string | null; courier: string | null; trackingUrl: string | null };
   items: { name: string; quantity: number }[];
 };
 
@@ -118,6 +119,17 @@ export default function TrackPage() {
                 </div>;
               })}
             </div>
+          )}
+
+          {(order.shipping.status || order.shipping.awb || order.shipping.courier) && (
+            <section className="track-shipment" aria-label="Courier tracking details" style={{ margin: "18px 0", padding: 18, border: "1px solid #e7e4da", borderRadius: 14 }}>
+              <h3 style={{ marginTop: 0 }}>Shipment tracking</h3>
+              <p><strong>Shipment status:</strong> {order.shipping.status || "Shipment information received"}</p>
+              {order.shipping.courier && <p><strong>Courier:</strong> {order.shipping.courier}</p>}
+              {order.shipping.awb && <p><strong>AWB / tracking number:</strong> <span style={{ wordBreak: "break-all" }}>{order.shipping.awb}</span></p>}
+              {order.shipping.trackingUrl && <a className="btn secondary" href={order.shipping.trackingUrl} target="_blank" rel="noreferrer">Track with courier ↗</a>}
+              {order.shipping.updatedAt && <p className="track-updated">Shipment updated {new Date(order.shipping.updatedAt).toLocaleString("en-IN")}</p>}
+            </section>
           )}
 
           <div className="track-items">
