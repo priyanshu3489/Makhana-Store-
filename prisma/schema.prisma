@@ -54,6 +54,13 @@ model Order {
   user              User?         @relation(fields: [userId], references: [id], onDelete: SetNull)
   items             OrderItem[]
   customerOrderNumber Int
+  shiprocketOrderId String? @unique
+  shiprocketShipmentId String? @unique
+  shippingAwbCode String? @unique
+  shippingCourierName String?
+  shippingTrackingUrl String?
+  shippingStatus String?
+  shippingStatusUpdatedAt DateTime?
 
   @@index([createdAt])
   @@index([status])
