@@ -15,8 +15,8 @@ type Tracking = {
 const stages = [
   { label: "Placed", statuses: ["PENDING"] },
   { label: "Processed", statuses: ["CONFIRMED", "PROCESSING", "PACKED"] },
-  { label: "Shipped", statuses: ["SHIPPED"] },
-  { label: "Out for delivery", statuses: ["OUT_FOR_DELIVERY"] },
+  { label: "Shipped", statuses: ["SHIPPED", "IN TRANSIT", "PICKUP SCHEDULED", "PICKED UP"] },
+  { label: "Out for delivery", statuses: ["OUT_FOR_DELIVERY", "OUT FOR DELIVERY"] },
   { label: "Delivered", statuses: ["DELIVERED"] },
 ];
 
@@ -24,12 +24,19 @@ function label(status: string) {
   return status.replaceAll("_", " ").toLowerCase().replace(/\b\w/g, c => c.toUpperCase());
 }
 
+function progressStatus(order: Tracking) {
+  const shipping = (order.shipping.status || "").toUpperCase().replaceAll("-", " ").trim();
+  if (shipping.includes("DELIVERED")) return "DELIVERED";
+  if (shipping.includes("OUT FOR DELIVERY")) return "OUT FOR DELIVERY";
+  if (shipping.includes("TRANSIT") || shipping.includes("PICKED") || shipping.includes("PICKUP")) return shipping;
+  return order.status;
+}
+
 function stageIndex(status: string) {
   if (status === "CANCELLED" || status === "PAYMENT_FAILED") return -1;
   for (let i = stages.length - 1; i >= 0; i--) {
     if (stages[i].statuses.includes(status)) return i;
   }
-  if (status === "PROCESSING" || status === "PACKED" || status === "CONFIRMED") return 1;
   return 0;
 }
 
@@ -37,16 +44,46 @@ function formatDate(value: string) {
   return new Date(value).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" });
 }
 
+function stageDate(order: Tracking, index: number, currentStage: number) {
+  if (index === 0) return formatDate(order.createdAt);
+  if (index === currentStage) {
+    const value = index >= 2 && order.shipping.updatedAt ? order.shipping.updatedAt : order.updatedAt;
+    return formatDate(value);
+  }
+  return index < currentStage ? "Completed" : "Awaiting update";
+}
+
 export default function TrackPage() {
   const [number, setNumber] = useState("");
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
+  const [autoLoading, setAutoLoading] = useState(false);
   const [error, setError] = useState("");
   const [order, setOrder] = useState<Tracking | null>(null);
 
   useEffect(() => {
     const savedOrderNumber = new URLSearchParams(window.location.search).get("orderNumber");
-    if (savedOrderNumber && /^[0-9]+$/.test(savedOrderNumber)) setNumber(savedOrderNumber);
+    if (!savedOrderNumber || !/^[0-9]+$/.test(savedOrderNumber)) return;
+    setNumber(savedOrderNumber);
+    let cancelled = false;
+    setAutoLoading(true);
+    fetch("/api/track", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ orderNumber: savedOrderNumber }),
+    })
+      .then(async res => {
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || "Sign in or enter your checkout email to view this order.");
+        if (!cancelled) setOrder(data.order);
+      })
+      .catch(() => {
+        // Guest users can still use the order number + checkout email form below.
+      })
+      .finally(() => {
+        if (!cancelled) setAutoLoading(false);
+      });
+    return () => { cancelled = true; };
   }, []);
 
   async function submit(e: React.FormEvent<HTMLFormElement>) {
@@ -70,7 +107,8 @@ export default function TrackPage() {
     }
   }
 
-  const currentStage = order ? stageIndex(order.status) : -1;
+  const statusForProgress = order ? progressStatus(order) : "";
+  const currentStage = order ? stageIndex(statusForProgress) : -1;
   const cancelled = order?.status === "CANCELLED" || order?.status === "PAYMENT_FAILED";
 
   return (
@@ -78,21 +116,24 @@ export default function TrackPage() {
       <section className="track-intro">
         <span className="eyebrow">ORDER STATUS</span>
         <h1>Track your makhana.</h1>
-        <p>Enter your customer order number and the email address used at checkout.<br className="track-desktop-break" /> For privacy, we only show delivery progress and item names here.</p>
+        <p>See every step of your order, from placement to delivery. Sign in and open Track order from My Orders for one-click access, or enter your order number and checkout email below.</p>
       </section>
 
-      <form className="track-form" onSubmit={submit}>
-        <label className="track-field">
-          <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10v18H7z"/><path d="M10 7h4M10 11h4M10 15h2"/></svg>Customer order number</span>
-          <input required inputMode="numeric" pattern="[0-9]+" value={number} onChange={e => setNumber(e.target.value)} placeholder="e.g. 1234" />
-        </label>
-        <label className="track-field">
-          <span><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg>Checkout email</span>
-          <input required type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="you@example.com" />
-        </label>
-        <button className="btn track-submit" type="submit" disabled={loading}>{loading ? "Looking up order…" : <>Track order <span aria-hidden="true">→</span></>}</button>
-        {error && <p role="alert" className="checkout-error track-error">{error}</p>}
-      </form>
+      {!order && (
+        <form className="track-form" onSubmit={submit}>
+          <label className="track-field">
+            <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10v18H7z"/><path d="M10 7h4M10 11h4M10 15h2"/></svg>Customer order number</span>
+            <input required inputMode="numeric" pattern="[0-9]+" value={number} onChange={e => setNumber(e.target.value)} placeholder="e.g. 1234" />
+          </label>
+          <label className="track-field">
+            <span><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg>Checkout email</span>
+            <input required type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="you@example.com" />
+          </label>
+          <button className="btn track-submit" type="submit" disabled={loading}>{loading ? "Looking up order…" : <>Track order <span aria-hidden="true">→</span></>}</button>
+          {error && <p role="alert" className="checkout-error track-error">{error}</p>}
+          {autoLoading && <p className="track-help">Loading your order securely…</p>}
+        </form>
+      )}
 
       {order && (
         <section className="track-result" aria-live="polite">
@@ -116,6 +157,7 @@ export default function TrackPage() {
                   <div className="track-timeline-line" aria-hidden="true" />
                   <span className="track-timeline-icon" aria-hidden="true">{done ? "✓" : i === 4 ? "⌂" : "○"}</span>
                   <strong>{stage.label}</strong>
+                  <small className="track-stage-date">{stageDate(order, i, currentStage)}</small>
                 </div>;
               })}
             </div>
@@ -137,10 +179,11 @@ export default function TrackPage() {
             {order.items.map((item, i) => <div className="track-item" key={`${item.name}-${i}`}><span>{item.name}</span><strong>× {item.quantity}</strong></div>)}
           </div>
           <p className="track-updated">Last updated {new Date(order.updatedAt).toLocaleString("en-IN")}</p>
+          <p><button className="btn secondary" type="button" onClick={() => { setOrder(null); setNumber(""); setEmail(""); }}>Track another order</button></p>
         </section>
       )}
 
-      <p className="track-help">Already have an account? View your full order history in <a className="text-link" href="/orders">My Orders</a>.</p>
+      <p className="track-help">Already have an account? View every order in <a className="text-link" href="/orders">My Orders</a>. Select Track order on any order to open its details directly.</p>
     </main>
   );
 }
