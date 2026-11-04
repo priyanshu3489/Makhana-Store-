@@ -309,7 +309,7 @@ export default async function AccountPage({
           <div className="stack account-order-list" style={{ marginTop: 14 }}>
             {orders.map((order) => {
               const terminal = ["DELIVERED", "CANCELLED", "PAYMENT_FAILED"].includes(order.status);
-              const statusLabel = order.status.replaceAll("_", " ").toLowerCase().replace(/\\b\\w/g, (letter) => letter.toUpperCase());
+              const statusLabel = order.status.replaceAll("_", " ").toLowerCase().replace(/\b\w/g, (letter) => letter.toUpperCase());
               return (
                 <article className="card account-order-card" key={order.id} style={{ padding: 18 }}>
                   <div className="row" style={{ alignItems: "center", flexWrap: "wrap" }}>
