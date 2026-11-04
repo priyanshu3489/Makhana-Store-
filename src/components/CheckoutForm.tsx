@@ -25,6 +25,7 @@ type CartProduct = {
 type CartItem = {
   product: CartProduct;
   quantity: number;
+  hamper?: {slug:string;name:string;count:number;pricePaise:number;productIds:string[];productNames:string[];giftNote?:string};
 };
 
 type FormState = {
@@ -134,11 +135,8 @@ export default function CheckoutForm({ user }: { user: User }) {
     setForm((previous) => ({ ...previous, [key]: value }));
   }
 
-  const subtotal = cart.reduce(
-    (sum, item) =>
-      sum + item.product.pricePaise * item.quantity,
-    0,
-  );
+  const activeHamper = cart.find(item=>item.hamper)?.hamper;
+  const subtotal = activeHamper ? activeHamper.pricePaise : cart.reduce((sum,item)=>sum+item.product.pricePaise*item.quantity,0);
 
   const shippingEstimate =
     subtotal === 0 ? 0 : subtotal >= 49900 ? 0 : 5000;
@@ -162,6 +160,7 @@ export default function CheckoutForm({ user }: { user: User }) {
         throw new Error("Your basket could not be loaded. Please refresh.");
       }
 
+      const hamper = raw.find((item: any)=>item.hamper)?.hamper;
       const items = raw.map((item: any) => ({
         productId: item.product?.id,
         quantity: item.quantity,
@@ -216,6 +215,7 @@ export default function CheckoutForm({ user }: { user: User }) {
           address: combinedAddress,
           postalCode: form.postalCode.trim(),
           items,
+          hamper,
         }),
       });
 
