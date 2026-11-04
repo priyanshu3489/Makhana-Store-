@@ -314,7 +314,10 @@ export default async function AccountPage({
                 <article className="card account-order-card" key={order.id} style={{ padding: 18 }}>
                   <div className="row" style={{ alignItems: "center", flexWrap: "wrap" }}>
                     <strong>Order #{order.customerOrderNumber}</strong>
-                    <span className={`pill account-status account-status-${order.status.toLowerCase().replaceAll("_", "-")}`}>{statusLabel}</span>
+                    <div className="row" style={{ alignItems: "center", gap: 8, flexWrap: "wrap" }}>
+                      <span className={`pill account-status account-status-${order.status.toLowerCase().replaceAll("_", "-")}`}>{statusLabel}</span>
+                      {!terminal && <Link className="btn" href={`/track?orderNumber=${order.customerOrderNumber}`}>Track order →</Link>}
+                    </div>
                   </div>
                   <p className="muted">
                     {order.createdAt.toLocaleDateString("en-IN")} · {order.items.reduce((sum, item) => sum + item.quantity, 0)} item(s)
@@ -324,7 +327,6 @@ export default async function AccountPage({
                     <strong>{formatMoney(order.totalPaise)}</strong>
                   </div>
                   <div className="row account-order-actions" style={{ justifyContent: "flex-start", flexWrap: "wrap", marginTop: 12 }}>
-                    {!terminal && <Link className="btn" href={`/track?orderNumber=${order.customerOrderNumber}`}>Track order →</Link>}
                     {order.status === "DELIVERED" && <span className="account-terminal-label">✓ Delivered</span>}
                     {order.status === "CANCELLED" && <span className="account-terminal-label is-cancelled">Order cancelled</span>}
                     {order.status === "PAYMENT_FAILED" && <span className="account-terminal-label is-cancelled">Payment failed</span>}
