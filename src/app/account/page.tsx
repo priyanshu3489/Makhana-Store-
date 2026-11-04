@@ -316,7 +316,7 @@ export default async function AccountPage({
                     <strong>Order #{order.customerOrderNumber}</strong>
                     <div className="row" style={{ alignItems: "center", gap: 8, flexWrap: "wrap" }}>
                       <span className={`pill account-status account-status-${order.status.toLowerCase().replaceAll("_", "-")}`}>{statusLabel}</span>
-                      {!terminal && <Link className="btn" href={`/track?orderNumber=${order.customerOrderNumber}`}>Track order →</Link>}
+                      <Link className="btn" href={`/track?orderNumber=${order.customerOrderNumber}`}>Track order →</Link>
                     </div>
                   </div>
                   <p className="muted">
