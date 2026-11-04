@@ -4,7 +4,7 @@ import { formatMoney } from "@/lib/money";
 
 type Product={id:string;slug:string;name:string;pricePaise:number;imageUrl:string;stock:number;flavor:string;weightGrams:number};
 type Hamper={slug:string;name:string;count:number;pricePaise:number;tag:string};
-const HAMPERS:Hamper[]=[{"slug":"most-selling","name":"Most Selling Hamper","count":3,"price":59900,"tag":"BESTSELLER"},{"slug":"premium","name":"Premium Hamper","count":5,"price":89900,"tag":"MORE TO LOVE"},{"slug":"celebration-gifting","name":"Celebration Gifting","count":8,"price":129900,"tag":"CELEBRATE"},{"slug":"luxury-gifting","name":"Luxury Gifting","count":12,"price":189900,"tag":"SIGNATURE GIFT"}];
+const HAMPERS:Hamper[]=[{"slug":"most-selling","name":"Most Selling Hamper","count":3,"pricePaise":59900,"tag":"BESTSELLER"},{"slug":"premium","name":"Premium Hamper","count":5,"pricePaise":89900,"tag":"MORE TO LOVE"},{"slug":"celebration-gifting","name":"Celebration Gifting","count":8,"pricePaise":129900,"tag":"CELEBRATE"},{"slug":"luxury-gifting","name":"Luxury Gifting","count":12,"pricePaise":189900,"tag":"SIGNATURE GIFT"}];
 export default function GiftHamperShop({products}:{products:Product[]}){
  const [tier,setTier]=useState<Hamper>(HAMPERS[0]);
  const [selected,setSelected]=useState<string[]>([]);
