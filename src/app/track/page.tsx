@@ -58,6 +58,7 @@ export default function TrackPage() {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [autoLoading, setAutoLoading] = useState(false);
+  const [linkedOrderNumber, setLinkedOrderNumber] = useState(false);
   const [error, setError] = useState("");
   const [order, setOrder] = useState<Tracking | null>(null);
 
@@ -65,6 +66,7 @@ export default function TrackPage() {
     const savedOrderNumber = new URLSearchParams(window.location.search).get("orderNumber");
     if (!savedOrderNumber || !/^[0-9]+$/.test(savedOrderNumber)) return;
     setNumber(savedOrderNumber);
+    setLinkedOrderNumber(true);
     let cancelled = false;
     setAutoLoading(true);
     fetch("/api/track", {
@@ -77,8 +79,8 @@ export default function TrackPage() {
         if (!res.ok) throw new Error(data.error || "Sign in or enter your checkout email to view this order.");
         if (!cancelled) setOrder(data.order);
       })
-      .catch(() => {
-        // Guest users can still use the order number + checkout email form below.
+      .catch(err => {
+        if (!cancelled) setError(err instanceof Error ? err.message : "Please sign in to view this order.");
       })
       .finally(() => {
         if (!cancelled) setAutoLoading(false);
@@ -119,7 +121,7 @@ export default function TrackPage() {
         <p>See every step of your order, from placement to delivery. Sign in and open Track order from My Orders for one-click access, or enter your order number and checkout email below.</p>
       </section>
 
-      {!order && (
+      {!order && !linkedOrderNumber && (
         <form className="track-form" onSubmit={submit}>
           <label className="track-field">
             <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h10v18H7z"/><path d="M10 7h4M10 11h4M10 15h2"/></svg>Customer order number</span>
@@ -133,6 +135,13 @@ export default function TrackPage() {
           {error && <p role="alert" className="checkout-error track-error">{error}</p>}
           {autoLoading && <p className="track-help">Loading your order securely…</p>}
         </form>
+      )}
+
+      {!order && linkedOrderNumber && (
+        <section className="track-form" aria-live="polite">
+          <p className="track-help">{autoLoading ? "Loading your order securely…" : error || "This order could not be loaded. Please sign in with the account used to place the order, then open Track order again."}</p>
+          {!autoLoading && <p><a className="btn secondary" href="/account">Back to My Account</a></p>}
+        </section>
       )}
 
       {order && (
@@ -183,7 +192,7 @@ export default function TrackPage() {
         </section>
       )}
 
-      <p className="track-help">Already have an account? View every order in <a className="text-link" href="/orders">My Orders</a>. Select Track order on any order to open its details directly.</p>
+      {!linkedOrderNumber && <p className="track-help">Already have an account? View every order in <a className="text-link" href="/orders">My Orders</a>. Select Track order on any order to open its details directly.</p>}
     </main>
   );
 }
