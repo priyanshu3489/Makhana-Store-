@@ -342,6 +342,7 @@ export default function Cart() {
                           Remove
                         </button>
                       </div>}
+                      {item.hamper && <button type="button" onClick={() => save(cart.filter((entry) => entry.hamper?.slug !== item.hamper?.slug))} style={{ marginTop: 12, border: 0, background: "transparent", color: "var(--muted, #777)", textDecoration: "underline", cursor: "pointer", padding: 6 }}>Remove entire hamper</button>}
 
                       {item.quantity >= item.product.stock &&
                         item.product.stock > 0 && (
