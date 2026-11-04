@@ -391,7 +391,7 @@ export default function Cart() {
                 }}
               >
                 <span style={{ flex: 1 }}>
-                  {item.hamper ? item.hamper.name : item.product.name+" × "+item.quantity}
+                  {item.hamper ? `${item.hamper.name} · ${item.product.name}` : item.product.name+" × "+item.quantity}
                 </span>
                 <strong style={{ whiteSpace: "nowrap" }}>
                   {formatMoney(
