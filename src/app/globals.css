@@ -1140,3 +1140,16 @@ body:has(.hero) .hero-inner { padding-top: 150px; }
 .gift-selection-hint{display:block;text-align:center;margin-top:8px;font-size:10px;color:#858477}
 @media(max-width:760px){.gift-builder-layout{grid-template-columns:1fr}.gift-your-hamper{position:static}.gift-product-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:420px){.gift-product-grid{grid-template-columns:1fr}.gift-product-option>img{width:58px;height:58px}}
+
+/* Gift hamper selection cards */
+.gift-card{appearance:none;text-align:left;cursor:pointer;padding:18px 16px;min-height:220px;transition:border-color .18s,transform .18s,box-shadow .18s}
+.gift-card:hover{transform:translateY(-3px);box-shadow:0 12px 24px #4c3c1b18}
+.gift-card.is-selected{border:2px solid #426b43;background:#f7f8f0;box-shadow:0 0 0 3px #426b4318}
+.gift-card h3{font:500 22px Georgia,serif;color:#1d422a;margin:13px 0}
+.gift-card-price{display:block;font-size:25px;color:#173c27;margin:10px 0}
+.gift-card-body p,.gift-card p{color:#67695d;font-size:13px;line-height:1.55}
+.gift-select-indicator{display:inline-flex;align-items:center;justify-content:center;position:static;width:auto;height:auto;border:0;border-radius:99px;background:#e9efe7;color:#245b3c;padding:9px 13px;font-size:11px;font-weight:700;margin-top:8px}
+.gift-card.is-selected .gift-select-indicator{background:#245b3c;color:white}
+.gift-builder-layout{margin-top:30px}
+.gift-note-label textarea:focus{outline:2px solid #426b43;outline-offset:1px}
+@media(max-width:600px){.gift-card{min-height:190px;padding:14px 12px}.gift-card h3{font-size:18px}}
