@@ -19,6 +19,8 @@ export async function POST(req: Request) {
     const awb = String(body?.awb || body?.awb_code || "").trim();
     const shipmentId = String(body?.shipment_id || "").trim();
     const status = String(body?.current_status || body?.status || body?.shipment_status || "").trim();
+    const courier = String(body?.courier_name || body?.courier || "").trim();
+    const trackingUrl = String(body?.tracking_url || body?.track_url || "").trim();
     if ((!awb && !shipmentId) || !status) {
       return NextResponse.json({ error: "Missing shipment identifier or status." }, { status: 400 });
     }
@@ -46,6 +48,8 @@ export async function POST(req: Request) {
         shippingStatus: status.slice(0, 120),
         shippingStatusUpdatedAt: new Date(),
         ...(awb && !order.shippingAwbCode ? { shippingAwbCode: awb } : {}),
+        ...(courier ? { shippingCourierName: courier.slice(0, 120) } : {}),
+        ...(trackingUrl && /^https:\\/\\//i.test(trackingUrl) ? { shippingTrackingUrl: trackingUrl } : {}),
         ...(orderStatus ? { status: orderStatus } : {}),
       },
     });
