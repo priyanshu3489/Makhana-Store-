@@ -1077,3 +1077,16 @@ body:has(.hero) .hero-inner { padding-top: 150px; }
 .track-stage-date{display:block;min-height:14px;color:#898a7e;font-size:10px;font-weight:500;line-height:1.3;white-space:nowrap}
 .track-timeline-step.is-active .track-stage-date{color:#376b40;font-weight:700}
 @media(max-width:520px){.track-stage-date{font-size:9px;white-space:normal}}
+
+/* Dedicated shop page */
+.shop-page-hero{padding:58px 0 42px;border-bottom:1px solid #e9e3d5;background:radial-gradient(circle at 88% 22%,#f0dfb8 0,transparent 25%)}
+.shop-page-hero h1{font-family:Georgia,'Times New Roman',serif;font-size:clamp(38px,5vw,58px);font-weight:500;letter-spacing:-1.5px;margin:12px 0;color:#253c29}
+.shop-page-hero>p{max-width:620px;color:#686b60;font-size:16px;line-height:1.8}
+.shop-page-actions{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:22px}
+.shop-category{padding-top:42px}
+.shop-category .section-heading{margin-bottom:20px}
+.shop-combo-banner{margin-top:54px;padding:30px 34px;border-radius:22px;background:#e9eddf;display:flex;align-items:center;justify-content:space-between;gap:22px}
+.shop-combo-banner>div{max-width:650px}
+.shop-combo-banner h2{font-family:Georgia,'Times New Roman',serif;font-weight:500;font-size:clamp(26px,3.5vw,38px);margin:8px 0}
+.shop-combo-banner p{color:#66695f;line-height:1.7;margin:0}
+@media(max-width:600px){.shop-page-hero{padding:38px 0 30px}.shop-combo-banner{padding:24px;align-items:flex-start;flex-direction:column}}
