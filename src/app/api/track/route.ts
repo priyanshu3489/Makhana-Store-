@@ -1,21 +1,32 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
+import { getCurrentUser } from "@/lib/session";
 
 const schema = z.object({
-  orderNumber: z.string().trim().regex(/^[1-9]\\d{0,8}$/),
-  email: z.string().trim().email().max(254),
+  orderNumber: z.string().trim().regex(/^[1-9]\d{0,8}$/),
+  email: z.string().trim().email().max(254).optional().or(z.literal("")),
 });
 
 export async function POST(req: Request) {
   try {
     const parsed = schema.safeParse(await req.json());
-    if (!parsed.success) return NextResponse.json({ error: "Enter a valid order number and checkout email." }, { status: 400 });
+    if (!parsed.success) {
+      return NextResponse.json({ error: "Enter a valid order number." }, { status: 400 });
+    }
+
+    const user = await getCurrentUser();
+    const email = parsed.data.email?.toLowerCase();
+    if (!user && !email) {
+      return NextResponse.json({ error: "Enter the checkout email, or sign in to track your order." }, { status: 400 });
+    }
 
     const order = await prisma.order.findFirst({
       where: {
         customerOrderNumber: Number(parsed.data.orderNumber),
-        email: parsed.data.email.toLowerCase(),
+        ...(user
+          ? { userId: user.id }
+          : { email }),
       },
       select: {
         customerOrderNumber: true,
@@ -32,7 +43,9 @@ export async function POST(req: Request) {
       },
     });
 
-    if (!order) return NextResponse.json({ error: "We couldn't find an order matching those details. Check the number and checkout email, or sign in to view your orders." }, { status: 404 });
+    if (!order) {
+      return NextResponse.json({ error: "We couldn't find an order matching those details. Check the number and checkout email, or sign in to view your orders." }, { status: 404 });
+    }
 
     return NextResponse.json({
       order: {
