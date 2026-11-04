@@ -70,6 +70,7 @@ export default function Cart() {
     );
   }
 
+  const visibleCart = cart.filter((item, index) => !item.hamper || cart.findIndex((entry) => entry.hamper?.slug === item.hamper?.slug) === index);
   const activeHamper = cart.find(item=>item.hamper)?.hamper;
   const subtotal = activeHamper ? activeHamper.pricePaise : cart.reduce((sum,item)=>sum+item.product.pricePaise*item.quantity,0);
 
@@ -191,10 +192,10 @@ export default function Cart() {
             )}
 
             <div className="stack" style={{ gap: 14 }}>
-              {cart.map((item) => (
+              {visibleCart.map((item) => (
                 <article
                   className="card"
-                  key={item.product.id}
+                  key={item.hamper ? `hamper-${item.hamper.slug}` : item.product.id}
                   style={{ padding: 18 }}
                 >
                   <div
@@ -249,12 +250,12 @@ export default function Cart() {
 
                         <strong style={{ whiteSpace: "nowrap" }}>
                           {formatMoney(
-                            item.hamper ? (cart.findIndex((entry) => entry.hamper?.slug === item.hamper?.slug) === cart.indexOf(item) ? item.hamper.pricePaise : 0) : item.hamper ? item.hamper.pricePaise : item.product.pricePaise * item.quantity,
+                            item.hamper ? item.hamper.pricePaise : item.product.pricePaise * item.quantity,
                           )}
                         </strong>
                       </div>
 
-                      <div
+                      {!item.hamper && <div
                         className="row"
                         style={{
                           justifyContent: "space-between",
@@ -326,10 +327,7 @@ export default function Cart() {
                           type="button"
                           onClick={() =>
                             save(
-                              cart.filter(
-                                (entry) =>
-                                  entry.product.id !== item.product.id,
-                              ),
+                              item.hamper ? cart.filter((entry) => entry.hamper?.slug !== item.hamper?.slug) : cart.filter((entry) => entry.product.id !== item.product.id),
                             )
                           }
                           style={{
@@ -343,7 +341,7 @@ export default function Cart() {
                         >
                           Remove
                         </button>
-                      </div>
+                      </div>}
 
                       {item.quantity >= item.product.stock &&
                         item.product.stock > 0 && (
@@ -380,7 +378,7 @@ export default function Cart() {
               Order summary
             </h2>
 
-            {cart.map((item) => (
+            {visibleCart.map((item) => (
               <div
                 className="row"
                 key={item.product.id}
@@ -395,7 +393,7 @@ export default function Cart() {
                 </span>
                 <strong style={{ whiteSpace: "nowrap" }}>
                   {formatMoney(
-                    item.product.pricePaise * item.quantity,
+                    item.hamper ? item.hamper.pricePaise : item.product.pricePaise * item.quantity,
                   )}
                 </strong>
               </div>
