@@ -128,3 +128,34 @@ The API verifies checkout signatures and fetches payment details from Razorpay b
 See `FEATURES-UPDATE.md` for the migration and testing steps.
 # Makhana-Store-
 # Makhana-Store-
+
+
+## Shiprocket shipping integration (optional)
+The admin Orders tab has a **Create Shiprocket shipment** action for paid Razorpay orders and COD orders. It creates the shipment in Shiprocket; courier selection/AWB generation and pickup scheduling remain steps in your Shiprocket dashboard unless you add those workflows separately. Tracking webhook updates the store order status and shipping status when Shiprocket sends matching shipment/AWB identifiers.
+
+### Local setup
+1. Create a Shiprocket account at https://www.shiprocket.in/ and complete the seller/pickup address setup. Add a pickup location in Shiprocket and copy its exact pickup-location name.
+2. Copy `.env.example` to `.env.local` (or merge the variables into your existing ignored `.env`). Never commit real credentials.
+3. Set:
+   - `SHIPROCKET_EMAIL`: Shiprocket account email
+   - `SHIPROCKET_PASSWORD`: Shiprocket account password
+   - `SHIPROCKET_PICKUP_LOCATION`: exact pickup-location name from Shiprocket
+   - `SHIPROCKET_WEBHOOK_TOKEN`: a long random secret you generate and also configure in Shiprocket webhook settings
+   - Package length, breadth, height (cm) and weight (kg) to match your packed parcel. Defaults are placeholders only; change them before creating a shipment.
+4. Apply the order shipment fields to PostgreSQL and regenerate Prisma:
+```bash
+npx prisma migrate dev --name add_shiprocket_shipping
+npx prisma generate
+``
+5. Restart the local app: `npm run dev`.
+6. In Shiprocket, configure the shipment status webhook to POST to `https://YOUR_PUBLIC_TUNNEL/api/webhooks/shiprocket` for local testing (a localhost URL is not reachable by Shiprocket). Configure the same secret as `SHIPROCKET_WEBHOOK_TOKEN`; the endpoint checks the `x-api-key` header.
+7. In Admin → Orders, use **Create Shiprocket shipment** on a paid online order or COD order. Then complete courier/AWB/pickup steps in Shiprocket. The store webhook records shipping status and maps delivered/shipped statuses to the local order status.
+
+### Safe testing
+- First test using a low-value COD/test order and verify the address, PIN code, parcel dimensions and weight in Shiprocket before confirming pickup.
+- Verify that a pending/unpaid Razorpay order is blocked, duplicate shipment creation is blocked, and the webhook rejects requests with a wrong token.
+- Use a public HTTPS tunnel only for webhook testing; do not expose your database or admin credentials.
+- The API password and webhook token stay on the server. Do not prefix them with `NEXT_PUBLIC_`, paste them into source files, or commit `.env.local`.
+- Do not create real courier pickups until your Shiprocket account, pickup address, parcel measurements and commercial terms are verified.
+
+This integration does not automatically generate an AWB, choose a courier, schedule pickup, calculate checkout shipping rates, or guarantee real-time tracking. Those are separate Shiprocket workflows and should be tested with your account before launch.
