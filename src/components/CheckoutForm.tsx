@@ -135,6 +135,7 @@ export default function CheckoutForm({ user }: { user: User }) {
     setForm((previous) => ({ ...previous, [key]: value }));
   }
 
+  const visibleCart = cart.filter((item, index) => !item.hamper || cart.findIndex((entry) => entry.hamper?.slug === item.hamper?.slug) === index);
   const activeHamper = cart.find(item=>item.hamper)?.hamper;
   const subtotal = activeHamper ? activeHamper.pricePaise : cart.reduce((sum,item)=>sum+item.product.pricePaise*item.quantity,0);
 
@@ -563,10 +564,10 @@ export default function CheckoutForm({ user }: { user: User }) {
             </div>
           ) : (
             <div className="checkout-cart-items">
-              {cart.map((item) => (
+              {visibleCart.map((item) => (
                 <div
                   className="checkout-cart-item"
-                  key={item.product.id}
+                  key={item.hamper ? `checkout-${item.hamper.slug}` : item.product.id}
                 >
                   <div className="checkout-cart-image-wrap">
                     <img
@@ -575,13 +576,13 @@ export default function CheckoutForm({ user }: { user: User }) {
                       className="checkout-cart-image"
                     />
                     <span className="checkout-cart-quantity">
-                      {item.quantity}
+                      {item.hamper ? item.hamper.count : item.quantity}
                     </span>
                   </div>
 
                   <div className="checkout-cart-product">
-                    <strong>{item.product.name}</strong>
-                    <span className="muted">Qty: {item.quantity}</span>
+                    <strong>{item.hamper ? item.hamper.name : item.product.name}</strong>
+                    <span className="muted">{item.hamper ? item.hamper.productNames.join(", ") : `Qty: ${item.quantity}`}</span>
                   </div>
 
                   <strong className="checkout-cart-price">
