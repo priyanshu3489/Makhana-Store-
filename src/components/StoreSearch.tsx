@@ -47,13 +47,14 @@ export default function StoreSearch(){
   },[open]);
 
   const normalized=query.trim().toLowerCase();
+  const terms=normalized.split(/\\s+/).filter(Boolean);
   const productResults=useMemo(()=>{
     if(!normalized)return [];
-    return products.filter(p=>[p.name,p.description,p.flavor,String(p.weightGrams)+" g"].join(" ").toLowerCase().includes(normalized)).slice(0,7);
+    return products.filter(p=>{const haystack=[p.name,p.description,p.flavor,String(p.weightGrams)+" g"].join(" ").toLowerCase().replace(/[-_/]/g," ");return terms.every(term=>haystack.includes(term.replace(/[-_/]/g," ")));}).slice(0,7);
   },[products,normalized]);
   const pageResults=useMemo(()=>{
     if(!normalized)return pages.slice(0,5);
-    return pages.filter(p=>(p.title+" "+p.keywords+" "+p.detail).toLowerCase().includes(normalized)).slice(0,6);
+    return pages.filter(p=>{const haystack=(p.title+" "+p.keywords+" "+p.detail).toLowerCase().replace(/[-_/]/g," ");return terms.every(term=>haystack.includes(term.replace(/[-_/]/g," ")));}).slice(0,6);
   },[normalized]);
   const close=()=>{setOpen(false);setQuery("")};
 
