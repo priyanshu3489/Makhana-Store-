@@ -150,7 +150,7 @@ export default function TrackPage() {
             <div className="track-order-thumb" aria-hidden="true"><span>✿</span><span>✦</span><span>❋</span></div>
             <div className="track-order-summary">
               <div className="track-order-title"><h2>Order #{order.orderNumber}</h2><span className={cancelled ? "track-status track-status-cancelled" : "track-status"}>{label(order.status)}</span></div>
-              <p className="track-order-subtitle">{cancelled ? "Please contact store support if you need help." : "Thank you for shopping with Makhana House."}</p>
+              <p className="track-order-subtitle">{cancelled ? "Please contact store support if you need help." : "Thank you for shopping with Foxberry."}</p>
               <p className="track-order-date">Order placed {formatDate(order.createdAt)}</p>
             </div>
           </div>
