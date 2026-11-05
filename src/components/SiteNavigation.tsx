@@ -1,4 +1,5 @@
 import Link from "next/link";
+import StoreSearch from "@/components/StoreSearch";
 
 function Icon({ name }: { name: "search" | "user" | "basket" | "home" | "shop" | "gift" | "book" | "leaf" }) {
   const paths = {
@@ -27,7 +28,7 @@ export default function SiteNavigation({ isAdmin }: { isAdmin: boolean }) {
         </>}
       </div>
       <div className="nav-utilities">
-        {!isAdmin && <Link href="/shop" className="nav-icon-link" aria-label="Browse products" title="Browse products"><Icon name="search" /></Link>}
+        {!isAdmin && <StoreSearch />}
         <Link href={isAdmin ? "/admin" : "/account"} className="nav-icon-link" aria-label={isAdmin ? "Admin dashboard" : "Account"} title={isAdmin ? "Admin dashboard" : "Account"}><Icon name="user" /></Link>
         {!isAdmin && <Link href="/cart" className="nav-icon-link nav-basket-link" aria-label="Shopping basket" title="Shopping basket"><Icon name="basket" /><span className="nav-basket-dot" aria-hidden="true" /></Link>}
       </div>
