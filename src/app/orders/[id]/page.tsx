@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { notFound, redirect } from "next/navigation";
 import { formatMoney } from "@/lib/money";
 import InvoiceActions from "@/components/InvoiceActions";
+import ReturnRequestButton from "@/components/ReturnRequestButton";
 
 export const dynamic = "force-dynamic";
 
@@ -115,6 +116,17 @@ export default async function OrderDetail({
             View delivery address on Google Maps ↗
           </a>
         </p>
+
+        {order.status === "DELIVERED" && (
+          <div style={{ marginTop: 22, paddingTop: 18, borderTop: "1px solid #e7e4da" }}>
+            <h2 style={{ fontSize: 22 }}>Need help with this delivery?</h2>
+            <p className="muted">If an item arrived damaged, incorrect, expired, tampered with or missing, request a return or replacement.</p>
+            <ReturnRequestButton
+              orderNumber={order.customerOrderNumber}
+              items={order.items.map((item) => `${item.productName} × ${item.quantity}`)}
+            />
+          </div>
+        )}
 
         <div className="invoice-footer">
           <p>
