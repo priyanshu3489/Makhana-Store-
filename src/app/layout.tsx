@@ -5,8 +5,8 @@ import SiteNavigation from "@/components/SiteNavigation";
 import { getCurrentUser } from "@/lib/session";
 
 export const metadata: Metadata = {
-  title: process.env.NEXT_PUBLIC_STORE_NAME || "Makhana House",
-  description: "Shop roasted makhana and fox nuts online.",
+  title: "Foxberry | Makhana like pearls",
+  description: "Foxberry — Makhana like pearls. Discover premium, flavourful makhana.",
 };
 
 export default async function RootLayout({
@@ -22,7 +22,7 @@ export default async function RootLayout({
       <body>
         <header className="site-header">
           <nav className="container nav">
-            <Link href="/" className="brand brand-icon-only" aria-label="Makhana House home" title="Makhana House">
+            <Link href="/" className="brand brand-icon-only" aria-label="Foxberry home" title="Foxberry">
               <span className="brand-mark" aria-hidden="true">
                 <svg viewBox="0 0 48 48" width="34" height="34" fill="none">
                   <path d="M24 5C17 11 8 17 8 27a13 13 0 0 0 26 0C34 16 28 10 24 5Z" fill="#315D3B"/>
@@ -31,7 +31,7 @@ export default async function RootLayout({
                   <path d="M13 25 21 33 36 15" stroke="#FFFDF5" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </span>
-              <span className="brand-wordmark">Makhana House</span>
+              <span className="brand-wordmark">Foxberry <small className="brand-tagline">Makhana like pearls</small></span>
             </Link>
             <SiteNavigation isAdmin={isAdmin} />
           </nav>
@@ -49,9 +49,9 @@ export default async function RootLayout({
           <div className="container footer-grid">
             <div>
               <Link href="/" className="footer-brand">
-                Makhana House
+                Foxberry
               </Link>
-              <p className="muted">Fresh crunch. Thoughtfully packed.</p>
+              <p className="muted">Makhana like pearls.</p>
               <p className="muted" style={{ maxWidth: 320 }}>
                 A flavourful little break for the everyday. Browse the range,
                 track orders and find your next favourite.
@@ -98,9 +98,9 @@ export default async function RootLayout({
           <div className="container footer-bottom">
             <span>
               © {new Date().getFullYear()}{" "}
-              {process.env.NEXT_PUBLIC_STORE_NAME || "Makhana House"}
+              Foxberry
             </span>
-            <span>Made for your everyday crunch.</span>
+            <span>Makhana like pearls.</span>
           </div>
         </footer>
       </body>
