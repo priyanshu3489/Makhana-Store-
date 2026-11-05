@@ -1153,3 +1153,7 @@ body:has(.hero) .hero-inner { padding-top: 150px; }
 .gift-builder-layout{margin-top:30px}
 .gift-note-label textarea:focus{outline:2px solid #426b43;outline-offset:1px}
 @media(max-width:600px){.gift-card{min-height:190px;padding:14px 12px}.gift-card h3{font-size:18px}}
+
+
+/* Foxberry wordmark tagline */
+.site-header .brand-tagline{display:block;font-family:inherit;font-size:10px;font-weight:500;letter-spacing:.08em;line-height:1.1;text-transform:uppercase;opacity:.82;margin-top:2px}
