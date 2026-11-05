@@ -1596,3 +1596,14 @@ body:not(:has(.hero)) .site-header .nav-basket-dot{
 .returns-page .tracking-note{font-size:13px;line-height:1.7;color:#687168;background:#f8f6f0;border-left:3px solid #d6a64f;padding:14px 16px;border-radius:0 10px 10px 0;margin:18px 0}
 .returns-actions{display:flex;gap:12px;flex-wrap:wrap;margin:24px 0}
 @media(max-width:600px){.returns-page{padding-top:30px;padding-bottom:42px}.returns-page .content-panel{padding:19px 17px;border-radius:14px}.returns-page .content-panel h2{font-size:20px}.returns-page .returns-lead{font-size:15px}.returns-actions{display:grid;grid-template-columns:1fr}.returns-actions .btn{width:100%}}
+
+
+/* Delivered-order return / replacement request */
+.return-request-box{display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+.return-request-form{width:min(100%,560px);background:#fbfaf6;border:1px solid #e5ddcc;border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:9px}
+.return-request-form h3{margin:0;color:#0f2418;font-size:19px}
+.return-request-form label{font-size:13px;font-weight:700;color:#25372b;margin-top:5px}
+.return-request-form select,.return-request-form textarea{width:100%;border:1px solid #d8d4c9;border-radius:9px;background:#fff;color:#17251b;padding:11px 12px;font:inherit}
+.return-request-form textarea{resize:vertical}
+.return-request-form .muted{font-size:12px;line-height:1.55;margin:2px 0 6px}
+@media(max-width:600px){.return-request-form{padding:14px}.return-request-box,.return-request-box .btn{width:100%}}
