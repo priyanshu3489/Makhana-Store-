@@ -1607,3 +1607,49 @@ body:not(:has(.hero)) .site-header .nav-basket-dot{
 .return-request-form textarea{resize:vertical}
 .return-request-form .muted{font-size:12px;line-height:1.55;margin:2px 0 6px}
 @media(max-width:600px){.return-request-form{padding:14px}.return-request-box,.return-request-box .btn{width:100%}}
+
+/* Homepage only: remove the header fill and let the banner start at the top edge. */
+body:has(.hero) .site-header-group{
+  position:absolute !important;
+  top:0;
+  left:0;
+  right:0;
+  z-index:50;
+  display:block;
+  width:100%;
+  background:transparent !important;
+  pointer-events:none;
+}
+body:has(.hero) .site-header-group .site-header{
+  position:relative !important;
+  inset:auto !important;
+  width:100%;
+  height:auto !important;
+  min-height:0;
+  background:transparent !important;
+  background-color:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
+  backdrop-filter:none !important;
+  pointer-events:auto;
+}
+body:has(.hero) .site-header-group .nav{
+  min-height:92px;
+}
+body:has(.hero) .site-header-group .offer-marquee{
+  display:none !important;
+}
+body:has(.hero) .hero{
+  margin-top:0 !important;
+}
+body:has(.hero) .hero-inner{
+  padding-top:150px;
+}
+@media(max-width:850px){
+  body:has(.hero) .site-header-group .nav{min-height:78px}
+  body:has(.hero) .hero-inner{padding-top:170px}
+}
+@media(max-width:520px){
+  body:has(.hero) .site-header-group .nav{min-height:70px}
+  body:has(.hero) .hero-inner{padding-top:175px}
+}
