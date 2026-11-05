@@ -22,16 +22,8 @@ export default async function RootLayout({
       <body>
         <header className="site-header">
           <nav className="container nav">
-            <Link href="/" className="brand brand-icon-only" aria-label="Foxberry home" title="Foxberry">
-              <span className="brand-mark" aria-hidden="true">
-                <svg viewBox="0 0 48 48" width="34" height="34" fill="none">
-                  <path d="M24 5C17 11 8 17 8 27a13 13 0 0 0 26 0C34 16 28 10 24 5Z" fill="#315D3B"/>
-                  <path d="M29 7C35 5 42 8 42 15c0 8-9 14-17 16 1-10-1-18 4-24Z" fill="#668B49"/>
-                  <path d="M7 17C1 17 1 25 7 30c4 4 9 5 13 5-3-8-5-15-13-18Z" fill="#8EAA64"/>
-                  <path d="M13 25 21 33 36 15" stroke="#FFFDF5" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-              </span>
-              <span className="brand-wordmark">Foxberry <small className="brand-tagline">Makhana like pearls</small></span>
+            <Link href="/" className="brand brand-logo-link" aria-label="Foxberry — Pearls of Makhana home" title="Foxberry — Pearls of Makhana">
+              <img src="/foxberry-logo.svg" alt="Foxberry — Pearls of Makhana" className="foxberry-logo foxberry-header-logo" />
             </Link>
             <SiteNavigation isAdmin={isAdmin} />
           </nav>
@@ -48,8 +40,8 @@ export default async function RootLayout({
         <footer className="site-footer">
           <div className="container footer-grid">
             <div>
-              <Link href="/" className="footer-brand">
-                Foxberry
+              <Link href="/" className="footer-brand foxberry-footer-brand" aria-label="Foxberry home">
+                <img src="/foxberry-logo.svg" alt="Foxberry — Pearls of Makhana" className="foxberry-logo" />
               </Link>
               <p className="muted">Makhana like pearls.</p>
               <p className="muted" style={{ maxWidth: 320 }}>
