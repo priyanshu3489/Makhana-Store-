@@ -1575,3 +1575,24 @@ body:not(:has(.hero)) .site-header .nav-basket-dot{
 .site-header-group .offer-marquee-track{
   margin:0 !important;
 }
+
+
+/* Foxberry returns policy page */
+.returns-page{max-width:900px;padding-top:48px;padding-bottom:64px}
+.returns-page>h1{font-family:Georgia,"Times New Roman",serif;font-size:clamp(34px,5vw,52px);font-weight:500;line-height:1.12;margin:12px 0 16px}
+.returns-page .returns-lead{max-width:760px;font-size:16px;line-height:1.8;color:#5d675f;margin-bottom:28px}
+.returns-page .content-panel{background:#fff;border:1px solid #e8e1d3;border-radius:18px;padding:24px 26px;margin:16px 0;box-shadow:0 8px 24px rgba(15,36,24,.045)}
+.returns-page .content-panel h2{font-family:Georgia,"Times New Roman",serif;font-size:23px;font-weight:500;color:#18271d;margin:0 0 12px}
+.returns-page .content-panel h3{font-size:15px;color:#18271d;margin:0 0 5px}
+.returns-page .content-panel p,.returns-page .content-panel li{color:#59635b;font-size:14px;line-height:1.75}
+.returns-page .content-panel ul,.returns-page .content-panel ol{padding-left:22px;margin:10px 0}
+.returns-page .content-panel li{padding:3px 0}
+.returns-page .content-panel a{color:#0f4d3a;text-decoration:underline;text-underline-offset:3px;font-weight:600}
+.returns-steps{display:grid;gap:0;margin:18px 0 22px}
+.returns-step{display:grid;grid-template-columns:34px 1fr;gap:12px;position:relative;padding:0 0 20px}
+.returns-step:not(:last-child):after{content:"";position:absolute;left:16px;top:32px;bottom:0;width:1px;background:#d6a64f}
+.returns-step-mark{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:#0f2418;color:#d6a64f;font-weight:800;z-index:1}
+.returns-step p{margin:0}
+.returns-page .tracking-note{font-size:13px;line-height:1.7;color:#687168;background:#f8f6f0;border-left:3px solid #d6a64f;padding:14px 16px;border-radius:0 10px 10px 0;margin:18px 0}
+.returns-actions{display:flex;gap:12px;flex-wrap:wrap;margin:24px 0}
+@media(max-width:600px){.returns-page{padding-top:30px;padding-bottom:42px}.returns-page .content-panel{padding:19px 17px;border-radius:14px}.returns-page .content-panel h2{font-size:20px}.returns-page .returns-lead{font-size:15px}.returns-actions{display:grid;grid-template-columns:1fr}.returns-actions .btn{width:100%}}
