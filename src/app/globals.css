@@ -1427,3 +1427,27 @@ body:has(.hero) .site-header .brand:after{content:none !important;display:none !
   -webkit-text-fill-color:#D6A64F !important;
   text-shadow:0 2px 18px rgba(4,20,12,.72) !important;
 }
+
+
+/* Restore the Foxberry descriptor beside/beneath the header logo */
+.foxberry-header-lockup{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  justify-content:center;
+  gap:1px;
+  line-height:1;
+}
+.foxberry-header-lockup .foxberry-header-logo{
+  display:block;
+}
+.foxberry-header-lockup .brand-tagline{
+  display:block !important;
+  margin-left:2px;
+  color:#D6A64F !important;
+  font-family:Georgia,serif;
+  font-size:10px;
+  font-style:italic;
+  letter-spacing:.12em;
+  line-height:1.2;
+}
