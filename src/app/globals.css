@@ -1318,3 +1318,92 @@ input,select,textarea{
   .btn,.gift-add-button{transition:background-color .2s ease,color .2s ease,transform .2s ease}
   .btn:hover,.gift-add-button:hover{background:#F0D18B !important;transform:translateY(-1px)}
 }
+
+
+/* FOXBERRY refinement: white shopping pages, green/gold brand accents */
+:root{
+  --foxberry-deep:#0F2418;
+  --foxberry-gold:#D6A64F;
+  --foxberry-white:#FFFFFF;
+  --foxberry-green:#0F4D3A;
+}
+html,body{
+  background:#FFFFFF !important;
+  color:#202820 !important;
+}
+body{background-color:#FFFFFF !important}
+main{background:#FFFFFF !important;color:#202820 !important}
+main h1,main h2,main h3,main h4,main h5,main h6{color:#18271D !important}
+main p,main .muted,main label,main .product-description{color:#626B63}
+main a{color:#0F4D3A}
+main a:hover{color:#A8792D}
+.card,.product-card,.checkout-section,.checkout-summary,.gift-card,
+.basket-summary,.order-card,.account-card,.tracking-card,
+.panel,.surface,.shop-filter-panel{
+  background:#FFFFFF !important;
+  color:#202820 !important;
+  border-color:#E8E1D3 !important;
+  box-shadow:0 8px 24px rgba(15,36,24,.045);
+}
+.site-header{
+  background:transparent !important;
+  background-color:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
+}
+.site-header .nav-primary a,
+.site-header .nav-utilities .nav-icon-link{
+  color:#0F2418 !important;
+}
+.site-header .nav-primary a:hover,
+.site-header .nav-utilities .nav-icon-link:hover{
+  color:#B88636 !important;
+}
+.site-header .nav-primary .nav-home:after{background:#D6A64F !important}
+.site-footer{
+  background:#0F2418 !important;
+  color:#FFFFFF !important;
+  border-top:1px solid #D6A64F !important;
+}
+.site-footer a,.site-footer h3,.site-footer .footer-bottom{color:#FFFFFF !important}
+.site-footer .muted{color:#E4E8E3 !important}
+.site-footer a:hover{color:#D6A64F !important}
+.btn,.gift-add-button,.checkout-submit,.primary-button,
+button.btn-primary{
+  background:#0F4D3A !important;
+  color:#FFFFFF !important;
+  border:1px solid #D6A64F !important;
+}
+.btn:hover,.gift-add-button:hover,.checkout-submit:hover,.primary-button:hover{
+  background:#0F2418 !important;
+  color:#FFFFFF !important;
+}
+.btn.secondary{
+  background:#FFFFFF !important;
+  color:#0F4D3A !important;
+  border:1px solid #D6A64F !important;
+}
+input,select,textarea{
+  background:#FFFFFF !important;
+  color:#202820 !important;
+  border-color:#D9D4C8 !important;
+}
+input:focus,select:focus,textarea:focus{
+  border-color:#D6A64F !important;
+  outline-color:#D6A64F !important;
+}
+.pill,.badge,.eyebrow,.gift-card-tag{color:#0F4D3A}
+.offer-band,.personal-offer,.verification-note{
+  background:#F8F6F0 !important;
+  color:#202820 !important;
+  border:1px solid #E8D7B5 !important;
+}
+.section-heading h2,.offer-band h2,.makhana-note h2,.gift-section-heading h2{
+  color:#18271D !important;
+}
+.product-description,.gift-card-body>p,.gift-card-includes{color:#626B63 !important}
+.gift-card-price strong{color:#0F4D3A !important}
+.gift-card-art{background:linear-gradient(145deg,#D6A64F,#F0D18B) !important}
+.gift-card-box{background:#0F2418 !important;color:#FFFFFF !important;border-color:#D6A64F !important}
+.gift-card-box>strong,.gift-card-brand-mark{color:#D6A64F !important}
+/* Keep the supplied homepage banner untouched. */
