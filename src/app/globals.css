@@ -1157,3 +1157,16 @@ body:has(.hero) .hero-inner { padding-top: 150px; }
 
 /* Foxberry wordmark tagline */
 .site-header .brand-tagline{display:block;font-family:inherit;font-size:10px;font-weight:500;letter-spacing:.08em;line-height:1.1;text-transform:uppercase;opacity:.82;margin-top:2px}
+
+
+/* Official Foxberry logo */
+.brand-logo-link{display:flex;align-items:center;flex:0 0 auto;width:118px;height:88px;overflow:visible;text-decoration:none!important}
+.foxberry-logo{display:block;width:100%;height:auto;object-fit:contain}
+.foxberry-header-logo{width:118px;max-height:88px}
+.footer-brand.foxberry-footer-brand{display:block;width:150px;line-height:0}
+.footer-brand.foxberry-footer-brand .foxberry-logo{width:150px}
+body:has(.hero) .site-header .brand-logo-link{width:118px;height:88px}
+body:has(.hero) .site-header .brand-logo-link:after{content:none}
+body:has(.hero) .site-header .foxberry-header-logo{width:118px;max-height:88px}
+@media(max-width:850px){.brand-logo-link{width:100px;height:76px}.foxberry-header-logo{width:100px;max-height:76px}body:has(.hero) .site-header .brand-logo-link{width:100px;height:76px}body:has(.hero) .site-header .foxberry-header-logo{width:100px;max-height:76px}}
+@media(max-width:520px){.brand-logo-link{width:84px;height:64px}.foxberry-header-logo{width:84px;max-height:64px}body:has(.hero) .site-header .brand-logo-link{width:84px;height:64px}body:has(.hero) .site-header .foxberry-header-logo{width:84px;max-height:64px}}
