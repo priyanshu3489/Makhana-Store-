@@ -1,9 +1,130 @@
 import Link from "next/link";
-export default function ReturnsPage(){return <main className="container content-page"><span className="eyebrow">CLEAR TERMS · BETTER SHOPPING</span><h1>Shipping, returns &amp; refunds.</h1><p>Please read these terms before ordering. Because makhana is a packaged food product, return requests are handled with food safety and product condition in mind. The store owner should review and confirm these terms and add a monitored support email/phone before launch.</p>
-<section className="content-panel"><h2>Shipping charges</h2><ul><li>Orders of ₹499 or more qualify for free shipping.</li><li>Orders below ₹499 currently have a ₹50 shipping charge.</li><li>Delivery timelines can vary by destination, courier service and operational conditions. Any estimate shown at checkout or in an order message takes precedence.</li><li>Please check your delivery address and mobile number carefully before placing an order.</li></ul></section>
-<section className="content-panel"><h2>Damaged, incorrect or missing items</h2><p>If your order arrives damaged, contains the wrong item, or appears incomplete, contact the store as soon as possible—ideally within 48 hours of delivery. Include your order number, a description of the issue and clear photos of the outer package and affected item. Keep the packaging until the request is reviewed.</p><p>We may ask for additional information to investigate with the courier or fulfilment team. Do not consume a product if its seal is broken or you believe it may be unsafe.</p></section>
-<section className="content-panel"><h2>Return eligibility</h2><p>For food-safety reasons, opened, used or unsealed food packs generally cannot be accepted for change-of-mind returns. A sealed, unopened item may be considered for return only after contacting the store and receiving approval. Do not send products back before receiving return instructions.</p><p>Requests involving damaged, incorrect or unsafe items are assessed individually. Eligibility and the resolution depend on the circumstances and applicable consumer law.</p></section>
-<section className="content-panel"><h2>Refunds</h2><ul><li>Approved refunds are returned to the original payment method where possible. Processing time can depend on the payment provider or bank.</li><li>For cash-on-delivery orders, the store will contact you to confirm an appropriate refund method.</li><li>Shipping charges may not be refundable for change-of-mind requests. If an error or issue is attributable to the store, the case will be reviewed fairly.</li><li>Refunds are not considered complete until the payment provider confirms processing.</li></ul></section>
-<section className="content-panel"><h2>Order cancellation</h2><p>Contact the store promptly if you need to request cancellation. Cancellation may not be possible after an order has been packed, dispatched or delivered. A paid order's refund must be processed through the appropriate payment/refund workflow; changing an order status alone does not issue a refund.</p></section>
-<section className="content-panel"><h2>How to request help</h2><p>Include your order number and the email address used at checkout when contacting the store. Do not send card details, passwords or one-time passcodes. Before publishing this page, the store owner should replace this note with a monitored support email address and/or phone number.</p></section>
-<p className="tracking-note">Policy note: This is a practical starter policy, not legal advice. The store owner must confirm the final policy, support contact and compliance with applicable Indian consumer-protection and food-safety requirements before treating it as the store's binding terms.</p><p><Link className="text-link" href="/track">Track an order →</Link></p></main>}
+
+const returnStages = [
+  { title: "1. Request submitted", detail: "Share your order number, the affected product and clear photos or an unboxing video." },
+  { title: "2. Review and approval", detail: "Foxberry support checks the request and confirms whether a return, replacement or refund is appropriate." },
+  { title: "3. Pickup / return shipment", detail: "After approval, we share the pickup instructions and reverse-pickup AWB or courier tracking link." },
+  { title: "4. Return in transit", detail: "Use the courier link and AWB shared by support to follow scans until the parcel reaches our return facility." },
+  { title: "5. Inspection and resolution", detail: "After the returned parcel is received and checked, we confirm the approved replacement or refund." },
+];
+
+export default function ReturnsPage() {
+  return (
+    <main className="container content-page returns-page">
+      <span className="eyebrow">FOXBERRY CUSTOMER CARE</span>
+      <h1>Returns, replacements &amp; refunds</h1>
+      <p className="returns-lead">
+        We want every Foxberry order to reach you in perfect condition. Since makhana is a food product,
+        returns are handled carefully to protect food safety and hygiene. Read the policy below before
+        sending anything back.
+      </p>
+
+      <section className="content-panel">
+        <h2>1. When can I request a return?</h2>
+        <ul>
+          <li>Contact us within <strong>48 hours of delivery</strong> if an item is damaged, defective, expired, tampered with, leaking, missing or different from what you ordered.</li>
+          <li>Share your order number, registered checkout email or phone number, a short description, and clear photos of the shipping label, outer packaging, product and batch/expiry details. An unboxing video is helpful where available.</li>
+          <li>Keep the product, seals and all packaging until the request is resolved. Do not consume any product that appears unsafe or has a broken seal.</li>
+          <li>Requests raised after 48 hours may be harder to verify and will be reviewed case by case. This reporting window does not remove any rights available under applicable law.</li>
+        </ul>
+      </section>
+
+      <section className="content-panel">
+        <h2>2. Food-safety and return conditions</h2>
+        <ul>
+          <li><strong>Opened, used or unsealed food packs:</strong> generally cannot be returned for a change of mind, taste preference or dislike, unless the product is defective, unsafe or otherwise covered by applicable law.</li>
+          <li><strong>Unopened packs:</strong> change-of-mind returns are not routinely accepted for food products. Contact support before dispatch; any exception must be approved in writing and may depend on product condition and applicable law.</li>
+          <li><strong>Wrong, damaged, expired or missing items:</strong> we will investigate and, where the issue is verified, arrange an appropriate replacement, refund or other remedy.</li>
+          <li><strong>Order placed by mistake / incorrect address:</strong> contact us immediately. Cancellation or address changes may not be possible once the order is packed or handed to the courier.</li>
+          <li>Items sent back without a return approval or return reference may be refused or delayed. Never send a parcel to an address that has not been confirmed by Foxberry support.</li>
+        </ul>
+      </section>
+
+      <section className="content-panel">
+        <h2>3. How to raise a return or replacement request</h2>
+        <ol>
+          <li>Open <Link href="/account">My Account</Link> and sign in using the account used for the purchase.</li>
+          <li>Open <Link href="/orders">My Orders</Link> and note the order number. If you checked out as a guest, use the order number and checkout details when contacting support.</li>
+          <li>Email <a href="mailto:info@foxberry.in.co">info@foxberry.in.co</a> with the subject <strong>Return request – Order #your-order-number</strong>. Include the issue, product name and quantity, photos/video, and your preferred resolution.</li>
+          <li>Wait for our written approval and instructions. We will confirm whether a courier pickup is available or provide the approved return-shipping instructions.</li>
+          <li>Pack the item securely with its original packaging and include the return reference shared by our team.</li>
+        </ol>
+        <p><strong>Important:</strong> Please do not ship the item back before receiving written approval and the correct return address/instructions.</p>
+      </section>
+
+      <section className="content-panel">
+        <h2>4. How to track returned goods — step by step</h2>
+        <p>
+          Once a return is approved and the reverse pickup is booked, our support team will share a return
+          reference and, when generated by the courier, the reverse-pickup AWB number and tracking link.
+        </p>
+        <div className="returns-steps">
+          {returnStages.map((stage) => (
+            <div className="returns-step" key={stage.title}>
+              <span className="returns-step-mark" aria-hidden="true">✓</span>
+              <div><h3>{stage.title}</h3><p>{stage.detail}</p></div>
+            </div>
+          ))}
+        </div>
+        <ul>
+          <li>Open the courier tracking link sent by email or support and enter the reverse AWB if requested.</li>
+          <li>Save the return reference, AWB and pickup receipt until the refund or replacement is complete.</li>
+          <li>If tracking has not updated for 48 hours after pickup, email us with your return reference and AWB so we can follow up with the courier.</li>
+        </ul>
+        <p className="tracking-note">
+          <strong>Tracking limitation:</strong> The <Link href="/track">Track an Order</Link> page currently shows the original delivery shipment. Reverse-return tracking is shared separately by Foxberry support after a return is approved; a live return timeline is not yet available inside the website.
+        </p>
+      </section>
+
+      <section className="content-panel">
+        <h2>5. Pickup and return-shipping charges</h2>
+        <ul>
+          <li>For a verified damaged, defective, expired, incorrect or unsafe item, Foxberry will arrange or reimburse reasonable return shipping as confirmed in writing.</li>
+          <li>If an exceptional change-of-mind return is approved, any return-shipping charge will be explained before you proceed.</li>
+          <li>If reverse pickup is unavailable at your pin code, our team will share the approved return method. Please retain the courier receipt and tracking number.</li>
+          <li>Do not pay an unexpected collection fee or share an OTP, password, card number or UPI PIN with anyone claiming to arrange your return.</li>
+        </ul>
+      </section>
+
+      <section className="content-panel">
+        <h2>6. Refunds and replacements</h2>
+        <ul>
+          <li>After the returned item is received and inspected, we will confirm the outcome by email or phone.</li>
+          <li>Where a refund is approved, it will normally be initiated to the original payment method. Bank, card, UPI or payment-provider posting times may vary.</li>
+          <li>For cash-on-delivery orders, support will contact you to confirm a suitable refund method. We will never ask for your UPI PIN or OTP to issue a refund.</li>
+          <li>Where a replacement is approved, it will be dispatched subject to stock availability and you will receive the new shipment details.</li>
+          <li>Any refund timeline communicated for your case begins after the refund is approved and initiated; the time taken by your bank or payment provider is outside our control.</li>
+        </ul>
+      </section>
+
+      <section className="content-panel">
+        <h2>7. Cancellations and delivery refusal</h2>
+        <p>
+          Contact us as soon as possible if you want to cancel an order. We can try to stop it before dispatch,
+          but cancellation may not be possible after packing or courier handover. If an order is already
+          dispatched, contact support for guidance rather than refusing it without notice. Approved refunds
+          are processed after the order/payment status is verified.
+        </p>
+      </section>
+
+      <section className="content-panel">
+        <h2>8. Contact Foxberry</h2>
+        <p>For a return, replacement, refund or reverse-shipment query, contact:</p>
+        <p><strong>Email:</strong> <a href="mailto:info@foxberry.in.co">info@foxberry.in.co</a></p>
+        <p><strong>Mobile:</strong> +91 xxxxxxxxxx</p>
+        <p>Include your order number in every message. Please do not send payment-card details, passwords, OTPs or other confidential credentials.</p>
+      </section>
+
+      <div className="returns-actions">
+        <Link className="btn" href="/orders">Go to My Orders</Link>
+        <Link className="btn secondary" href="/track">Track an order</Link>
+      </div>
+      <p className="tracking-note">
+        This page describes Foxberry's operational return process and is not a substitute for rights available
+        under applicable Indian consumer-protection and food-safety laws. The store owner should review the
+        final policy, service levels and return logistics before launch. Where applicable law provides a
+        stronger consumer remedy, that legal right takes precedence over this policy.
+      </p>
+    </main>
+  );
+}
