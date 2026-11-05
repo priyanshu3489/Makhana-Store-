@@ -243,8 +243,8 @@ export default function CheckoutForm({ user }: { user: User }) {
         key: data.keyId,
         amount: data.amount,
         currency: data.currency || "INR",
-        name: process.env.NEXT_PUBLIC_STORE_NAME || "Makhana House",
-        description: "Makhana House order",
+        name: "Foxberry",
+        description: "Foxberry — Makhana like pearls",
         order_id: data.razorpayOrderId,
         prefill: {
           name: form.customerName,
@@ -552,7 +552,7 @@ export default function CheckoutForm({ user }: { user: User }) {
         </section>
 
         <aside className="card checkout-summary">
-          <span className="eyebrow">MAKHANA HOUSE</span>
+          <span className="eyebrow">FOXBERRY</span>
           <h2 className="checkout-section-title">Your order</h2>
 
           {cart.length === 0 ? (
