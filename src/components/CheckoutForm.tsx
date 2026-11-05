@@ -244,7 +244,7 @@ export default function CheckoutForm({ user }: { user: User }) {
         amount: data.amount,
         currency: data.currency || "INR",
         name: "Foxberry",
-        description: "Foxberry — Makhana like pearls",
+        description: "Foxberry makhana order",
         order_id: data.razorpayOrderId,
         prefill: {
           name: form.customerName,
