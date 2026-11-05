@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect } from "react";
 import Link from "next/link";
 import StoreSearch from "@/components/StoreSearch";
 
@@ -16,6 +19,20 @@ function Icon({ name }: { name: "search" | "user" | "basket" | "home" | "shop" |
 }
 
 export default function SiteNavigation({ isAdmin }: { isAdmin: boolean }) {
+  useEffect(() => {
+    const homepage = Boolean(document.querySelector(".hero"));
+    if (!homepage) return;
+    const updateHeader = () => {
+      document.body.classList.toggle("homepage-header-compact", window.scrollY > 90);
+    };
+    updateHeader();
+    window.addEventListener("scroll", updateHeader, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", updateHeader);
+      document.body.classList.remove("homepage-header-compact");
+    };
+  }, []);
+
   return (
     <div className="nav-links">
       <div className="nav-primary">
@@ -29,7 +46,7 @@ export default function SiteNavigation({ isAdmin }: { isAdmin: boolean }) {
       </div>
       <div className="nav-utilities">
         {!isAdmin && <StoreSearch />}
-        <Link href={isAdmin ? "/admin" : "/account"} className="nav-icon-link" aria-label={isAdmin ? "Admin dashboard" : "Account"} title={isAdmin ? "Admin dashboard" : "Account"}><Icon name="user" /></Link>
+        <Link href={isAdmin ? "/admin" : "/account"} className="nav-icon-link" aria-label={isAdmin ? "Admin dashboard" : "Account"} title={isAdmin ? "Admin dashboard" : "Account"}><Icon name="user" /><span className="nav-account-label">{isAdmin ? "Admin" : "Sign in"}</span></Link>
         {!isAdmin && <Link href="/cart" className="nav-icon-link nav-basket-link" aria-label="Shopping basket" title="Shopping basket"><Icon name="basket" /><span className="nav-basket-dot" aria-hidden="true" /></Link>}
       </div>
     </div>
