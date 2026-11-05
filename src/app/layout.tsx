@@ -31,8 +31,14 @@ export default async function RootLayout({
 
         <div className="offer-marquee" role="region" aria-label="Store offers">
           <div className="offer-marquee-track">
-            <span>✦ FREE SHIPPING on orders ₹499 and above</span><span>✦ Check checkout for exclusive collection discounts</span><span>✦ Build your own makhana combo</span><span>✦ Secure checkout · Track orders from your account</span>
-            <span aria-hidden="true">✦ FREE SHIPPING on orders ₹499 and above</span><span aria-hidden="true">✦ Check checkout for exclusive collection discounts</span><span aria-hidden="true">✦ Build your own makhana combo</span><span aria-hidden="true">✦ Secure checkout · Track orders from your account</span>
+            <span className="offer-chip offer-chip-shipping">FREE SHIPPING <b>on orders ₹499+</b></span>
+            <span className="offer-chip offer-chip-discount">EXCLUSIVE SAVINGS <b>Check checkout for offers</b></span>
+            <span className="offer-chip offer-chip-combo">GIFT YOUR WAY <b>Build your own makhana combo</b></span>
+            <span className="offer-chip offer-chip-tracking">SHOP WITH EASE <b>Secure checkout · Track every order</b></span>
+            <span className="offer-chip offer-chip-shipping" aria-hidden="true">FREE SHIPPING <b>on orders ₹499+</b></span>
+            <span className="offer-chip offer-chip-discount" aria-hidden="true">EXCLUSIVE SAVINGS <b>Check checkout for offers</b></span>
+            <span className="offer-chip offer-chip-combo" aria-hidden="true">GIFT YOUR WAY <b>Build your own makhana combo</b></span>
+            <span className="offer-chip offer-chip-tracking" aria-hidden="true">SHOP WITH EASE <b>Secure checkout · Track every order</b></span>
           </div>
         </div>
         {children}
