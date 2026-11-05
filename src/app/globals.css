@@ -1490,3 +1490,61 @@ body:not(:has(.hero)) .site-header .nav-primary .nav-home:after{
 body:not(:has(.hero)) .site-header .nav-basket-dot{
   box-shadow:0 0 0 2px #0F2418 !important;
 }
+
+
+/* Foxberry offer ribbon: warm gold rail with distinct deep-emerald offer shapes */
+.offer-marquee{
+  background:#D6A64F !important;
+  color:#0F2418 !important;
+  border-top:1px solid rgba(15,36,24,.16) !important;
+  border-bottom:1px solid rgba(15,36,24,.2) !important;
+  padding:5px 0 !important;
+  overflow:hidden;
+}
+.offer-marquee-track{
+  align-items:center !important;
+  gap:14px !important;
+  padding:5px 0 !important;
+}
+.offer-marquee-track .offer-chip{
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  min-height:34px;
+  padding:8px 17px;
+  color:#F8F3E7 !important;
+  background:#0F2418;
+  border:1px solid rgba(248,243,231,.22);
+  box-shadow:0 3px 8px rgba(15,36,24,.12);
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:1px;
+  line-height:1.2;
+  white-space:nowrap;
+}
+.offer-marquee-track .offer-chip b{
+  color:#E7C77F;
+  font-size:10px;
+  font-weight:500;
+  letter-spacing:.15px;
+}
+.offer-marquee-track .offer-chip-shipping{
+  border-radius:999px;
+}
+.offer-marquee-track .offer-chip-discount{
+  border-radius:7px 18px 7px 18px;
+}
+.offer-marquee-track .offer-chip-combo{
+  border-radius:5px;
+  clip-path:polygon(0 0,calc(100% - 10px) 0,100% 50%,calc(100% - 10px) 100%,0 100%,8px 50%);
+  padding-left:22px;
+}
+.offer-marquee-track .offer-chip-tracking{
+  border-radius:18px 5px 18px 5px;
+}
+@media(max-width:520px){
+  .offer-marquee{padding:4px 0 !important}
+  .offer-marquee-track{gap:9px !important}
+  .offer-marquee-track .offer-chip{font-size:9px;padding:7px 12px;gap:6px}
+  .offer-marquee-track .offer-chip b{font-size:9px}
+}
