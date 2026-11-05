@@ -1237,3 +1237,84 @@ body:has(.hero) .site-header .nav-primary a,
 body:has(.hero) .site-header .nav-utilities .nav-icon-link{
   color:#FFFFFF !important;
 }
+
+
+/* FOXBERRY brand palette — 60% deep green, 30% gold, 10% white */
+:root{
+  --foxberry-deep:#0F2418;
+  --foxberry-gold:#D6A64F;
+  --foxberry-white:#FFFFFF;
+  --foxberry-green:#0F4D3A;
+  --foxberry-surface:#183426;
+  --foxberry-muted:#D9C18E;
+}
+html{background:var(--foxberry-deep)}
+body{
+  background:var(--foxberry-deep) !important;
+  color:var(--foxberry-white) !important;
+}
+main{background-color:transparent}
+h1,h2,h3,h4,h5,h6{color:var(--foxberry-white)}
+p,.muted,.section-heading p,.hero-copy>p{color:#E7E3D8}
+a{color:var(--foxberry-gold)}
+a:hover{color:#F0D18B}
+.btn,.gift-add-button,.checkout-submit,.primary-button{
+  background:var(--foxberry-gold) !important;
+  color:var(--foxberry-deep) !important;
+  border:1px solid var(--foxberry-gold) !important;
+}
+.btn.secondary{
+  background:transparent !important;
+  color:var(--foxberry-gold) !important;
+  border:1px solid var(--foxberry-gold) !important;
+}
+.card,.product-card,.checkout-section,.checkout-summary,.gift-card,
+.basket-summary,.order-card,.account-card,.tracking-card{
+  background:var(--foxberry-surface) !important;
+  color:var(--foxberry-white) !important;
+  border-color:rgba(214,166,79,.55) !important;
+}
+input,select,textarea{
+  background:#FFFFFF !important;
+  color:#0F2418 !important;
+  border-color:var(--foxberry-gold) !important;
+}
+.pill,.badge,.eyebrow,.gift-card-tag{
+  color:var(--foxberry-gold) !important;
+}
+.site-header{
+  background:transparent !important;
+  border-color:transparent !important;
+}
+.site-footer{
+  background:var(--foxberry-deep) !important;
+  color:var(--foxberry-white) !important;
+  border-top:1px solid var(--foxberry-gold) !important;
+}
+.site-footer a,.site-footer h3,.site-footer .footer-bottom{color:var(--foxberry-white) !important}
+.site-footer a:hover{color:var(--foxberry-gold) !important}
+.hero{
+  background-color:var(--foxberry-deep);
+}
+.benefits,.makhana-note,.shop-section,.gift-hamper-list{
+  color:var(--foxberry-white);
+}
+.offer-band,.personal-offer,.verification-note{
+  background:var(--foxberry-surface) !important;
+  color:var(--foxberry-white) !important;
+  border:1px solid rgba(214,166,79,.5);
+}
+.section-heading h2,.offer-band h2,.makhana-note h2,.gift-section-heading h2{
+  color:var(--foxberry-white) !important;
+}
+.product-description,.gift-card-body>p,.gift-card-includes{
+  color:#E7E3D8 !important;
+}
+.gift-card-price strong{color:var(--foxberry-gold) !important}
+.gift-card-art{background:linear-gradient(145deg,#D6A64F,#F0D18B) !important}
+.gift-card-box{background:var(--foxberry-deep) !important;color:#FFFFFF !important;border-color:var(--foxberry-gold) !important}
+.gift-card-box>strong,.gift-card-brand-mark{color:var(--foxberry-gold) !important}
+@media(prefers-reduced-motion:no-preference){
+  .btn,.gift-add-button{transition:background-color .2s ease,color .2s ease,transform .2s ease}
+  .btn:hover,.gift-add-button:hover{background:#F0D18B !important;transform:translateY(-1px)}
+}
