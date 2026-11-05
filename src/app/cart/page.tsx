@@ -12,7 +12,7 @@ export default function CartPage() {
       }}
     >
       <header style={{ marginBottom: 28 }}>
-        <p className="eyebrow">MAKHANA HOUSE · YOUR SELECTION</p>
+        <p className="eyebrow">FOXBERRY · YOUR SELECTION</p>
 
         <div
           className="row"
