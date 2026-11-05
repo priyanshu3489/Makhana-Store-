@@ -1215,3 +1215,25 @@ body:has(.hero) .site-header .foxberry-header-logo{width:118px;max-height:88px}
 @media(hover:hover){
   .site-footer a:hover{color:#E4BD72 !important}
 }
+
+
+/* Header stays unfilled: let the page/banner show through */
+.site-header{
+  background:transparent !important;
+  background-color:transparent !important;
+  border-bottom-color:transparent !important;
+  box-shadow:none !important;
+  backdrop-filter:none !important;
+}
+body:not(:has(.hero)) .site-header .nav-primary a,
+body:not(:has(.hero)) .site-header .nav-utilities .nav-icon-link{
+  color:#0F4D3A !important;
+}
+body:not(:has(.hero)) .site-header .nav-primary a:hover,
+body:not(:has(.hero)) .site-header .nav-utilities .nav-icon-link:hover{
+  color:#D6A64F !important;
+}
+body:has(.hero) .site-header .nav-primary a,
+body:has(.hero) .site-header .nav-utilities .nav-icon-link{
+  color:#FFFFFF !important;
+}
