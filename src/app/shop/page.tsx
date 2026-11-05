@@ -46,7 +46,7 @@ export default async function ShopPage() {
   return (
     <main className="container content-page">
       <section className="shop-page-hero">
-        <span className="eyebrow">THE MAKHANA HOUSE COLLECTION</span>
+        <span className="eyebrow">THE FOXBERRY COLLECTION</span>
         <h1>Find your kind of crunch.</h1>
         <p>Explore every flavour, stock up on your favourites and discover a new snack-time ritual.</p>
         <div className="shop-page-actions">
