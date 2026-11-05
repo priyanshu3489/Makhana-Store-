@@ -20,6 +20,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body>
+        <div className="site-header-group">
         <header className="site-header">
           <nav className="container nav">
             <Link href="/" className="brand brand-logo-link" aria-label="Foxberry — Pearls of Makhana home" title="Foxberry — Pearls of Makhana">
@@ -40,6 +41,7 @@ export default async function RootLayout({
             <span className="offer-chip offer-chip-combo" aria-hidden="true">GIFT YOUR WAY <b>Build your own makhana combo</b></span>
             <span className="offer-chip offer-chip-tracking" aria-hidden="true">SHOP WITH EASE <b>Secure checkout · Track every order</b></span>
           </div>
+        </div>
         </div>
         {children}
 
