@@ -1490,3 +1490,36 @@ body:not(:has(.hero)) .site-header .nav-primary .nav-home:after{
 body:not(:has(.hero)) .site-header .nav-basket-dot{
   box-shadow:0 0 0 2px #0F2418 !important;
 }
+
+
+/* Foxberry global search */
+.search-trigger{border:0;background:transparent;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;color:inherit;padding:8px}
+.search-trigger:hover{color:#D6A64F}
+.store-search-backdrop{position:fixed;inset:0;z-index:1000;background:rgba(5,17,11,.68);backdrop-filter:blur(5px);display:flex;justify-content:center;align-items:flex-start;padding:clamp(14px,5vh,54px) 16px 24px;overflow-y:auto}
+.store-search-dialog{width:min(680px,100%);max-height:min(790px,90vh);overflow:hidden;display:flex;flex-direction:column;background:#FBF8F0;color:#17251C;border:1px solid rgba(214,166,79,.55);border-radius:22px;box-shadow:0 24px 90px rgba(0,0,0,.3)}
+.store-search-top{display:flex;align-items:center;justify-content:space-between;padding:19px 22px 12px}
+.store-search-top .eyebrow{color:#876126;font-size:10px;letter-spacing:1.5px;font-weight:800}
+.store-search-close{width:34px;height:34px;border:1px solid #e5ddcc;border-radius:50%;background:#fff;color:#0F2418;font-size:24px;line-height:1;cursor:pointer}
+.store-search-field{margin:0 20px 12px;display:flex;align-items:center;gap:12px;padding:0 15px;min-height:56px;border:1px solid #d8c9a9;border-radius:13px;background:#fff;color:#0F2418}
+.store-search-field:focus-within{outline:2px solid rgba(214,166,79,.55);border-color:#b9893e}
+.store-search-field input{flex:1;min-width:0;border:0;outline:0;background:transparent;color:#17251C;font:inherit;font-size:15px}
+.store-search-field input::placeholder{color:#8a8d83}
+.store-search-field button{border:0;background:transparent;color:#42694e;font-size:12px;font-weight:700;cursor:pointer}
+.store-search-results{padding:2px 20px 16px;overflow-y:auto;min-height:120px}
+.store-search-hint{font-size:12px;color:#777d72;margin:8px 2px 14px}
+.store-search-group{margin:0 0 14px}
+.store-search-group h3{font-size:10px;letter-spacing:1.3px;text-transform:uppercase;color:#8b6a36;margin:12px 2px 7px}
+.store-search-result{display:flex;align-items:center;justify-content:space-between;gap:14px;text-decoration:none!important;color:#17251C!important;padding:11px 12px;border-radius:12px;border:1px solid transparent;min-height:55px}
+.store-search-result:hover{background:#f1eadb;border-color:#e4d3ad}
+.store-search-result span{display:flex;flex-direction:column;gap:3px;min-width:0}
+.store-search-result strong{font-size:14px;font-weight:700}
+.store-search-result small{font-size:12px;color:#74796f}
+.store-search-result>b{font-size:11px;color:#356343;white-space:nowrap}
+.store-search-product img{width:44px;height:44px;object-fit:cover;border-radius:9px;background:#eee}
+.store-search-product span{flex:1}
+.store-search-empty{padding:22px 12px;text-align:center;color:#263b2c}
+.store-search-empty p,.store-search-loading{font-size:13px;color:#777d72}
+.store-search-empty a{color:#245d39;font-weight:700}
+.store-search-footer{display:flex;align-items:center;justify-content:space-between;padding:11px 22px;border-top:1px solid #e9e1d2;color:#777d72;font-size:11px}
+.store-search-footer kbd{border:1px solid #d8cfbd;border-radius:5px;padding:2px 7px;background:#fff;color:#596258}
+@media(max-width:600px){.store-search-backdrop{padding:8px}.store-search-dialog{border-radius:17px;max-height:94vh}.store-search-top{padding:15px 15px 10px}.store-search-field{margin:0 13px 10px;min-height:52px}.store-search-results{padding:2px 13px 12px}.store-search-footer{padding:10px 15px}}
