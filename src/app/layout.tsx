@@ -89,7 +89,8 @@ export default async function RootLayout({
             <div>
               <h3>Help &amp; information</h3>
               <Link href="/about#story">Our story</Link>
-              <span className="muted">Support: add your business email</span>
+              <span className="muted">Mobile: +91 xxxxxxxxxx</span>
+              <a href="mailto:info@foxberry.in.co">Email: info@foxberry.in.co</a>
               <Link href="/returns">Shipping, refunds &amp; returns</Link>
               <Link href="/track">Track an order</Link>
             </div>
