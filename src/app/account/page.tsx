@@ -30,7 +30,7 @@ export default async function AccountPage({
         className="container"
         style={{ paddingTop: 40, maxWidth: 720 }}
       >
-        <p className="muted">YOUR MAKHANA HOUSE ACCOUNT</p>
+        <p className="muted">YOUR FOXBERRY ACCOUNT</p>
         <h1 style={{ fontSize: 36 }}>Welcome back</h1>
         <p className="muted">
           Sign in to track orders, revisit past purchases and check out faster.
