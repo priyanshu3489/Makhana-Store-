@@ -1653,3 +1653,104 @@ body:has(.hero) .hero-inner{
   body:has(.hero) .site-header-group .nav{min-height:70px}
   body:has(.hero) .hero-inner{padding-top:175px}
 }
+
+/* Homepage scroll header: compact logo + sign-in control, like the reference storefront. */
+.nav-account-label{display:none}
+body.homepage-header-compact .site-header-group{
+  position:fixed !important;
+  top:0 !important;
+  left:0 !important;
+  right:0 !important;
+  z-index:100 !important;
+  display:block !important;
+  width:100%;
+  background:rgba(15,36,24,.96) !important;
+  box-shadow:0 5px 22px rgba(0,0,0,.14);
+  backdrop-filter:blur(12px) !important;
+  pointer-events:auto !important;
+  animation:foxberry-compact-enter .22s ease-out both;
+}
+body.homepage-header-compact .site-header-group .site-header{
+  position:relative !important;
+  height:auto !important;
+  min-height:0 !important;
+  background:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
+}
+body.homepage-header-compact .site-header-group .nav{
+  width:min(1320px,calc(100% - 40px));
+  min-height:66px !important;
+  height:66px !important;
+  padding:5px 0 !important;
+  display:flex !important;
+  flex-direction:row !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  flex-wrap:nowrap !important;
+}
+body.homepage-header-compact .site-header .brand-logo-link{
+  width:76px !important;
+  height:56px !important;
+  flex:0 0 76px !important;
+  overflow:hidden;
+}
+body.homepage-header-compact .site-header .foxberry-header-logo{
+  width:76px !important;
+  max-height:56px !important;
+  object-fit:contain;
+}
+body.homepage-header-compact .site-header .nav-links{
+  display:flex !important;
+  flex:0 0 auto !important;
+  width:auto !important;
+  justify-content:flex-end !important;
+  order:initial !important;
+}
+body.homepage-header-compact .site-header .nav-primary,
+body.homepage-header-compact .site-header .search-trigger,
+body.homepage-header-compact .site-header .nav-basket-link{
+  display:none !important;
+}
+body.homepage-header-compact .site-header .nav-utilities{
+  display:flex !important;
+  flex:0 0 auto !important;
+  margin-left:auto !important;
+  gap:0 !important;
+}
+body.homepage-header-compact .site-header .nav-icon-link[aria-label="Account"],
+body.homepage-header-compact .site-header .nav-icon-link[aria-label="Admin dashboard"]{
+  display:inline-flex !important;
+  width:auto !important;
+  min-height:40px;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding:8px 15px;
+  border:1px solid rgba(214,166,79,.8);
+  border-radius:999px;
+  color:#fff !important;
+  font-size:13px;
+  font-weight:700;
+  text-decoration:none;
+}
+body.homepage-header-compact .site-header .nav-account-label{display:inline}
+body.homepage-header-compact .site-header .nav-icon-link svg{width:18px;height:18px}
+body.homepage-header-compact .offer-marquee{display:none !important}
+@keyframes foxberry-compact-enter{
+  from{opacity:.65;transform:translateY(-8px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@media(max-width:520px){
+  body.homepage-header-compact .site-header-group .nav{
+    width:calc(100% - 28px);
+    min-height:58px !important;
+    height:58px !important;
+  }
+  body.homepage-header-compact .site-header .brand-logo-link{
+    width:66px !important;height:50px !important;flex-basis:66px !important;
+  }
+  body.homepage-header-compact .site-header .foxberry-header-logo{
+    width:66px !important;max-height:50px !important;
+  }
+}
