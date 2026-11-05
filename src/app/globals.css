@@ -1549,3 +1549,29 @@ body:not(:has(.hero)) .site-header .nav-basket-dot{
 .site-header-group .offer-marquee-track{
   margin:0;
 }
+
+
+/* Seamless header + gold offer ribbon: remove the dividing seam entirely */
+.site-header-group{
+  display:flex;
+  flex-direction:column;
+  gap:0 !important;
+  background:#0F2418;
+}
+.site-header-group .site-header{
+  border:0 !important;
+  border-bottom:0 !important;
+  box-shadow:none !important;
+  margin:0 !important;
+}
+.site-header-group .offer-marquee{
+  margin:0 !important;
+  border:0 !important;
+  border-top:0 !important;
+  border-bottom:0 !important;
+  border-radius:0 !important;
+  box-shadow:none !important;
+}
+.site-header-group .offer-marquee-track{
+  margin:0 !important;
+}
