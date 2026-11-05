@@ -1457,3 +1457,12 @@ body:has(.hero) .site-header .brand:after{content:none !important;display:none !
 .site-header .brand-logo-link:after{content:none!important}
 .site-header .foxberry-header-logo{filter:none!important}
 .site-header .foxberry-header-lockup .brand-tagline{color:#B77B2B!important}
+
+
+/* Force the homepage hero headline to Foxberry gold */
+.hero .hero-copy h1,
+.hero .hero-copy h1 em{
+  color:#D6A64F !important;
+  -webkit-text-fill-color:#D6A64F !important;
+  text-shadow:0 2px 18px rgba(4,20,12,.72) !important;
+}
