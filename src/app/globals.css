@@ -1466,3 +1466,27 @@ body:has(.hero) .site-header .brand:after{content:none !important;display:none !
   -webkit-text-fill-color:#D6A64F !important;
   text-shadow:0 2px 18px rgba(4,20,12,.72) !important;
 }
+
+
+/* Interior pages: solid Foxberry deep-emerald header. Homepage keeps its transparent hero overlay. */
+body:not(:has(.hero)) .site-header{
+  background:#0F2418 !important;
+  background-color:#0F2418 !important;
+  border-bottom:1px solid rgba(214,166,79,.38) !important;
+  box-shadow:0 4px 18px rgba(0,0,0,.12) !important;
+  backdrop-filter:none !important;
+}
+body:not(:has(.hero)) .site-header .nav-primary a,
+body:not(:has(.hero)) .site-header .nav-utilities .nav-icon-link{
+  color:#FFFFFF !important;
+}
+body:not(:has(.hero)) .site-header .nav-primary a:hover,
+body:not(:has(.hero)) .site-header .nav-utilities .nav-icon-link:hover{
+  color:#D6A64F !important;
+}
+body:not(:has(.hero)) .site-header .nav-primary .nav-home:after{
+  background:#D6A64F !important;
+}
+body:not(:has(.hero)) .site-header .nav-basket-dot{
+  box-shadow:0 0 0 2px #0F2418 !important;
+}
