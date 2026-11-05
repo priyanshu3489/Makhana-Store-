@@ -21,7 +21,7 @@ export default async function CheckoutPage() {
       }}
     >
       <header style={{ marginBottom: 28 }}>
-        <p className="eyebrow">MAKHANA HOUSE · SECURE CHECKOUT</p>
+        <p className="eyebrow">FOXBERRY · SECURE CHECKOUT</p>
         <h1 style={{ fontSize: 36, margin: "8px 0" }}>
           Complete your order
         </h1>
