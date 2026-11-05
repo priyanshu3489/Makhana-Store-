@@ -1418,3 +1418,12 @@ body:has(.hero) .hero-copy h1 em{
 /* Remove legacy text brand mark and any old tagline treatment */
 body:has(.hero) .site-header .brand:after{content:none !important;display:none !important}
 .brand-tagline{display:none !important}
+
+
+/* Force the homepage hero headline to Foxberry gold */
+.hero .hero-copy h1,
+.hero .hero-copy h1 em{
+  color:#D6A64F !important;
+  -webkit-text-fill-color:#D6A64F !important;
+  text-shadow:0 2px 18px rgba(4,20,12,.72) !important;
+}
