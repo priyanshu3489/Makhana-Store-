@@ -374,7 +374,7 @@ export default function Cart() {
               top: 24,
             }}
           >
-            <p className="eyebrow">MAKHANA HOUSE</p>
+            <p className="eyebrow">FOXBERRY</p>
             <h2 style={{ fontSize: 23, margin: "8px 0 20px" }}>
               Order summary
             </h2>
