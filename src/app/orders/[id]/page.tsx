@@ -118,7 +118,7 @@ export default async function OrderDetail({
 
         <div className="invoice-footer">
           <p>
-            <strong>Thank you for choosing Makhana House.</strong>
+            <strong>Thank you for choosing Foxberry.</strong>
           </p>
           <p className="muted">
             Keep this bill for your records. For help, contact your store
