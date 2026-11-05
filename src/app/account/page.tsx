@@ -6,6 +6,7 @@ import { formatMoney } from "@/lib/money";
 import AccountPanel from "@/components/AccountPanel";
 import LogoutButton from "@/components/LogoutButton";
 import AccountAutoRefresh from "@/components/AccountAutoRefresh";
+import ReturnRequestButton from "@/components/ReturnRequestButton";
 
 export const dynamic = "force-dynamic";
 
@@ -328,6 +329,12 @@ export default async function AccountPage({
                   </div>
                   <div className="row account-order-actions" style={{ justifyContent: "flex-start", flexWrap: "wrap", marginTop: 12 }}>
                     {order.status === "DELIVERED" && <span className="account-terminal-label">✓ Delivered</span>}
+                    {order.status === "DELIVERED" && (
+                      <ReturnRequestButton
+                        orderNumber={order.customerOrderNumber}
+                        items={order.items.map((item) => `${item.productName} × ${item.quantity}`)}
+                      />
+                    )}
                     {order.status === "CANCELLED" && <span className="account-terminal-label is-cancelled">Order cancelled</span>}
                     {order.status === "PAYMENT_FAILED" && <span className="account-terminal-label is-cancelled">Payment failed</span>}
                     <Link className="text-link" href={`/orders/${order.id}`}>View details</Link>
