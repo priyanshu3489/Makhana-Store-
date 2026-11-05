@@ -1407,3 +1407,14 @@ input:focus,select:focus,textarea:focus{
 .gift-card-box{background:#0F2418 !important;color:#FFFFFF !important;border-color:#D6A64F !important}
 .gift-card-box>strong,.gift-card-brand-mark{color:#D6A64F !important}
 /* Keep the supplied homepage banner untouched. */
+
+
+/* Foxberry hero headline: signature gold typography */
+body:has(.hero) .hero-copy h1,
+body:has(.hero) .hero-copy h1 em{
+  color:#D6A64F !important;
+  text-shadow:0 2px 18px rgba(4,20,12,.72) !important;
+}
+/* Remove legacy text brand mark and any old tagline treatment */
+body:has(.hero) .site-header .brand:after{content:none !important;display:none !important}
+.brand-tagline{display:none !important}
