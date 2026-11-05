@@ -5,8 +5,8 @@ import SiteNavigation from "@/components/SiteNavigation";
 import { getCurrentUser } from "@/lib/session";
 
 export const metadata: Metadata = {
-  title: "Foxberry",
-  description: "Discover premium, flavourful Foxberry makhana.",
+  title: "Foxberry | Makhana like pearls",
+  description: "Foxberry — Makhana like pearls. Discover premium, flavourful makhana.",
 };
 
 export default async function RootLayout({
@@ -22,8 +22,8 @@ export default async function RootLayout({
       <body>
         <header className="site-header">
           <nav className="container nav">
-            <Link href="/" className="brand brand-logo-link" aria-label="Foxberry home" title="Foxberry">
-              <span className="foxberry-header-lockup"><img src="/foxberry-logo.svg" alt="Foxberry" className="foxberry-logo foxberry-header-logo" /><span className="brand-tagline">Pearls of Makhana</span></span>
+            <Link href="/" className="brand brand-logo-link" aria-label="Foxberry — Pearls of Makhana home" title="Foxberry — Pearls of Makhana">
+              <img src="/foxberry-logo.svg" alt="Foxberry — Pearls of Makhana" className="foxberry-logo foxberry-header-logo" />
             </Link>
             <SiteNavigation isAdmin={isAdmin} />
           </nav>
@@ -43,6 +43,7 @@ export default async function RootLayout({
               <Link href="/" className="footer-brand foxberry-footer-brand" aria-label="Foxberry home">
                 <img src="/foxberry-logo.svg" alt="Foxberry — Pearls of Makhana" className="foxberry-logo" />
               </Link>
+              <p className="muted">Makhana like pearls.</p>
               <p className="muted" style={{ maxWidth: 320 }}>
                 A flavourful little break for the everyday. Browse the range,
                 track orders and find your next favourite.
@@ -91,6 +92,7 @@ export default async function RootLayout({
               © {new Date().getFullYear()}{" "}
               Foxberry
             </span>
+            <span>Makhana like pearls.</span>
           </div>
         </footer>
       </body>
