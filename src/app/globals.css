@@ -1754,3 +1754,77 @@ body.homepage-header-compact .offer-marquee{display:none !important}
     width:66px !important;max-height:50px !important;
   }
 }
+
+/* Smooth homepage header morph: fade and collapse controls instead of display:none jumps. */
+body:has(.hero) .site-header-group,
+body:has(.hero) .site-header-group .site-header,
+body:has(.hero) .site-header-group .nav,
+body:has(.hero) .site-header-group .brand-logo-link,
+body:has(.hero) .site-header-group .foxberry-header-logo,
+body:has(.hero) .site-header-group .nav-links,
+body:has(.hero) .site-header-group .nav-primary,
+body:has(.hero) .site-header-group .search-trigger,
+body:has(.hero) .site-header-group .nav-basket-link,
+body:has(.hero) .site-header-group .nav-account-label{
+  transition:
+    height .38s cubic-bezier(.2,.75,.25,1),
+    min-height .38s cubic-bezier(.2,.75,.25,1),
+    width .38s cubic-bezier(.2,.75,.25,1),
+    max-width .38s cubic-bezier(.2,.75,.25,1),
+    padding .32s ease,
+    margin .32s ease,
+    opacity .22s ease,
+    transform .32s cubic-bezier(.2,.75,.25,1),
+    background-color .3s ease,
+    box-shadow .3s ease;
+}
+body.homepage-header-compact .site-header-group{
+  animation:none !important;
+  background:rgba(15,36,24,.97) !important;
+}
+body.homepage-header-compact .site-header-group .nav-primary{
+  display:flex !important;
+  flex:0 1 0 !important;
+  width:0 !important;
+  max-width:0 !important;
+  min-width:0 !important;
+  overflow:hidden !important;
+  opacity:0 !important;
+  visibility:hidden !important;
+  transform:translateY(-5px);
+  pointer-events:none !important;
+  gap:0 !important;
+}
+body.homepage-header-compact .site-header .search-trigger,
+body.homepage-header-compact .site-header .nav-basket-link{
+  display:inline-flex !important;
+  flex:0 0 0 !important;
+  width:0 !important;
+  min-width:0 !important;
+  max-width:0 !important;
+  padding-left:0 !important;
+  padding-right:0 !important;
+  margin:0 !important;
+  border-width:0 !important;
+  overflow:hidden !important;
+  opacity:0 !important;
+  visibility:hidden !important;
+  transform:translateY(-5px);
+  pointer-events:none !important;
+}
+body.homepage-header-compact .site-header .brand-logo-link{
+  transition-delay:0s;
+}
+body.homepage-header-compact .site-header .nav-icon-link[aria-label="Account"],
+body.homepage-header-compact .site-header .nav-icon-link[aria-label="Admin dashboard"]{
+  transition:padding .3s ease, min-height .3s ease, border-color .3s ease, color .3s ease, transform .3s ease;
+}
+@media(prefers-reduced-motion:reduce){
+  body:has(.hero) .site-header-group,
+  body:has(.hero) .site-header-group *{
+    transition-duration:.01ms !important;
+    animation-duration:.01ms !important;
+    scroll-behavior:auto !important;
+  }
+}
+
