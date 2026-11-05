@@ -23,7 +23,7 @@ export default async function RootLayout({
         <header className="site-header">
           <nav className="container nav">
             <Link href="/" className="brand brand-logo-link" aria-label="Foxberry home" title="Foxberry">
-              <img src="/foxberry-logo.svg" alt="Foxberry" className="foxberry-logo foxberry-header-logo" />
+              <span className="foxberry-header-lockup"><img src="/foxberry-logo.svg" alt="Foxberry" className="foxberry-logo foxberry-header-logo" /><span className="brand-tagline">Pearls of Makhana</span></span>
             </Link>
             <SiteNavigation isAdmin={isAdmin} />
           </nav>
