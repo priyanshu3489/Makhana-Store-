@@ -58,6 +58,7 @@ export default function HomeProductCarousel({ products }: { products: HomeProduc
 
   useEffect(() => {
     if (orderedProducts.length < 2 || moving) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const timer = window.setTimeout(() => {
       const track = trackRef.current;
