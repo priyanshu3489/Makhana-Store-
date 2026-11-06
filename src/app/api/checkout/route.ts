@@ -252,6 +252,7 @@ export async function POST(req: Request) {
               d.hamper
                 ? [
                     `CUSTOM COMBO: ${comboConfig[d.hamper.slug].name}`,
+                    `COMBO_IMAGE: ${d.hamper.slug === "3-jar-taste-combo" ? "/products/3-jar%20taste%20combo.png" : d.hamper.slug === "4-jar-classic-combo" ? "/products/4-jar%20taste%20combo.png" : "/products/6-jar%20taste%20combo.png"}`,
                     `Makhana jars: ₹${(jarSubtotal / 100).toFixed(2)}`,
                     `Hamper box: ₹${(boxPrice / 100).toFixed(2)}`,
                     d.hamper.includeMessageCard ? `Message card: ₹${(cardPrice / 100).toFixed(2)}` : "Message card: Not selected",
