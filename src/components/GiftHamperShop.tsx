@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { formatMoney } from "@/lib/money";
 
 type Product = {
@@ -60,7 +60,29 @@ export default function GiftHamperShop({ products }: { products: Product[] }) {
   const [message, setMessage] = useState("");
   const [includeMessageCard, setIncludeMessageCard] = useState(false);
   const [messageCardText, setMessageCardText] = useState("");
+  const [editingSlug, setEditingSlug] = useState<string | null>(null);
   const messageCardPricePaise = 2900;
+
+  useEffect(() => {
+    const requestedSlug = new URLSearchParams(window.location.search).get("edit");
+    if (!requestedSlug) return;
+    try {
+      const stored = JSON.parse(localStorage.getItem("makhana-cart") || "[]");
+      const items = Array.isArray(stored) ? stored : [];
+      const existing = items.find((item: any) => item.hamper?.slug === requestedSlug);
+      if (!existing?.hamper) return;
+      const selectedIds = existing.hamper.productIds || items.filter((item: any) => item.hamper?.slug === requestedSlug).map((item: any) => item.product.id);
+      const selectedCombo = COMBOS.find((option) => option.slug === requestedSlug);
+      if (selectedCombo) setCombo(selectedCombo);
+      setSelected(selectedIds);
+      setIncludeMessageCard(Boolean(existing.hamper.includeMessageCard));
+      setMessageCardText(existing.hamper.messageCardText || "");
+      setEditingSlug(requestedSlug);
+      setMessage("You are editing this hamper. Update your choices and save.");
+    } catch {
+      setMessage("Could not load this hamper for editing. Please try again.");
+    }
+  }, []);
 
   const available = useMemo(
     () => products.filter((product) => product.stock > 0),
@@ -121,7 +143,8 @@ export default function GiftHamperShop({ products }: { products: Product[] }) {
         productIds: chosen.map((product) => product.id),
         productNames: chosen.map((product) => product.name),
       };
-      const otherItems = cart.filter((item: any) => !item.hamper);
+      const replacedSlug = editingSlug || combo.slug;
+      const otherItems = cart.filter((item: any) => item.hamper?.slug !== replacedSlug);
       const comboItems = chosen.map((product) => ({
         product,
         quantity: 1,
@@ -130,7 +153,9 @@ export default function GiftHamperShop({ products }: { products: Product[] }) {
 
       localStorage.setItem("makhana-cart", JSON.stringify([...otherItems, ...comboItems]));
       window.dispatchEvent(new Event("makhana-cart-updated"));
-      setMessage(`${combo.name} added to your basket for ${formatMoney(totalPaise)}.`);
+      setEditingSlug(null);
+      window.history.replaceState({}, "", "/combos");
+      setMessage(`${combo.name} ${editingSlug ? "updated in" : "added to"} your basket for ${formatMoney(totalPaise)}.`);
     } catch {
       setMessage("Could not update your basket. Please try again.");
     }
@@ -259,7 +284,7 @@ export default function GiftHamperShop({ products }: { products: Product[] }) {
               disabled={chosen.length !== combo.count}
               onClick={addCombo}
             >
-              Add combo to basket →
+              {editingSlug ? "Save hamper changes →" : "Add combo to basket →"}
             </button>
             <small className="gift-selection-hint">
               Select exactly {combo.count} jars. Box and optional card charges are added separately.
