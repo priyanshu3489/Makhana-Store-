@@ -51,58 +51,38 @@ function ProductCards({ products }: { products: HomeProduct[] }) {
 export default function HomeProductCarousel({ products }: { products: HomeProduct[] }) {
   const trackRef = useRef<HTMLDivElement>(null);
   const firstSetRef = useRef<HTMLDivElement>(null);
-  const pauseUntilRef = useRef(0);
 
   useEffect(() => {
     const track = trackRef.current;
     const firstSet = firstSetRef.current;
     if (!track || !firstSet || products.length < 2) return;
 
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (reducedMotion.matches) return;
-
-    const pause = (duration = 1400) => {
-      pauseUntilRef.current = Date.now() + duration;
-    };
-
-    const onVisibilityChange = () => {
-      if (document.hidden) pause(100000000);
-      else pause(1000);
-    };
-
-    track.addEventListener("pointerdown", () => pause(1800));
-    track.addEventListener("touchstart", () => pause(1800), { passive: true });
-    track.addEventListener("wheel", () => pause(1800), { passive: true });
-    track.addEventListener("mouseenter", () => pause(100000000));
-    track.addEventListener("mouseleave", () => pause(700));
-    track.addEventListener("focusin", () => pause(100000000));
-    track.addEventListener("focusout", () => pause(1200));
-    document.addEventListener("visibilitychange", onVisibilityChange);
+    // Keep the marquee moving left continuously, except when the tab is hidden
+    // or the visitor has requested reduced motion.
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     let frame = 0;
     let previous = 0;
-    const speed = 22; // pixels per second: slow, continuous default movement
+    const speed = 22;
 
     const animate = (time: number) => {
-      if (previous) {
+      if (previous && !document.hidden) {
         const elapsed = Math.min((time - previous) / 1000, 0.05);
-        if (!document.hidden && Date.now() > pauseUntilRef.current) {
-          const loopWidth = firstSet.offsetWidth + 18;
-          if (loopWidth > 18) {
-            track.scrollLeft += speed * elapsed;
-            if (track.scrollLeft >= loopWidth) track.scrollLeft -= loopWidth;
-          }
+        const gap = Number.parseFloat(window.getComputedStyle(track).columnGap) || 0;
+        const loopWidth = firstSet.offsetWidth + gap;
+
+        if (loopWidth > 0) {
+          track.scrollLeft += speed * elapsed;
+          if (track.scrollLeft >= loopWidth) track.scrollLeft -= loopWidth;
         }
       }
+
       previous = time;
       frame = window.requestAnimationFrame(animate);
     };
 
     frame = window.requestAnimationFrame(animate);
-    return () => {
-      window.cancelAnimationFrame(frame);
-      document.removeEventListener("visibilitychange", onVisibilityChange);
-    };
+    return () => window.cancelAnimationFrame(frame);
   }, [products.length]);
 
   return (
