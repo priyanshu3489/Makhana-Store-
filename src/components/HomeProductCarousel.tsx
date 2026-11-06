@@ -48,6 +48,7 @@ export default function HomeProductCarousel({ products }: { products: HomeProduc
   const [orderedProducts, setOrderedProducts] = useState(products);
   const [moving, setMoving] = useState(false);
   const [stepWidth, setStepWidth] = useState(0);
+  const [hovered, setHovered] = useState(false);
   const trackRef = useRef<HTMLDivElement>(null);
   const completedSlideRef = useRef(true);
 
@@ -58,11 +59,14 @@ export default function HomeProductCarousel({ products }: { products: HomeProduc
     completedSlideRef.current = true;
   }, [products]);
 
+  // Wait one second between steps. Hover pauses the carousel without
+  // interrupting a slide halfway through.
   useEffect(() => {
-    if (orderedProducts.length < 2 || moving) return;
+    if (orderedProducts.length < 2 || moving || hovered) return;
+
     const timer = window.setTimeout(() => {
       const track = trackRef.current;
-      const firstCard = track?.querySelector<HTMLElement>(".home-product-card");
+      const firstCard = track?.querySelector<HTMLElement>(".home-products-step-item");
       if (!track || !firstCard) return;
 
       const gap = Number.parseFloat(window.getComputedStyle(track).columnGap) || 0;
@@ -72,32 +76,37 @@ export default function HomeProductCarousel({ products }: { products: HomeProduc
     }, 1000);
 
     return () => window.clearTimeout(timer);
-  }, [orderedProducts, moving]);
+  }, [orderedProducts, moving, hovered]);
 
   useEffect(() => {
     if (!moving) return;
 
-    // Fallback: keep the carousel moving even if transitionend is not emitted.
-    const fallback = window.setTimeout(() => {
-      if (completedSlideRef.current) return;
-      completedSlideRef.current = true;
-      setOrderedProducts((current) => [...current.slice(1), current[0]]);
-      setMoving(false);
-      setStepWidth(0);
-    }, 1200);
+    // Safety fallback in case the browser does not emit transitionend.
+    const fallback = window.setTimeout(() => finishSlide(), 1100);
     return () => window.clearTimeout(fallback);
   }, [moving]);
 
-  const finishSlide = () => {
-    if (!moving || completedSlideRef.current) return;
+  function finishSlide() {
+    if (completedSlideRef.current) return;
     completedSlideRef.current = true;
     setOrderedProducts((current) => [...current.slice(1), current[0]]);
     setMoving(false);
     setStepWidth(0);
-  };
+  }
+
+  const loopProducts = [...orderedProducts, ...orderedProducts];
 
   return (
-    <div className="home-products-track" aria-label="All Foxberry products">
+    <div
+      className="home-products-track"
+      aria-label="All Foxberry products"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      onFocusCapture={() => setHovered(true)}
+      onBlurCapture={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setHovered(false);
+      }}
+    >
       <div
         className={`home-products-step-track${moving ? " is-moving" : ""}`}
         ref={trackRef}
@@ -106,8 +115,12 @@ export default function HomeProductCarousel({ products }: { products: HomeProduc
           if (event.target === event.currentTarget && event.propertyName === "transform") finishSlide();
         }}
       >
-        {orderedProducts.map((product) => (
-          <div className="home-products-step-item" key={product.id}>
+        {loopProducts.map((product, index) => (
+          <div
+            className="home-products-step-item"
+            key={`${product.id}-loop-${index}`}
+            aria-hidden={index >= orderedProducts.length ? true : undefined}
+          >
             <ProductCard product={product} />
           </div>
         ))}
