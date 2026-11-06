@@ -239,12 +239,8 @@ export default function Cart() {
                           >
                             {item.hamper ? item.hamper.name : item.product.name}
                           </h3>
-                          <p
-                            className="muted"
-                            style={{ margin: 0, fontSize: 14 }}
-                          >
-                            {item.hamper ? `${item.hamper.count} selected jars · ${item.hamper.productNames.join(", ")}${item.hamper.includeMessageCard ? " · Message card added" : ""}` : formatMoney(item.product.pricePaise)+" per pack"}
-                          </p>
+                          {!item.hamper && <p className="muted" style={{ margin: 0, fontSize: 14 }}>{formatMoney(item.product.pricePaise)} per pack</p>}
+                          {item.hamper && <p className="muted" style={{ margin: 0, fontSize: 13 }}>{item.hamper.count} selected makhana jars in this hamper</p>}
                         </div>
 
                         <strong style={{ whiteSpace: "nowrap" }}>
@@ -253,6 +249,20 @@ export default function Cart() {
                           )}
                         </strong>
                       </div>
+                      {item.hamper && (
+                        <div style={{ marginTop: 14, padding: 12, borderRadius: 12, background: "#faf8f1", border: "1px solid #eee9dc" }}>
+                          <strong style={{ display: "block", fontSize: 12, letterSpacing: ".06em", textTransform: "uppercase", marginBottom: 9, color: "#52634c" }}>Inside your hamper</strong>
+                          <div style={{ display: "grid", gap: 9 }}>
+                            {cart.filter((entry) => entry.hamper?.slug === item.hamper?.slug).map((entry, index) => (
+                              <div key={entry.product.id} style={{ display: "grid", gridTemplateColumns: "42px minmax(0, 1fr) auto", alignItems: "center", gap: 10 }}>
+                                <img src={entry.product.imageUrl} alt={entry.product.name} style={{ width: 42, height: 42, objectFit: "cover", borderRadius: 8, background: "#f0ede4" }} />
+                                <span style={{ fontSize: 13, lineHeight: 1.35 }}>{index + 1}. {entry.product.name}</span>
+                                <span style={{ fontSize: 12, color: "var(--muted, #777)", whiteSpace: "nowrap" }}>1 jar</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
                       {item.hamper && (
                         <div style={{marginTop:10,fontSize:13,color:"var(--muted, #777)",display:"grid",gap:5}}>
                           <div className="row"><span>Hamper box</span><span>{formatMoney(item.hamper.boxPricePaise || 0)}</span></div>
@@ -409,7 +419,7 @@ export default function Cart() {
                 }}
               >
                 <span style={{ flex: 1 }}>
-                  {item.hamper ? `${item.hamper.name} · ${item.product.name}` : item.product.name+" × "+item.quantity}
+                  {item.hamper ? `${item.hamper.name} · ${item.hamper.count} selected jars` : item.product.name+" × "+item.quantity}
                 </span>
                 <strong style={{ whiteSpace: "nowrap" }}>
                   {formatMoney(
