@@ -2026,3 +2026,46 @@ body.homepage-header-compact .site-header .nav-icon-link[aria-label="Account"]{
 .home-product-card{flex:0 0 clamp(230px,25vw,270px);min-width:0;scroll-snap-align:start}
 @media(max-width:600px){.home-products-track{gap:13px}.home-products-set{gap:13px}.home-product-card{flex-basis:76vw;max-width:290px}}
 @media(prefers-reduced-motion:reduce){.home-products-track{scroll-behavior:auto}}
+
+
+/* Seamless right-to-left homepage product marquee. CSS animation avoids
+   scrollLeft timing jitter and loops at a constant linear speed. */
+.home-products-track{
+  display:block;
+  width:100%;
+  overflow:hidden;
+  padding:4px 0 18px;
+  position:relative;
+  -webkit-mask-image:linear-gradient(to right,transparent 0,#000 2%,#000 98%,transparent 100%);
+  mask-image:linear-gradient(to right,transparent 0,#000 2%,#000 98%,transparent 100%);
+}
+.home-products-marquee{
+  display:flex;
+  width:max-content;
+  gap:18px;
+  will-change:transform;
+  animation:foxberry-products-left 48s linear infinite;
+}
+.home-products-set{
+  display:flex;
+  flex:0 0 auto;
+  gap:18px;
+}
+.home-product-card{
+  flex:0 0 clamp(230px,25vw,270px);
+  min-width:0;
+}
+@keyframes foxberry-products-left{
+  from{transform:translate3d(0,0,0)}
+  to{transform:translate3d(-50%,0,0)}
+}
+@media(max-width:600px){
+  .home-products-track{padding-bottom:14px}
+  .home-products-marquee,.home-products-set{gap:13px}
+  .home-products-marquee{animation-duration:38s}
+  .home-product-card{flex-basis:76vw;max-width:290px}
+}
+@media(prefers-reduced-motion:reduce){
+  .home-products-track{overflow-x:auto;-webkit-mask-image:none;mask-image:none}
+  .home-products-marquee{animation:none;transform:none}
+}
