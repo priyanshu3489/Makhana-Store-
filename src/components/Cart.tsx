@@ -209,7 +209,7 @@ export default function Cart() {
                       aria-label={`View ${item.product.name}`}
                     >
                       <img
-                        src={item.hamper?.image || item.product.imageUrl}
+                        src={item.hamper ? (item.hamper.image || (item.hamper.slug === "3-jar-taste-combo" ? "/products/3-jar%20taste%20combo.png" : item.hamper.slug === "4-jar-classic-combo" ? "/products/4-jar%20taste%20combo.png" : "/products/6-jar%20taste%20combo.png")) : item.product.imageUrl}
                         alt={item.hamper ? item.hamper.name : item.product.name}
                         style={{
                           width: "100%",
