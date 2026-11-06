@@ -21,6 +21,7 @@ type Combo = {
   image: string;
   tag: string;
   description: string;
+  boxPricePaise: number;
 };
 
 const COMBOS: Combo[] = [
@@ -31,6 +32,7 @@ const COMBOS: Combo[] = [
     image: "/products/3-jar%20taste%20combo.png",
     tag: "TASTE COMBO",
     description: "Pick any 3 makhana jars and create your own flavour mix.",
+    boxPricePaise: 14900,
   },
   {
     slug: "4-jar-classic-combo",
@@ -39,6 +41,7 @@ const COMBOS: Combo[] = [
     image: "/products/4-jar%20taste%20combo.png",
     tag: "CLASSIC COLLECTION",
     description: "Choose 4 favourites for a classic Foxberry selection.",
+    boxPricePaise: 19900,
   },
   {
     slug: "6-jar-premium-collection",
@@ -47,6 +50,7 @@ const COMBOS: Combo[] = [
     image: "/products/6-jar%20taste%20combo.png",
     tag: "PREMIUM COLLECTION",
     description: "Build a premium collection with any 6 makhana jars.",
+    boxPricePaise: 24900,
   },
 ];
 
@@ -54,6 +58,10 @@ export default function GiftHamperShop({ products }: { products: Product[] }) {
   const [combo, setCombo] = useState<Combo>(COMBOS[0]);
   const [selected, setSelected] = useState<string[]>([]);
   const [message, setMessage] = useState("");
+  const [includeMessageCard, setIncludeMessageCard] = useState(false);
+  const [messageCardText, setMessageCardText] = useState("");
+  const [boxMessage, setBoxMessage] = useState("");
+  const messageCardPricePaise = 2900;
 
   const available = useMemo(
     () => products.filter((product) => product.stock > 0),
@@ -65,12 +73,16 @@ export default function GiftHamperShop({ products }: { products: Product[] }) {
       .filter(Boolean) as Product[],
     [selected, available],
   );
-  const totalPaise = chosen.reduce((sum, product) => sum + product.pricePaise, 0);
+  const jarTotalPaise = chosen.reduce((sum, product) => sum + product.pricePaise, 0);
+  const totalPaise = jarTotalPaise + combo.boxPricePaise + (includeMessageCard ? messageCardPricePaise : 0);
 
   function chooseCombo(nextCombo: Combo) {
     setCombo(nextCombo);
     setSelected([]);
     setMessage("");
+    setIncludeMessageCard(false);
+    setMessageCardText("");
+    setBoxMessage("");
   }
 
   function toggleProduct(id: string) {
@@ -89,6 +101,10 @@ export default function GiftHamperShop({ products }: { products: Product[] }) {
       setMessage(`Please select exactly ${combo.count} jars to continue.`);
       return;
     }
+    if (includeMessageCard && !messageCardText.trim()) {
+      setMessage("Please enter the message for your message card, or switch the card off.");
+      return;
+    }
 
     try {
       const raw = JSON.parse(localStorage.getItem("makhana-cart") || "[]");
@@ -98,6 +114,13 @@ export default function GiftHamperShop({ products }: { products: Product[] }) {
         name: combo.name,
         count: combo.count,
         pricePaise: totalPaise,
+        jarTotalPaise,
+        boxPricePaise: combo.boxPricePaise,
+        messageCardPricePaise: includeMessageCard ? messageCardPricePaise : 0,
+        includeMessageCard,
+        messageCardText: includeMessageCard ? messageCardText.trim() : "",
+        boxMessage: boxMessage.trim(),
+        productIds: chosen.map((product) => product.id),
         productNames: chosen.map((product) => product.name),
       };
       const otherItems = cart.filter((item: any) => !item.hamper);
@@ -144,6 +167,7 @@ export default function GiftHamperShop({ products }: { products: Product[] }) {
               <span className="taste-combo-card-copy">
                 <strong>{option.name}</strong>
                 <small>{option.description}</small>
+                <span className="taste-combo-box-price">Hamper box · {formatMoney(option.boxPricePaise)}</span>
                 <span className="taste-combo-card-action">
                   {combo.slug === option.slug ? "Selected ✓" : "Choose this combo →"}
                 </span>
@@ -211,6 +235,27 @@ export default function GiftHamperShop({ products }: { products: Product[] }) {
               ))}
               {!chosen.length && <li className="muted">Your chosen flavours will appear here.</li>}
             </ul>
+            <div className="taste-combo-price-breakdown">
+              <div><span>Makhana jars</span><strong>{formatMoney(jarTotalPaise)}</strong></div>
+              <div><span>{combo.name} box</span><strong>{formatMoney(combo.boxPricePaise)}</strong></div>
+              <div><span>Message card {includeMessageCard ? "(included)" : "(optional)"}</span><strong>{includeMessageCard ? formatMoney(messageCardPricePaise) : "—"}</strong></div>
+            </div>
+            <label className="taste-combo-message-toggle">
+              <input type="checkbox" checked={includeMessageCard} onChange={(event) => setIncludeMessageCard(event.target.checked)} />
+              <span><strong>Add a message card</strong><small>Optional · {formatMoney(messageCardPricePaise)}</small></span>
+            </label>
+            {includeMessageCard && (
+              <label className="taste-combo-message-field">
+                Message for the card
+                <textarea maxLength={160} rows={3} placeholder="Write a little note for someone special…" value={messageCardText} onChange={(event) => setMessageCardText(event.target.value)} />
+                <small>{messageCardText.length}/160 characters</small>
+              </label>
+            )}
+            <label className="taste-combo-message-field">
+              Customise the hamper box
+              <textarea maxLength={100} rows={2} placeholder="Message to print on the hamper box (optional)" value={boxMessage} onChange={(event) => setBoxMessage(event.target.value)} />
+              <small>We’ll use this as the custom box-printing message · {boxMessage.length}/100</small>
+            </label>
             <div className="taste-combo-total">
               <span>Combo total</span>
               <strong>{formatMoney(totalPaise)}</strong>
@@ -224,7 +269,7 @@ export default function GiftHamperShop({ products }: { products: Product[] }) {
               Add combo to basket →
             </button>
             <small className="gift-selection-hint">
-              Select exactly {combo.count} jars. Combo total is calculated from your selected jars.
+              Select exactly {combo.count} jars. Box and optional card charges are added separately.
             </small>
           </aside>
         </div>
