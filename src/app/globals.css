@@ -2108,3 +2108,15 @@ body.homepage-header-compact .site-header .nav-icon-link[aria-label="Account"]{
   .home-products-track{overflow-x:auto;-webkit-mask-image:none;mask-image:none}
   .home-products-step-track.is-moving{transition:none}
 }
+
+
+/* Gentle one-product-at-a-time carousel motion. */
+.home-products-step-track.is-moving{
+  transition:transform .95s cubic-bezier(.22,.61,.36,1) !important;
+}
+.home-products-step-item{
+  backface-visibility:hidden;
+}
+@media(prefers-reduced-motion:reduce){
+  .home-products-step-track.is-moving{transition:none !important}
+}
