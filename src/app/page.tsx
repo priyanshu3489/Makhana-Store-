@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import { formatMoney } from "@/lib/money";
+import HomeProductCarousel from "@/components/HomeProductCarousel";
 export const dynamic = "force-dynamic";
 export default async function HomePage(){const products=await prisma.product.findMany({where:{active:true},orderBy:{createdAt:"desc"}});return <main><section className="hero"><div className="container hero-inner"><div className="hero-copy"><span className="pill">ROASTED · FLAVOURED · CRUNCHY</span><h1>A better kind of<br/><em>everyday crunch.</em></h1><p>Meet your new snack-time favourite. Discover bold flavours, satisfying crunch and easy-to-love makhana for the little breaks that make a day.</p><div className="row hero-actions" style={{justifyContent:"flex-start",flexWrap:"wrap"}}><Link className="btn" href="/shop">Shop all flavours</Link><Link className="btn secondary" href="/about">Our story</Link></div><div className="hero-points"><span>✦ Snack-time variety</span><span>✦ Easy online ordering</span><span>✦ Order tracking</span></div></div><div className="hero-art hero-art-photo" aria-label="Makhana snack photograph with popping fox nuts" role="img"><div className="hero-photo-glow"/>{products[0]?.imageUrl ? <img className="hero-food-photo" src={products[0].imageUrl} alt="A bowl of Foxberry fox nuts" /> : <div className="hero-photo-fallback" aria-hidden="true"><span>🥣</span><strong>FOXBERRY</strong></div>}<span className="photo-puff photo-puff-one" aria-hidden="true"/><span className="photo-puff photo-puff-two" aria-hidden="true"/><span className="photo-puff photo-puff-three" aria-hidden="true"/><span className="photo-puff photo-puff-four" aria-hidden="true"/><span className="photo-sparkle photo-sparkle-one" aria-hidden="true">✦</span><span className="photo-sparkle photo-sparkle-two" aria-hidden="true">✧</span><div className="art-label">A LITTLE CRUNCH<br/>GOES A LONG WAY</div></div></div></section><section className="container benefits"><div><span className="benefit-icon">✺</span><h3>Crunch into variety</h3><p>From classic to spicy, find a flavour for your kind of day.</p></div><div><span className="benefit-icon">♡</span><h3>A snack-time reset</h3><p>Make room for a mindful break between the busy bits.</p></div><div><span className="benefit-icon">↗</span><h3>Simple shopping</h3><p>Clear pricing, secure checkout and order history in your account.</p></div></section>
 
@@ -10,26 +11,7 @@ export default async function HomePage(){const products=await prisma.product.fin
     <Link className="text-link" href="/shop">View all products →</Link>
   </div>
   {products.length > 0 ? (
-    <div className="home-products-track" aria-label="All Foxberry products">
-      {products.map((product) => (
-        <article className="card product-card home-product-card" key={product.id}>
-          <Link href={`/products/${product.slug}`} aria-label={`View ${product.name}`}>
-            <img className="product-image" src={product.imageUrl} alt={product.name} />
-          </Link>
-          <div className="home-product-copy">
-            <span className="pill">{product.flavor} · {product.weightGrams} g</span>
-            <h3>{product.name}</h3>
-            <p className="muted product-description">{product.description}</p>
-            <div className="home-product-bottom">
-              <div><strong>{formatMoney(product.pricePaise)}</strong>
-                {product.compareAtPaise && product.compareAtPaise > product.pricePaise ? <div className="muted home-product-compare">{formatMoney(product.compareAtPaise)}</div> : null}
-              </div>
-              {product.stock > 0 ? <Link className="btn" href={`/products/${product.slug}`}>View product</Link> : <span className="home-product-out">Out of stock</span>}
-            </div>
-          </div>
-        </article>
-      ))}
-    </div>
+    <HomeProductCarousel products={products.map((product) => ({ id: product.id, slug: product.slug, name: product.name, imageUrl: product.imageUrl, flavor: product.flavor, weightGrams: product.weightGrams, description: product.description, pricePaise: product.pricePaise, compareAtPaise: product.compareAtPaise, stock: product.stock }))} />
   ) : <p className="muted">Our products are being restocked. Please check back soon.</p>}
 </section>
 <section className="container review-preview">
