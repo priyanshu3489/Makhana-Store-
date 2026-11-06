@@ -31,8 +31,6 @@ const schema = z.object({
     productNames: z.array(z.string().max(120)).min(3).max(6),
     includeMessageCard: z.boolean().optional(),
     messageCardText: z.string().max(160).optional(),
-    boxMessage: z.string().max(100).optional(),
-    boxDesign: z.enum(["classic-gold", "celebration", "floral"]).optional(),
   }).optional(),
   items: z
     .array(
@@ -259,8 +257,6 @@ export async function POST(req: Request) {
                     d.hamper.includeMessageCard ? `Message card: ₹${(cardPrice / 100).toFixed(2)}` : "Message card: Not selected",
                     `Selected packs: ${products.map((p) => p.name).join(", ")}`,
                     d.hamper.messageCardText?.trim() ? `Card message: ${d.hamper.messageCardText.trim()}` : null,
-                    d.hamper.boxDesign ? `Hamper box design: ${d.hamper.boxDesign}` : null,
-                    d.hamper.boxMessage?.trim() ? `Custom box print: ${d.hamper.boxMessage.trim()}` : null,
                   ].filter(Boolean).join("\n")
                 : null,
             ].filter(Boolean).join("\n\n") || null,
