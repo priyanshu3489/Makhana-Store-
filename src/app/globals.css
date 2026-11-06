@@ -1904,10 +1904,10 @@ body:not(:has(.hero)) .site-header-group .site-header{
   top:auto !important;
 }
 
-/* On the homepage, show a signed-in customer's name in the account control
-   in both the full transparent header and the compact scrolled header. */
+/* Homepage account text is reserved for the compact, scrolled header.
+   At the top of the homepage only the account icon is shown. */
 body:has(.hero) .site-header .nav-account-label{
-  display:inline !important;
+  display:none !important;
 }
 body:has(.hero) .site-header .nav-icon-link[aria-label="Account"]{
   max-width:min(240px,42vw);
@@ -1916,4 +1916,83 @@ body:has(.hero) .site-header .nav-account-label{
   overflow:hidden;
   text-overflow:ellipsis;
   white-space:nowrap;
+}
+
+/* Slim homepage header after scrolling: logo, search and account controls. */
+body.homepage-header-compact .site-header-group .nav{
+  min-height:60px !important;
+  height:60px !important;
+  padding:0 !important;
+}
+body.homepage-header-compact .site-header .brand-logo-link{
+  width:72px !important;
+  height:52px !important;
+  flex:0 0 72px !important;
+}
+body.homepage-header-compact .site-header .foxberry-header-logo{
+  width:72px !important;
+  max-height:52px !important;
+}
+body.homepage-header-compact .site-header .search-trigger{
+  display:inline-flex !important;
+  flex:0 0 40px !important;
+  width:40px !important;
+  min-width:40px !important;
+  max-width:40px !important;
+  height:40px !important;
+  padding:8px !important;
+  margin:0 !important;
+  overflow:visible !important;
+  opacity:1 !important;
+  visibility:visible !important;
+  transform:none !important;
+  border:0 !important;
+  background:transparent !important;
+  color:#fff !important;
+  pointer-events:auto !important;
+}
+body.homepage-header-compact .site-header .search-trigger:hover{
+  color:#D6A64F !important;
+  background:rgba(214,166,79,.08) !important;
+}
+body.homepage-header-compact .site-header .nav-utilities{
+  display:flex !important;
+  align-items:center !important;
+  gap:12px !important;
+}
+body.homepage-header-compact .site-header .nav-account-label{
+  display:inline !important;
+  max-width:150px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+body.homepage-header-compact .site-header .nav-icon-link[aria-label="Account"]{
+  display:inline-flex !important;
+  align-items:center !important;
+  gap:7px !important;
+  max-width:min(200px,40vw) !important;
+  color:#fff !important;
+}
+@media(max-width:520px){
+  body.homepage-header-compact .site-header-group .nav{
+    min-height:54px !important;
+    height:54px !important;
+  }
+  body.homepage-header-compact .site-header .brand-logo-link{
+    width:64px !important;
+    height:48px !important;
+    flex-basis:64px !important;
+  }
+  body.homepage-header-compact .site-header .foxberry-header-logo{
+    width:64px !important;
+    max-height:48px !important;
+  }
+  body.homepage-header-compact .site-header .nav-utilities{
+    gap:6px !important;
+  }
+  body.homepage-header-compact .site-header .nav-account-label{
+    max-width:105px;
+    font-size:12px;
+  }
 }
