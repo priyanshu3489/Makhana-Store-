@@ -2126,3 +2126,32 @@ body.homepage-header-compact .site-header .nav-icon-link[aria-label="Account"]{
 @media(prefers-reduced-motion:reduce){
   .home-products-step-track.is-moving{transition:transform .95s cubic-bezier(.22,.61,.36,1) !important}
 }
+
+
+/* Final carousel layout: the duplicated second pass keeps the next card
+   available when the last product wraps back to the first. */
+.home-products-track{
+  display:block !important;
+  width:100%;
+  overflow:hidden !important;
+  touch-action:pan-y;
+}
+.home-products-step-track{
+  display:flex !important;
+  width:max-content;
+  gap:18px;
+  align-items:stretch;
+  will-change:transform;
+}
+.home-products-step-track.is-moving{
+  transition:transform .95s cubic-bezier(.22,.61,.36,1) !important;
+}
+.home-products-step-item{
+  flex:0 0 auto;
+  width:clamp(230px,25vw,270px);
+  backface-visibility:hidden;
+}
+@media(max-width:600px){
+  .home-products-step-track{gap:13px}
+  .home-products-step-item{width:76vw;max-width:290px}
+}
