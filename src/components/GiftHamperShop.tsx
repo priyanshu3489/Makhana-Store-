@@ -110,6 +110,7 @@ export default function GiftHamperShop({ products }: { products: Product[] }) {
       const comboDetails = {
         slug: combo.slug,
         name: combo.name,
+        image: combo.image,
         count: combo.count,
         pricePaise: totalPaise,
         jarTotalPaise,
