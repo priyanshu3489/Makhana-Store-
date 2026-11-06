@@ -6,7 +6,7 @@ import TabAttentionTitle from "@/components/TabAttentionTitle";
 import { getCurrentUser } from "@/lib/session";
 
 export const metadata: Metadata = {
-  title: "Foxberry | Makhana like pearls",
+  title: "FOXBERRY | Pearls of Makhana",
   description: "Foxberry — Makhana like pearls. Discover premium, flavourful makhana.",
 };
 
