@@ -60,8 +60,6 @@ export default function HomeProductCarousel({ products }: { products: HomeProduc
 
   useEffect(() => {
     if (orderedProducts.length < 2 || moving) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
     const timer = window.setTimeout(() => {
       const track = trackRef.current;
       const firstCard = track?.querySelector<HTMLElement>(".home-product-card");
@@ -71,7 +69,7 @@ export default function HomeProductCarousel({ products }: { products: HomeProduc
       completedSlideRef.current = false;
       setStepWidth(firstCard.getBoundingClientRect().width + gap);
       setMoving(true);
-    }, 1500);
+    }, 1000);
 
     return () => window.clearTimeout(timer);
   }, [orderedProducts, moving]);
