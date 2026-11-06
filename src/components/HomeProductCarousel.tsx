@@ -80,7 +80,13 @@ export default function HomeProductCarousel({ products }: { products: HomeProduc
     if (!moving) return;
 
     // Fallback: keep the carousel moving even if transitionend is not emitted.
-    const fallback = window.setTimeout(() => finishSlide(), 1200);
+    const fallback = window.setTimeout(() => {
+      if (completedSlideRef.current) return;
+      completedSlideRef.current = true;
+      setOrderedProducts((current) => [...current.slice(1), current[0]]);
+      setMoving(false);
+      setStepWidth(0);
+    }, 1200);
     return () => window.clearTimeout(fallback);
   }, [moving]);
 
