@@ -277,7 +277,7 @@ export async function POST(req: Request) {
               d.paymentMethod === "COD" ? "COD_PENDING" : "PENDING",
 
             items: {
-              create: products.map((p,i) => ({
+              create: products.map((p) => ({
                 productId: p.id,
                 productName: d.hamper ? `${d.hamper.name} — ${p.name}` : p.name,
                 unitPricePaise: d.hamper ? (i===0 ? subtotal : 0) : p.pricePaise,
