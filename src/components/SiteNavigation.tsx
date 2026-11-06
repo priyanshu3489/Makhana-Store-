@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import StoreSearch from "@/components/StoreSearch";
 
@@ -19,19 +20,27 @@ function Icon({ name }: { name: "search" | "user" | "basket" | "home" | "shop" |
 }
 
 export default function SiteNavigation({ isAdmin, customerName }: { isAdmin: boolean; customerName?: string | null }) {
+  const pathname = usePathname();
+
   useEffect(() => {
-    const homepage = Boolean(document.querySelector(".hero"));
-    if (!homepage) return;
+    // The compact scroll treatment belongs exclusively to the homepage.
+    // Always clear it before activating the listener for a new route.
+    document.body.classList.remove("homepage-header-compact");
+
+    if (pathname !== "/") return;
+
     const updateHeader = () => {
       document.body.classList.toggle("homepage-header-compact", window.scrollY > 90);
     };
+
     updateHeader();
     window.addEventListener("scroll", updateHeader, { passive: true });
+
     return () => {
       window.removeEventListener("scroll", updateHeader);
       document.body.classList.remove("homepage-header-compact");
     };
-  }, []);
+  }, [pathname]);
 
   return (
     <div className="nav-links">
