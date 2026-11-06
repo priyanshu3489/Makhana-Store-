@@ -49,11 +49,13 @@ export default function HomeProductCarousel({ products }: { products: HomeProduc
   const [moving, setMoving] = useState(false);
   const [stepWidth, setStepWidth] = useState(0);
   const trackRef = useRef<HTMLDivElement>(null);
+  const completedSlideRef = useRef(true);
 
   useEffect(() => {
     setOrderedProducts(products);
     setMoving(false);
     setStepWidth(0);
+    completedSlideRef.current = true;
   }, [products]);
 
   useEffect(() => {
@@ -66,15 +68,25 @@ export default function HomeProductCarousel({ products }: { products: HomeProduc
       if (!track || !firstCard) return;
 
       const gap = Number.parseFloat(window.getComputedStyle(track).columnGap) || 0;
+      completedSlideRef.current = false;
       setStepWidth(firstCard.getBoundingClientRect().width + gap);
       setMoving(true);
-    }, 1000);
+    }, 1500);
 
     return () => window.clearTimeout(timer);
   }, [orderedProducts, moving]);
 
-  const finishSlide = () => {
+  useEffect(() => {
     if (!moving) return;
+
+    // Fallback: keep the carousel moving even if transitionend is not emitted.
+    const fallback = window.setTimeout(() => finishSlide(), 1200);
+    return () => window.clearTimeout(fallback);
+  }, [moving]);
+
+  const finishSlide = () => {
+    if (!moving || completedSlideRef.current) return;
+    completedSlideRef.current = true;
     setOrderedProducts((current) => [...current.slice(1), current[0]]);
     setMoving(false);
     setStepWidth(0);
