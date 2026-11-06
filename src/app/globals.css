@@ -2015,3 +2015,14 @@ body.homepage-header-compact .site-header .nav-icon-link[aria-label="Account"]{
 .home-product-compare{font-size:12px;text-decoration:line-through;margin-top:3px}
 .home-product-out{font-size:12px;font-weight:700;color:#98602b}
 @media(max-width:600px){.home-products{padding-top:38px}.home-product-card{flex-basis:76vw;max-width:290px}.home-products-track{gap:13px}.home-products .section-heading{align-items:flex-start}.home-product-copy{padding:13px}}
+
+
+/* Auto-moving homepage product carousel: slow, seamless loop with manual-scroll support. */
+.home-products-track{display:flex;gap:18px;overflow-x:auto;overflow-y:hidden;padding:4px 2px 18px;scroll-snap-type:x proximity;scrollbar-width:thin;scrollbar-color:#b9a77e #e9e5d9;-webkit-overflow-scrolling:touch;overscroll-behavior-inline:contain}
+.home-products-track::-webkit-scrollbar{height:8px}
+.home-products-track::-webkit-scrollbar-track{background:#e9e5d9;border-radius:99px}
+.home-products-track::-webkit-scrollbar-thumb{background:#b9a77e;border-radius:99px}
+.home-products-set{display:flex;flex:0 0 auto;gap:18px}
+.home-product-card{flex:0 0 clamp(230px,25vw,270px);min-width:0;scroll-snap-align:start}
+@media(max-width:600px){.home-products-track{gap:13px}.home-products-set{gap:13px}.home-product-card{flex-basis:76vw;max-width:290px}}
+@media(prefers-reduced-motion:reduce){.home-products-track{scroll-behavior:auto}}
