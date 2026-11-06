@@ -279,8 +279,10 @@ export async function POST(req: Request) {
             items: {
               create: products.map((p) => ({
                 productId: p.id,
-                productName: d.hamper ? `${d.hamper.name} — ${p.name}` : p.name,
-                unitPricePaise: d.hamper ? (i===0 ? subtotal : 0) : p.pricePaise,
+                productName: d.hamper && hamperProductIds.has(p.id) ? `${d.hamper.name} — ${p.name}` : p.name,
+                unitPricePaise: d.hamper && p.id === d.hamper.productIds[0]
+                  ? p.pricePaise + boxPrice + cardPrice
+                  : p.pricePaise,
                 quantity: qty.get(p.id)!,
               })),
             },
