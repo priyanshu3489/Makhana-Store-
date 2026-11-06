@@ -22,7 +22,17 @@ const schema = z.object({
   notes: z.string().max(500).optional(),
   couponCode: z.string().trim().max(40).optional(),
   paymentMethod: z.enum(["RAZORPAY", "COD"]),
-  hamper: z.object({slug:z.enum(["most-selling","premium","celebration-gifting","luxury-gifting"]),name:z.string().max(80),count:z.number().int(),pricePaise:z.number().int(),productIds:z.array(z.string().min(1)).min(3).max(12),productNames:z.array(z.string().max(120)).min(3).max(12),giftNote:z.string().max(160).optional()}).optional(),
+  hamper: z.object({
+    slug: z.enum(["3-jar-taste-combo", "4-jar-classic-combo", "6-jar-premium-collection"]),
+    name: z.string().max(80),
+    count: z.number().int(),
+    pricePaise: z.number().int(),
+    productIds: z.array(z.string().min(1)).min(3).max(6),
+    productNames: z.array(z.string().max(120)).min(3).max(6),
+    includeMessageCard: z.boolean().optional(),
+    messageCardText: z.string().max(160).optional(),
+    boxMessage: z.string().max(100).optional(),
+  }).optional(),
   items: z
     .array(
       z.object({
@@ -55,8 +65,28 @@ export async function POST(req: Request) {
     }
 
     const d = parsed.data;
-    const hamperPrices:Record<string,{name:string;count:number;pricePaise:number}>={"most-selling":{name:"Most Selling Hamper",count:3,pricePaise:59900},"premium":{name:"Premium Hamper",count:5,pricePaise:89900},"celebration-gifting":{name:"Celebration Gifting",count:8,pricePaise:129900},"luxury-gifting":{name:"Luxury Gifting",count:12,pricePaise:189900}};
-    if(d.hamper){const expected=hamperPrices[d.hamper.slug];if(!expected||d.hamper.count!==expected.count||d.hamper.pricePaise!==expected.pricePaise||d.items.length!==expected.count||d.hamper.productIds.length!==expected.count||new Set(d.hamper.productIds).size!==expected.count||d.items.some(i=>i.quantity!==1||!d.hamper!.productIds.includes(i.productId))||d.hamper.productNames.length!==expected.count){return NextResponse.json({error:"Hamper selection is invalid. Please rebuild your hamper."},{status:400});}}
+    const comboConfig: Record<string, { name: string; count: number; boxPricePaise: number }> = {
+      "3-jar-taste-combo": { name: "3-Jar Taste Combo", count: 3, boxPricePaise: 14900 },
+      "4-jar-classic-combo": { name: "4-Jar Classic Combo", count: 4, boxPricePaise: 19900 },
+      "6-jar-premium-collection": { name: "6-Jar Premium Collection", count: 6, boxPricePaise: 24900 },
+    };
+    const messageCardPricePaise = 2900;
+    if (d.hamper) {
+      const expected = comboConfig[d.hamper.slug];
+      const ids = d.hamper.productIds;
+      if (
+        !expected ||
+        d.hamper.count !== expected.count ||
+        d.items.length !== expected.count ||
+        ids.length !== expected.count ||
+        new Set(ids).size !== expected.count ||
+        d.items.some((item) => item.quantity !== 1 || !ids.includes(item.productId)) ||
+        d.hamper.productNames.length !== expected.count ||
+        (d.hamper.includeMessageCard && !d.hamper.messageCardText?.trim())
+      ) {
+        return NextResponse.json({ error: "Combo selection is invalid. Please rebuild your combo." }, { status: 400 });
+      }
+    }
     const qty = new Map<string, number>();
 
     for (const item of d.items) {
@@ -96,7 +126,10 @@ export async function POST(req: Request) {
       }
     }
 
-    const subtotal = d.hamper ? hamperPrices[d.hamper.slug].pricePaise : products.reduce((sum,p)=>sum+p.pricePaise*(qty.get(p.id)||0),0);
+    const jarSubtotal = products.reduce((sum, p) => sum + p.pricePaise * (qty.get(p.id) || 0), 0);
+    const boxPrice = d.hamper ? comboConfig[d.hamper.slug].boxPricePaise : 0;
+    const cardPrice = d.hamper?.includeMessageCard ? messageCardPricePaise : 0;
+    const subtotal = jarSubtotal + boxPrice + cardPrice;
 
     let discount = 0;
     let couponCode: string | undefined;
@@ -214,7 +247,20 @@ export async function POST(req: Request) {
             city: d.city,
             state: d.state,
             postalCode: d.postalCode,
-            notes: [d.notes,d.hamper ? `GIFT HAMPER: ${hamperPrices[d.hamper.slug].name} (₹${(hamperPrices[d.hamper.slug].pricePaise/100).toFixed(2)})\\nSelected packs: ${products.map(p=>p.name).join(", ")}${d.hamper.giftNote ? `\\nGift message: ${d.hamper.giftNote}` : ""}` : null].filter(Boolean).join("\\n\\n") || null,
+            notes: [
+              d.notes,
+              d.hamper
+                ? [
+                    `CUSTOM COMBO: ${comboConfig[d.hamper.slug].name}`,
+                    `Makhana jars: ₹${(jarSubtotal / 100).toFixed(2)}`,
+                    `Hamper box: ₹${(boxPrice / 100).toFixed(2)}`,
+                    d.hamper.includeMessageCard ? `Message card: ₹${(cardPrice / 100).toFixed(2)}` : "Message card: Not selected",
+                    `Selected packs: ${products.map((p) => p.name).join(", ")}`,
+                    d.hamper.messageCardText?.trim() ? `Card message: ${d.hamper.messageCardText.trim()}` : null,
+                    d.hamper.boxMessage?.trim() ? `Custom box print: ${d.hamper.boxMessage.trim()}` : null,
+                  ].filter(Boolean).join("\n")
+                : null,
+            ].filter(Boolean).join("\n\n") || null,
 
             subtotalPaise: subtotal,
             discountPaise: discount,
