@@ -144,7 +144,7 @@ export default function GiftHamperShop({ products }: { products: Product[] }) {
         productNames: chosen.map((product) => product.name),
       };
       const replacedSlug = editingSlug || combo.slug;
-      const otherItems = cart.filter((item: any) => item.hamper?.slug !== replacedSlug);
+      const otherItems = cart.filter((item: any) => !item.hamper || (item.hamper.slug !== replacedSlug && item.hamper.slug !== combo.slug));
       const comboItems = chosen.map((product) => ({
         product,
         quantity: 1,
