@@ -16,7 +16,7 @@ type P = {
 type C = {
   product: P;
   quantity: number;
-  hamper?: {slug:string;name:string;count:number;pricePaise:number;productNames:string[];boxPricePaise?:number;messageCardPricePaise?:number;includeMessageCard?:boolean;messageCardText?:string;boxMessage?:string;boxDesign?:string};
+  hamper?: {slug:string;name:string;count:number;pricePaise:number;productNames:string[];boxPricePaise?:number;messageCardPricePaise?:number;includeMessageCard?:boolean;messageCardText?:string};
 };
 
 export default function Cart() {
@@ -243,7 +243,7 @@ export default function Cart() {
                             className="muted"
                             style={{ margin: 0, fontSize: 14 }}
                           >
-                            {item.hamper ? `${item.hamper.count} selected jars · ${item.hamper.productNames.join(", ")}${item.hamper.includeMessageCard ? " · Message card added" : ""}${item.hamper.boxMessage ? " · Custom box message" : ""}` : formatMoney(item.product.pricePaise)+" per pack"}
+                            {item.hamper ? `${item.hamper.count} selected jars · ${item.hamper.productNames.join(", ")}${item.hamper.includeMessageCard ? " · Message card added" : ""}` : formatMoney(item.product.pricePaise)+" per pack"}
                           </p>
                         </div>
 
@@ -257,9 +257,7 @@ export default function Cart() {
                         <div style={{marginTop:10,fontSize:13,color:"var(--muted, #777)",display:"grid",gap:5}}>
                           <div className="row"><span>Hamper box</span><span>{formatMoney(item.hamper.boxPricePaise || 0)}</span></div>
                           {item.hamper.includeMessageCard && <div className="row"><span>Message card</span><span>{formatMoney(item.hamper.messageCardPricePaise || 0)}</span></div>}
-                          {item.hamper.boxDesign && <p style={{margin:"4px 0"}}>Box design: {item.hamper.boxDesign.replaceAll("-", " ")}</p>}
                           {item.hamper.messageCardText && <p style={{margin:"4px 0"}}>Card message: “{item.hamper.messageCardText}”</p>}
-                          {item.hamper.boxMessage && <p style={{margin:"4px 0"}}>Box print: “{item.hamper.boxMessage}”</p>}
                         </div>
                       )}
 
