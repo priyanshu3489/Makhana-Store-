@@ -26,14 +26,14 @@ export default async function ShopPage() {
               <span className="pill">{product.flavor} · {product.weightGrams} g</span>
               <h3 style={{ fontSize: 19, margin: "12px 0 6px" }}>{product.name}</h3>
               <p className="muted product-description">{product.description}</p>
-              <div className="row" style={{ marginTop: 16, alignItems: "center" }}>
-                <div>
+              <div className="shop-product-bottom">
+                <div className="shop-product-price">
                   <strong>{formatMoney(product.pricePaise)}</strong>
                   {product.compareAtPaise && product.compareAtPaise > product.pricePaise ? (
-                    <div className="muted" style={{ fontSize: 12, textDecoration: "line-through" }}>{formatMoney(product.compareAtPaise)}</div>
+                    <span className="muted shop-product-compare">{formatMoney(product.compareAtPaise)}</span>
                   ) : null}
                 </div>
-                <Link className="btn" href={`/products/${product.slug}`}>View product</Link>
+                <Link className="btn shop-product-view" href={`/products/${product.slug}`}>View product</Link>
               </div>
               {product.stock <= 10 ? <p className="stock-note">Only {product.stock} left</p> : null}
             </div>
