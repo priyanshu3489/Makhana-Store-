@@ -16,7 +16,7 @@ type P = {
 type C = {
   product: P;
   quantity: number;
-  hamper?: {slug:string;name:string;image?:string;count:number;pricePaise:number;productNames:string[];boxPricePaise?:number;messageCardPricePaise?:number;includeMessageCard?:boolean;messageCardText?:string};
+  hamper?: {slug:string;name:string;image?:string;count:number;productIds?:string[];pricePaise:number;productNames:string[];boxPricePaise?:number;messageCardPricePaise?:number;includeMessageCard?:boolean;messageCardText?:string};
 };
 
 export default function Cart() {
@@ -348,7 +348,20 @@ export default function Cart() {
                           Remove
                         </button>
                       </div>}
-                      {item.hamper && <button type="button" onClick={() => save(cart.filter((entry) => entry.hamper?.slug !== item.hamper?.slug))} style={{ marginTop: 12, border: 0, background: "transparent", color: "var(--muted, #777)", textDecoration: "underline", cursor: "pointer", padding: 6 }}>Remove entire hamper</button>}
+                      {item.hamper && (
+                        <div className="row" style={{ justifyContent: "flex-start", flexWrap: "wrap", gap: 14, marginTop: 12 }}>
+                          <Link
+                            href={`/combos?edit=${encodeURIComponent(item.hamper.slug)}`}
+                            className="btn secondary"
+                            style={{ padding: "9px 14px", fontSize: 13 }}
+                          >
+                            Edit hamper
+                          </Link>
+                          <button type="button" onClick={() => save(cart.filter((entry) => entry.hamper?.slug !== item.hamper?.slug))} style={{ border: 0, background: "transparent", color: "var(--muted, #777)", textDecoration: "underline", cursor: "pointer", padding: 6 }}>
+                            Remove entire hamper
+                          </button>
+                        </div>
+                      )}
 
                       {item.quantity >= item.product.stock &&
                         item.product.stock > 0 && (
