@@ -1891,3 +1891,29 @@ body.homepage-header-compact .site-header .nav-icon-link svg{
   }
 }
 
+
+
+/* Keep every interior-page header identical during upward and downward scrolling. */
+body:not(:has(.hero)) .site-header-group{
+  position:sticky !important;
+  top:0 !important;
+  z-index:40 !important;
+}
+body:not(:has(.hero)) .site-header-group .site-header{
+  position:relative !important;
+  top:auto !important;
+}
+
+/* On the homepage, show a signed-in customer's name in the account control
+   in both the full transparent header and the compact scrolled header. */
+body:has(.hero) .site-header .nav-account-label{
+  display:inline !important;
+}
+body:has(.hero) .site-header .nav-icon-link[aria-label="Account"]{
+  max-width:min(240px,42vw);
+}
+body:has(.hero) .site-header .nav-account-label{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
