@@ -25,7 +25,7 @@ type CartProduct = {
 type CartItem = {
   product: CartProduct;
   quantity: number;
-  hamper?: {slug:string;name:string;count:number;pricePaise:number;productIds:string[];productNames:string[];jarTotalPaise?:number;boxPricePaise?:number;messageCardPricePaise?:number;includeMessageCard?:boolean;messageCardText?:string;boxMessage?:string};
+  hamper?: {slug:string;name:string;count:number;pricePaise:number;productIds:string[];productNames:string[];jarTotalPaise?:number;boxPricePaise?:number;messageCardPricePaise?:number;includeMessageCard?:boolean;messageCardText?:string;boxMessage?:string;boxDesign?:string};
 };
 
 type FormState = {
@@ -600,6 +600,7 @@ export default function CheckoutForm({ user }: { user: User }) {
               <div><span>Makhana jars</span><strong>{formatMoney(activeHamper.jarTotalPaise || 0)}</strong></div>
               <div><span>Hamper box</span><strong>{formatMoney(activeHamper.boxPricePaise || 0)}</strong></div>
               {activeHamper.includeMessageCard && <div><span>Message card</span><strong>{formatMoney(activeHamper.messageCardPricePaise || 0)}</strong></div>}
+              {activeHamper.boxDesign && <p>Box design: {activeHamper.boxDesign.replaceAll("-", " ")}</p>}
               {activeHamper.messageCardText && <p>Card message: “{activeHamper.messageCardText}”</p>}
               {activeHamper.boxMessage && <p>Box print: “{activeHamper.boxMessage}”</p>}
             </div>
