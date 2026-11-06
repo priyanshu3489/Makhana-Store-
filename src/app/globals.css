@@ -2177,3 +2177,41 @@ body.homepage-header-compact .site-header .nav-icon-link[aria-label="Account"]{
 .gift-hero-banner img{display:block;width:100%;max-width:none;height:auto;max-height:none;object-fit:fill;object-position:center}
 .gift-hamper-list{width:min(1160px,calc(100% - 32px));margin-inline:auto}
 @media(max-width:700px){.gift-hero-banner img{width:100%;height:auto;max-height:none;object-fit:fill}}
+
+
+/* Build-your-own taste combo collection */
+.taste-combo-page{width:100%;max-width:1160px;margin:0 auto;padding:42px 16px 64px}
+.taste-combo-intro{text-align:center;max-width:760px;margin:0 auto 30px}
+.taste-combo-intro h1{font-family:Georgia,'Times New Roman',serif;font-size:clamp(30px,4.5vw,48px);font-weight:500;line-height:1.12;margin:10px 0}
+.taste-combo-intro p{color:#65685e;line-height:1.7;margin:0}
+.taste-combo-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.taste-combo-card{display:block;text-align:left;padding:0;overflow:hidden;border:1px solid #e5dfd0;border-radius:18px;background:#fff;color:inherit;transition:border-color .2s,box-shadow .2s,transform .2s}
+.taste-combo-card:hover{transform:translateY(-3px);box-shadow:0 12px 28px #263b2514}
+.taste-combo-card.is-selected{border:2px solid #315d3c;box-shadow:0 0 0 3px #315d3c18}
+.taste-combo-image-wrap{position:relative;display:block;aspect-ratio:1.25/1;background:#f6f1e6;overflow:hidden}
+.taste-combo-image-wrap img{display:block;width:100%;height:100%;object-fit:contain}
+.taste-combo-tag{position:absolute;left:12px;top:12px;border-radius:99px;padding:7px 10px;background:#0f2418;color:#fff;font-size:10px;font-weight:800;letter-spacing:1px}
+.taste-combo-card-copy{display:grid;gap:8px;padding:16px}
+.taste-combo-card-copy>strong{font-size:19px}
+.taste-combo-card-copy small{min-height:40px;color:#686b61;line-height:1.5;font-size:13px}
+.taste-combo-card-action{color:#315d3c;font-size:13px;font-weight:800}
+.taste-combo-builder{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(280px,.8fr);gap:22px;align-items:start;margin-top:34px}
+.taste-combo-picker,.taste-combo-summary{min-width:0;padding:22px;border:1px solid #e7e2d7;border-radius:18px;background:#fff}
+.taste-combo-picker-heading{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:18px}
+.taste-combo-picker-heading h2,.taste-combo-summary h2{font-family:Georgia,'Times New Roman',serif;font-weight:500;font-size:25px;margin:7px 0}
+.taste-combo-picker-heading p{margin:0;color:#686b61;font-size:13px;line-height:1.55}
+.taste-combo-count{flex:0 0 auto;padding:9px 12px;border-radius:999px;background:#edf2e9;color:#315d3c;font-size:13px}
+.taste-combo-product-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.taste-combo-summary{position:sticky;top:22px}
+.taste-combo-summary-image{height:155px;overflow:hidden;border-radius:12px;background:#f6f1e6}
+.taste-combo-summary-image img{width:100%;height:100%;object-fit:contain}
+.taste-combo-summary-count{font-size:13px;color:#686b61;margin:14px 0}
+.taste-combo-selected-list{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.taste-combo-selected-list li{display:flex;justify-content:space-between;gap:12px;font-size:13px}
+.taste-combo-selected-list li strong{white-space:nowrap}
+.taste-combo-total{display:flex;justify-content:space-between;align-items:center;gap:12px;border-top:1px solid #e8e4da;margin-top:18px;padding-top:16px;font-size:15px}
+.taste-combo-total strong{font-size:21px}
+.taste-combo-summary .gift-add-button{width:100%;margin-top:18px}
+.taste-combo-summary .gift-selection-hint{display:block;margin-top:10px;text-align:center}
+@media(max-width:850px){.taste-combo-builder{grid-template-columns:minmax(0,1fr)}.taste-combo-summary{position:static}.taste-combo-options{gap:12px}}
+@media(max-width:600px){.taste-combo-page{padding:30px 14px 48px}.taste-combo-options{grid-template-columns:1fr;gap:14px}.taste-combo-card{display:grid;grid-template-columns:42% minmax(0,1fr);align-items:stretch}.taste-combo-image-wrap{height:100%;min-height:150px;aspect-ratio:auto}.taste-combo-card-copy{align-content:center;padding:13px}.taste-combo-card-copy>strong{font-size:16px}.taste-combo-card-copy small{min-height:0;font-size:12px}.taste-combo-picker,.taste-combo-summary{padding:16px}.taste-combo-product-grid{grid-template-columns:1fr}.taste-combo-picker-heading h2{font-size:21px}}
