@@ -3,10 +3,10 @@
 import { useEffect } from "react";
 
 const TAB_MESSAGES = [
-  "Pearls of Makhana ✨ | Foxberry",
-  "Hey! Your crunchy favourite is waiting 🦊",
-  "Don't miss out — shop Foxberry today!",
-  "A little crunch, a lot of joy | Foxberry",
+  "Pearls of Makhana ✨ | FOXBERRY",
+  "Hey! Your crunch is waiting 🦊",
+  "Don't miss out!",
+  "A little crunch, a lot of joy",
 ];
 
 export default function TabAttentionTitle() {
