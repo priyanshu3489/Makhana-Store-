@@ -27,14 +27,14 @@ function ProductCard({ product }: { product: HomeProduct }) {
         <h3>{product.name}</h3>
         <p className="muted product-description">{product.description}</p>
         <div className="home-product-bottom">
-          <div>
+          <div className="home-product-price">
             <strong>₹{(product.pricePaise / 100).toFixed(2)}</strong>
             {product.compareAtPaise && product.compareAtPaise > product.pricePaise ? (
-              <div className="muted home-product-compare">₹{(product.compareAtPaise / 100).toFixed(2)}</div>
+              <span className="muted home-product-compare">₹{(product.compareAtPaise / 100).toFixed(2)}</span>
             ) : null}
           </div>
           {product.stock > 0 ? (
-            <Link className="btn" href={`/products/${product.slug}`}>View product</Link>
+            <Link className="btn home-product-view" href={`/products/${product.slug}`}>View product</Link>
           ) : (
             <span className="home-product-out">Out of stock</span>
           )}
