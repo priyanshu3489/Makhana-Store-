@@ -82,7 +82,13 @@ export default function HomeProductCarousel({ products }: { products: HomeProduc
     if (!moving) return;
 
     // Safety fallback in case the browser does not emit transitionend.
-    const fallback = window.setTimeout(() => finishSlide(), 1100);
+    const fallback = window.setTimeout(() => {
+      if (completedSlideRef.current) return;
+      completedSlideRef.current = true;
+      setOrderedProducts((current) => [...current.slice(1), current[0]]);
+      setMoving(false);
+      setStepWidth(0);
+    }, 1100);
     return () => window.clearTimeout(fallback);
   }, [moving]);
 
