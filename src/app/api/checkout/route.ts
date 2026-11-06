@@ -32,6 +32,7 @@ const schema = z.object({
     includeMessageCard: z.boolean().optional(),
     messageCardText: z.string().max(160).optional(),
     boxMessage: z.string().max(100).optional(),
+    boxDesign: z.enum(["classic-gold", "celebration", "floral"]).optional(),
   }).optional(),
   items: z
     .array(
@@ -77,10 +78,10 @@ export async function POST(req: Request) {
       if (
         !expected ||
         d.hamper.count !== expected.count ||
-        d.items.length !== expected.count ||
+        d.items.length < expected.count ||
         ids.length !== expected.count ||
         new Set(ids).size !== expected.count ||
-        d.items.some((item) => item.quantity !== 1 || !ids.includes(item.productId)) ||
+        ids.some((id) => !d.items.some((item) => item.productId === id && item.quantity === 1)) ||
         d.hamper.productNames.length !== expected.count ||
         (d.hamper.includeMessageCard && !d.hamper.messageCardText?.trim())
       ) {
@@ -127,6 +128,7 @@ export async function POST(req: Request) {
     }
 
     const jarSubtotal = products.reduce((sum, p) => sum + p.pricePaise * (qty.get(p.id) || 0), 0);
+    const hamperProductIds = new Set(d.hamper?.productIds || []);
     const boxPrice = d.hamper ? comboConfig[d.hamper.slug].boxPricePaise : 0;
     const cardPrice = d.hamper?.includeMessageCard ? messageCardPricePaise : 0;
     const subtotal = jarSubtotal + boxPrice + cardPrice;
@@ -257,6 +259,7 @@ export async function POST(req: Request) {
                     d.hamper.includeMessageCard ? `Message card: ₹${(cardPrice / 100).toFixed(2)}` : "Message card: Not selected",
                     `Selected packs: ${products.map((p) => p.name).join(", ")}`,
                     d.hamper.messageCardText?.trim() ? `Card message: ${d.hamper.messageCardText.trim()}` : null,
+                    d.hamper.boxDesign ? `Hamper box design: ${d.hamper.boxDesign}` : null,
                     d.hamper.boxMessage?.trim() ? `Custom box print: ${d.hamper.boxMessage.trim()}` : null,
                   ].filter(Boolean).join("\n")
                 : null,
