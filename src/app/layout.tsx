@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Link from "next/link";
 import SiteNavigation from "@/components/SiteNavigation";
+import TabAttentionTitle from "@/components/TabAttentionTitle";
 import { getCurrentUser } from "@/lib/session";
 
 export const metadata: Metadata = {
@@ -20,6 +21,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body>
+        <TabAttentionTitle />
         <div className="site-header-group">
         <header className="site-header">
           <nav className="container nav">
