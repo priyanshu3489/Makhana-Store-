@@ -324,8 +324,8 @@ export default async function AccountPage({
                     {order.createdAt.toLocaleDateString("en-IN")} · {order.items.reduce((sum, item) => sum + item.quantity, 0)} item(s)
                   </p>
                   {(() => {
-                    const comboName = order.notes?.match(/CUSTOM COMBO: ([^\\n]+)/)?.[1];
-                    const comboImage = order.notes?.match(/COMBO_IMAGE: ([^\\n]+)/)?.[1]
+                    const comboName = order.notes?.match(/CUSTOM COMBO: ([^\n]+)/)?.[1];
+                    const comboImage = order.notes?.match(/COMBO_IMAGE: ([^\n]+)/)?.[1]
                       || (comboName?.includes("3-Jar") ? "/products/3-jar%20taste%20combo.png" : comboName?.includes("4-Jar") ? "/products/4-jar%20taste%20combo.png" : comboName?.includes("6-Jar") ? "/products/6-jar%20taste%20combo.png" : null);
                     return comboImage ? (
                       <div style={{ display: "flex", alignItems: "center", gap: 14, margin: "12px 0" }}>
