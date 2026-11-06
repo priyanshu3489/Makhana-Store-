@@ -2167,3 +2167,13 @@ body.homepage-header-compact .site-header .nav-icon-link[aria-label="Account"]{
 .gift-hero-banner{width:100%;height:auto;overflow:visible;background:#f7edda;line-height:0}
 .gift-hero-banner img{display:block;width:100%;height:auto;max-height:none;object-fit:contain;object-position:center}
 @media(max-width:700px){.gift-hero-banner img{max-height:none;object-fit:contain}}
+
+
+/* Hamper page banner must be edge-to-edge like the homepage hero.
+   Keep only the hamper content below the banner inside a readable container. */
+.gift-hamper-main{width:100%;max-width:none;margin:0;padding:0;overflow-x:clip}
+.gift-hamper-page{width:100%;max-width:none;margin:0 !important}
+.gift-hero-banner{display:block;width:100vw;max-width:100vw;margin-inline:calc(50% - 50vw);padding:0;overflow:hidden;line-height:0}
+.gift-hero-banner img{display:block;width:100%;max-width:none;height:auto;max-height:none;object-fit:fill;object-position:center}
+.gift-hamper-list{width:min(1160px,calc(100% - 32px));margin-inline:auto}
+@media(max-width:700px){.gift-hero-banner img{width:100%;height:auto;max-height:none;object-fit:fill}}
