@@ -18,7 +18,7 @@ function Icon({ name }: { name: "search" | "user" | "basket" | "home" | "shop" |
   return <svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">{paths[name]}</svg>;
 }
 
-export default function SiteNavigation({ isAdmin }: { isAdmin: boolean }) {
+export default function SiteNavigation({ isAdmin, customerName }: { isAdmin: boolean; customerName?: string | null }) {
   useEffect(() => {
     const homepage = Boolean(document.querySelector(".hero"));
     if (!homepage) return;
@@ -46,7 +46,7 @@ export default function SiteNavigation({ isAdmin }: { isAdmin: boolean }) {
       </div>
       <div className="nav-utilities">
         {!isAdmin && <StoreSearch />}
-        <Link href={isAdmin ? "/admin" : "/account"} className="nav-icon-link" aria-label={isAdmin ? "Admin dashboard" : "Account"} title={isAdmin ? "Admin dashboard" : "Account"}><Icon name="user" /><span className="nav-account-label">{isAdmin ? "Admin" : "Sign in"}</span></Link>
+        <Link href={isAdmin ? "/admin" : "/account"} className="nav-icon-link" aria-label={isAdmin ? "Admin dashboard" : "Account"} title={isAdmin ? "Admin dashboard" : "Account"}><Icon name="user" /><span className="nav-account-label">{isAdmin ? "Admin" : customerName?.trim() || "Sign in"}</span></Link>
         {!isAdmin && <Link href="/cart" className="nav-icon-link nav-basket-link" aria-label="Shopping basket" title="Shopping basket"><Icon name="basket" /><span className="nav-basket-dot" aria-hidden="true" /></Link>}
       </div>
     </div>
