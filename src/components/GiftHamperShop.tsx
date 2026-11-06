@@ -116,7 +116,11 @@ export default function GiftHamperShop({ products }: { products: Product[] }) {
   }
 
   return (
-    <div className="taste-combo-page">
+    <>
+      <div className="gift-hero-banner">
+        <img src="/products/Hamper%20banner.png" alt="Foxberry gifting hamper collection" />
+      </div>
+      <div className="taste-combo-page">
       <section className="taste-combo-intro">
         <span className="gift-eyebrow">BUILD YOUR OWN FOXBERRY COMBO</span>
         <h1>Pick your combo. Choose your flavours.</h1>
@@ -227,6 +231,7 @@ export default function GiftHamperShop({ products }: { products: Product[] }) {
 
         {message && <p className="gift-cart-feedback" role="status">{message} <a href="/cart">View basket →</a></p>}
       </section>
-    </div>
+      </div>
+    </>
   );
 }
