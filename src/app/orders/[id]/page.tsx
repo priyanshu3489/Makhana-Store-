@@ -56,6 +56,18 @@ export default async function OrderDetail({
           <strong>{order.paymentStatus}</strong>
         </div>
 
+        {(() => {
+          const comboName = order.notes?.match(/CUSTOM COMBO: ([^\\n]+)/)?.[1];
+          const comboImage = order.notes?.match(/COMBO_IMAGE: ([^\\n]+)/)?.[1]
+            || (comboName?.includes("3-Jar") ? "/products/3-jar%20taste%20combo.png" : comboName?.includes("4-Jar") ? "/products/4-jar%20taste%20combo.png" : comboName?.includes("6-Jar") ? "/products/6-jar%20taste%20combo.png" : null);
+          return comboImage ? (
+            <div style={{ display: "flex", alignItems: "center", gap: 16, margin: "18px 0", padding: 14, borderRadius: 14, background: "#f8f6ef" }}>
+              <img src={comboImage} alt={comboName || "Foxberry combo"} style={{ width: 116, height: 116, objectFit: "contain", borderRadius: 12, background: "#fff" }} />
+              <div><strong>{comboName || "Foxberry combo"}</strong><p className="muted" style={{ margin: "5px 0 0" }}>Your selected combo</p></div>
+            </div>
+          ) : null;
+        })()}
+
         <hr style={{ margin: "20px 0", borderColor: "#e7e4da" }} />
 
         {order.items.map((item) => (
