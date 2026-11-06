@@ -16,7 +16,7 @@ type P = {
 type C = {
   product: P;
   quantity: number;
-  hamper?: {slug:string;name:string;count:number;pricePaise:number;productNames:string[];boxPricePaise?:number;messageCardPricePaise?:number;includeMessageCard?:boolean;messageCardText?:string};
+  hamper?: {slug:string;name:string;image?:string;count:number;pricePaise:number;productNames:string[];boxPricePaise?:number;messageCardPricePaise?:number;includeMessageCard?:boolean;messageCardText?:string};
 };
 
 export default function Cart() {
@@ -209,12 +209,12 @@ export default function Cart() {
                       aria-label={`View ${item.product.name}`}
                     >
                       <img
-                        src={item.product.imageUrl}
+                        src={item.hamper?.image || item.product.imageUrl}
                         alt={item.hamper ? item.hamper.name : item.product.name}
                         style={{
                           width: "100%",
                           aspectRatio: "1",
-                          objectFit: "cover",
+                          objectFit: item.hamper ? "contain" : "cover",
                           borderRadius: 14,
                           background: "#f5f2e9",
                         }}
@@ -237,7 +237,7 @@ export default function Cart() {
                               margin: "0 0 6px",
                             }}
                           >
-                            {item.product.name}
+                            {item.hamper ? item.hamper.name : item.product.name}
                           </h3>
                           <p
                             className="muted"
