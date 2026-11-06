@@ -137,7 +137,7 @@ export default function CheckoutForm({ user }: { user: User }) {
 
   const visibleCart = cart.filter((item, index) => !item.hamper || cart.findIndex((entry) => entry.hamper?.slug === item.hamper?.slug) === index);
   const activeHamper = cart.find(item=>item.hamper)?.hamper;
-  const subtotal = activeHamper ? activeHamper.pricePaise : cart.reduce((sum,item)=>sum+item.product.pricePaise*item.quantity,0);
+  const subtotal = cart.reduce((sum, item, index) => item.hamper ? (cart.findIndex((entry) => entry.hamper?.slug === item.hamper?.slug) === index ? sum + item.hamper.pricePaise : sum) : sum + item.product.pricePaise * item.quantity, 0);
 
   const shippingEstimate =
     subtotal === 0 ? 0 : subtotal >= 49900 ? 0 : 5000;
