@@ -28,7 +28,7 @@ export default async function RootLayout({
             <Link href="/" className="brand brand-logo-link" aria-label="Foxberry — Pearls of Makhana home" title="Foxberry — Pearls of Makhana">
               <img src="/foxberry-logo.svg" alt="Foxberry — Pearls of Makhana" className="foxberry-logo foxberry-header-logo" />
             </Link>
-            <SiteNavigation isAdmin={isAdmin} />
+            <SiteNavigation isAdmin={isAdmin} customerName={user?.role === "CUSTOMER" ? user.name : null} />
           </nav>
         </header>
 
