@@ -323,6 +323,17 @@ export default async function AccountPage({
                   <p className="muted">
                     {order.createdAt.toLocaleDateString("en-IN")} · {order.items.reduce((sum, item) => sum + item.quantity, 0)} item(s)
                   </p>
+                  {(() => {
+                    const comboName = order.notes?.match(/CUSTOM COMBO: ([^\\n]+)/)?.[1];
+                    const comboImage = order.notes?.match(/COMBO_IMAGE: ([^\\n]+)/)?.[1]
+                      || (comboName?.includes("3-Jar") ? "/products/3-jar%20taste%20combo.png" : comboName?.includes("4-Jar") ? "/products/4-jar%20taste%20combo.png" : comboName?.includes("6-Jar") ? "/products/6-jar%20taste%20combo.png" : null);
+                    return comboImage ? (
+                      <div style={{ display: "flex", alignItems: "center", gap: 14, margin: "12px 0" }}>
+                        <img src={comboImage} alt={comboName || "Foxberry combo"} style={{ width: 88, height: 88, objectFit: "contain", borderRadius: 12, background: "#f5f2e9" }} />
+                        <div><strong>{comboName || "Foxberry combo"}</strong><p className="muted" style={{ margin: "4px 0 0" }}>Selected combo</p></div>
+                      </div>
+                    ) : null;
+                  })()}
                   <div className="row" style={{ flexWrap: "wrap" }}>
                     <span>{order.paymentMethod} · {order.paymentStatus}</span>
                     <strong>{formatMoney(order.totalPaise)}</strong>
