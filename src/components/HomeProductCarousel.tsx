@@ -73,7 +73,7 @@ export default function HomeProductCarousel({ products }: { products: HomeProduc
       completedSlideRef.current = false;
       setStepWidth(firstCard.getBoundingClientRect().width + gap);
       setMoving(true);
-    }, 1000);
+    }, 3000);
 
     return () => window.clearTimeout(timer);
   }, [orderedProducts, moving, hovered]);
