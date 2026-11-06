@@ -60,8 +60,6 @@ export default function GiftHamperShop({ products }: { products: Product[] }) {
   const [message, setMessage] = useState("");
   const [includeMessageCard, setIncludeMessageCard] = useState(false);
   const [messageCardText, setMessageCardText] = useState("");
-  const [boxMessage, setBoxMessage] = useState("");
-  const [boxDesign, setBoxDesign] = useState("classic-gold");
   const messageCardPricePaise = 2900;
 
   const available = useMemo(
@@ -83,8 +81,6 @@ export default function GiftHamperShop({ products }: { products: Product[] }) {
     setMessage("");
     setIncludeMessageCard(false);
     setMessageCardText("");
-    setBoxMessage("");
-    setBoxDesign("classic-gold");
   }
 
   function toggleProduct(id: string) {
@@ -121,8 +117,6 @@ export default function GiftHamperShop({ products }: { products: Product[] }) {
         messageCardPricePaise: includeMessageCard ? messageCardPricePaise : 0,
         includeMessageCard,
         messageCardText: includeMessageCard ? messageCardText.trim() : "",
-        boxMessage: boxMessage.trim(),
-        boxDesign,
         productIds: chosen.map((product) => product.id),
         productNames: chosen.map((product) => product.name),
       };
@@ -254,19 +248,6 @@ export default function GiftHamperShop({ products }: { products: Product[] }) {
                 <small>{messageCardText.length}/160 characters</small>
               </label>
             )}
-            <label className="taste-combo-message-field">
-              Choose your hamper box design
-              <select value={boxDesign} onChange={(event) => setBoxDesign(event.target.value)}>
-                <option value="classic-gold">Classic Gold</option>
-                <option value="celebration">Celebration</option>
-                <option value="floral">Floral Elegance</option>
-              </select>
-            </label>
-            <label className="taste-combo-message-field">
-              Personalise the hamper box
-              <textarea maxLength={100} rows={2} placeholder="Message to print on the hamper box (optional)" value={boxMessage} onChange={(event) => setBoxMessage(event.target.value)} />
-              <small>We’ll use this as the custom box-printing message · {boxMessage.length}/100</small>
-            </label>
             <div className="taste-combo-total">
               <span>Combo total</span>
               <strong>{formatMoney(totalPaise)}</strong>
