@@ -2535,3 +2535,212 @@ body:not(:has(.hero)) .site-header .nav-utilities{gap:18px}
 @media(prefers-reduced-motion:reduce){
   .btn,.primary-button,.btn-primary,.gift-add-button,.product-add-button,.checkout-submit,.track-submit{transition:none}
 }
+
+
+
+/* Product cards: stable vertical rhythm and consistently aligned actions */
+.product-card{
+  display:flex;
+  flex-direction:column;
+  min-width:0;
+  height:100%;
+}
+.product-card>a:first-child{display:block;flex:0 0 auto;overflow:hidden}
+.product-card .product-image{display:block;width:100%;aspect-ratio:1/1;object-fit:cover}
+.product-card>div{
+  display:flex;
+  flex:1 1 auto;
+  flex-direction:column;
+  align-items:stretch;
+  min-width:0;
+  gap:0;
+}
+.product-card>div>.pill{align-self:flex-start;max-width:100%;white-space:normal;line-height:1.4}
+.product-card>div>h3{
+  min-height:2.65em;
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
+  overflow:hidden;
+  line-height:1.32!important;
+  overflow-wrap:anywhere;
+}
+.product-card .product-description{
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:3;
+  overflow:hidden;
+  min-height:4.65em;
+  line-height:1.55;
+  margin:0;
+}
+.shop-product-bottom{
+  display:grid;
+  grid-template-columns:minmax(0,1fr);
+  gap:12px;
+  margin-top:auto;
+  padding-top:18px;
+}
+.shop-product-price{
+  display:flex;
+  align-items:baseline;
+  flex-wrap:wrap;
+  gap:9px;
+  min-height:27px;
+}
+.shop-product-price>strong{font-size:20px;line-height:1.2;color:var(--fb-forest)}
+.shop-product-compare{font-size:12px;text-decoration:line-through}
+.shop-product-view,.home-product-view{
+  width:100%;
+  min-height:46px;
+  justify-content:center;
+  border-radius:12px;
+  white-space:normal!important;
+  line-height:1.2;
+}
+.product-card .stock-note{margin:10px 0 0;min-height:1.2em}
+
+/* Homepage carousel cards use the same price/action rhythm as the shop */
+.home-product-card{display:flex;flex-direction:column;height:100%;overflow:hidden}
+.home-product-card .product-image{width:100%;aspect-ratio:1/1;object-fit:cover}
+.home-product-copy{display:flex;flex:1 1 auto;flex-direction:column;align-items:stretch;min-width:0;gap:0}
+.home-product-copy>.pill{align-self:flex-start;max-width:100%;white-space:normal;line-height:1.4}
+.home-product-copy h3{
+  min-height:2.7em;
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
+  overflow:hidden;
+  overflow-wrap:anywhere;
+}
+.home-product-copy .product-description{
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:3;
+  overflow:hidden;
+  min-height:4.65em;
+  margin:0;
+}
+.home-product-bottom{
+  display:grid;
+  grid-template-columns:minmax(0,1fr);
+  align-items:stretch;
+  gap:12px;
+  margin-top:auto;
+  padding-top:18px;
+}
+.home-product-price{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;min-height:27px}
+.home-product-price>strong{font-size:20px;line-height:1.2;color:var(--fb-forest)}
+.home-product-compare{margin:0}
+.home-product-out{display:flex;align-items:center;min-height:46px;font-weight:700}
+
+/* Combo flavour rows: reserve a dedicated column for a clear + / tick control */
+.taste-combo-product-grid{align-items:stretch;gap:12px}
+.gift-product-option{
+  position:relative;
+  display:grid;
+  grid-template-columns:68px minmax(0,1fr);
+  align-items:center;
+  gap:12px;
+  min-height:92px;
+  padding:11px 54px 11px 11px;
+  border:1px solid #e5dfd0;
+  border-radius:14px;
+  background:#fffefa;
+  box-shadow:0 2px 8px rgba(26,42,27,.025);
+  transition:border-color .18s ease,background .18s ease,box-shadow .18s ease,transform .18s ease;
+}
+.gift-product-option:hover{
+  border-color:#a9b99f;
+  background:#fbfcf7;
+  box-shadow:0 7px 18px rgba(26,42,27,.07);
+}
+.gift-product-option:has(input:focus-visible){
+  outline:3px solid rgba(214,166,79,.72);
+  outline-offset:3px;
+}
+.gift-product-option.is-selected{
+  padding:10px 53px 10px 10px;
+  border:2px solid var(--fb-leaf);
+  background:#f2f6ed;
+  box-shadow:0 0 0 2px rgba(49,93,59,.08);
+}
+.gift-product-option>img{
+  display:block;
+  width:68px;
+  height:68px;
+  flex:0 0 68px;
+  object-fit:cover;
+  border-radius:11px;
+  background:#f1eadb;
+}
+.gift-product-details{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  justify-content:center;
+  min-width:0;
+  gap:4px;
+  padding:0;
+}
+.gift-product-details strong{
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
+  overflow:hidden;
+  width:100%;
+  font-size:13px;
+  line-height:1.35;
+  overflow-wrap:anywhere;
+}
+.gift-product-details small{font-size:11px;line-height:1.35}
+.gift-product-details b{font-size:13px;line-height:1.25;color:var(--fb-forest)}
+.gift-select-indicator{
+  position:absolute;
+  top:50%;
+  right:12px;
+  transform:translateY(-50%);
+  display:grid;
+  place-items:center;
+  width:32px;
+  height:32px;
+  min-width:32px;
+  padding:0;
+  border:1.5px solid #c9cbbb;
+  border-radius:50%;
+  background:#fff;
+  color:#61705e;
+  font-size:19px;
+  font-weight:500;
+  line-height:1;
+  box-shadow:0 1px 3px rgba(20,35,20,.06);
+}
+.gift-product-option.is-selected .gift-select-indicator{
+  border-color:var(--fb-forest);
+  background:var(--fb-forest);
+  color:#fff;
+  font-size:17px;
+}
+.taste-combo-picker-heading{min-width:0}
+.taste-combo-picker-heading>div{min-width:0}
+.taste-combo-count{white-space:nowrap}
+@media(max-width:700px){
+  .product-card>div{padding:13px!important}
+  .product-card>div>h3{font-size:16px!important}
+  .shop-product-view,.home-product-view{min-height:44px;font-size:13px}
+  .home-product-copy{padding:13px}
+  .home-product-copy h3{font-size:16px}
+  .gift-product-option{
+    grid-template-columns:58px minmax(0,1fr);
+    min-height:82px;
+    gap:10px;
+    padding:10px 49px 10px 10px;
+  }
+  .gift-product-option.is-selected{padding:9px 48px 9px 9px}
+  .gift-product-option>img{width:58px;height:58px;flex-basis:58px}
+  .gift-select-indicator{right:10px;width:30px;height:30px;min-width:30px}
+}
+@media(max-width:420px){
+  .taste-combo-product-grid{grid-template-columns:minmax(0,1fr)}
+  .gift-product-option{min-height:78px}
+}
