@@ -1828,3 +1828,66 @@ body.homepage-header-compact .site-header .nav-icon-link[aria-label="Admin dashb
   }
 }
 
+/* Match the scrolled homepage header to the standard interior-page header. */
+body.homepage-header-compact .site-header-group{
+  background:#0F2418 !important;
+  border-bottom:1px solid rgba(214,166,79,.55) !important;
+  box-shadow:0 3px 12px rgba(0,0,0,.12) !important;
+  backdrop-filter:none !important;
+  animation:none !important;
+}
+body.homepage-header-compact .site-header-group .site-header{
+  background:#0F2418 !important;
+  border-bottom:0 !important;
+}
+body.homepage-header-compact .site-header-group .nav{
+  width:min(1320px,calc(100% - 40px)) !important;
+  min-height:78px !important;
+  height:78px !important;
+  padding:0 !important;
+}
+body.homepage-header-compact .site-header .brand-logo-link{
+  width:88px !important;
+  height:68px !important;
+  flex:0 0 88px !important;
+}
+body.homepage-header-compact .site-header .foxberry-header-logo{
+  width:88px !important;
+  max-height:68px !important;
+}
+body.homepage-header-compact .site-header .nav-icon-link[aria-label="Account"],
+body.homepage-header-compact .site-header .nav-icon-link[aria-label="Admin dashboard"]{
+  min-height:42px !important;
+  padding:8px 10px !important;
+  border:0 !important;
+  border-radius:6px !important;
+  background:transparent !important;
+  color:#fff !important;
+  box-shadow:none !important;
+}
+body.homepage-header-compact .site-header .nav-icon-link[aria-label="Account"]:hover,
+body.homepage-header-compact .site-header .nav-icon-link[aria-label="Admin dashboard"]:hover{
+  color:#D6A64F !important;
+  background:rgba(214,166,79,.08) !important;
+}
+body.homepage-header-compact .site-header .nav-icon-link svg{
+  width:20px !important;
+  height:20px !important;
+}
+@media(max-width:520px){
+  body.homepage-header-compact .site-header-group .nav{
+    width:calc(100% - 28px) !important;
+    min-height:64px !important;
+    height:64px !important;
+  }
+  body.homepage-header-compact .site-header .brand-logo-link{
+    width:74px !important;
+    height:58px !important;
+    flex-basis:74px !important;
+  }
+  body.homepage-header-compact .site-header .foxberry-header-logo{
+    width:74px !important;
+    max-height:58px !important;
+  }
+}
+
