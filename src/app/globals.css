@@ -2161,3 +2161,9 @@ body.homepage-header-compact .site-header .nav-icon-link[aria-label="Account"]{
 .gift-hero-banner{width:100%;overflow:hidden;background:#f7edda;line-height:0}
 .gift-hero-banner img{display:block;width:100%;height:auto;max-height:520px;object-fit:cover;object-position:center}
 @media(max-width:700px){.gift-hero-banner img{max-height:320px;object-fit:cover;object-position:center}}
+
+
+/* Show the complete hamper banner image without cropping on any screen. */
+.gift-hero-banner{width:100%;height:auto;overflow:visible;background:#f7edda;line-height:0}
+.gift-hero-banner img{display:block;width:100%;height:auto;max-height:none;object-fit:contain;object-position:center}
+@media(max-width:700px){.gift-hero-banner img{max-height:none;object-fit:contain}}
