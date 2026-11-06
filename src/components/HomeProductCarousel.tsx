@@ -59,7 +59,7 @@ export default function HomeProductCarousel({ products }: { products: HomeProduc
     completedSlideRef.current = true;
   }, [products]);
 
-  // Wait one second between steps. Hover pauses the carousel without
+  // Wait two seconds between steps. Hover pauses the carousel without
   // interrupting a slide halfway through.
   useEffect(() => {
     if (orderedProducts.length < 2 || moving || hovered) return;
@@ -73,7 +73,7 @@ export default function HomeProductCarousel({ products }: { products: HomeProduc
       completedSlideRef.current = false;
       setStepWidth(firstCard.getBoundingClientRect().width + gap);
       setMoving(true);
-    }, 3000);
+    }, 2000);
 
     return () => window.clearTimeout(timer);
   }, [orderedProducts, moving, hovered]);
