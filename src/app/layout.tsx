@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "./shop-hero.css";
 import Link from "next/link";
 import SiteNavigation from "@/components/SiteNavigation";
 import TabAttentionTitle from "@/components/TabAttentionTitle";
