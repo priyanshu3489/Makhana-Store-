@@ -2120,3 +2120,9 @@ body.homepage-header-compact .site-header .nav-icon-link[aria-label="Account"]{
 @media(prefers-reduced-motion:reduce){
   .home-products-step-track.is-moving{transition:none !important}
 }
+
+
+/* Explicitly requested autoplay: preserve the paired in/out slide even when OS reduced motion is enabled. */
+@media(prefers-reduced-motion:reduce){
+  .home-products-step-track.is-moving{transition:transform .95s cubic-bezier(.22,.61,.36,1) !important}
+}
